@@ -1,0 +1,120 @@
+<!--<div class="container row">-->
+<!--  <div class="col-md-12">-->
+<!--    <h1>Upload Image</h1>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<div class="container row">-->
+<!--  <div class="col-md-6">-->
+<!--    <input type="file" style="display: block" (change)="onFileChanged($event)"/>-->
+<!--  </div>-->
+<!--  <div class="col-md-6">-->
+<!--    <input type="button" (click)="onUpload()" value="upload"/>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<hr/>-->
+<!--<div class="container row">-->
+<!--  <div class="col-md-12">-->
+<!--    <div *ngIf=message>{{message}}</div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div class="container row">-->
+<!--  <div class="col-md-6">-->
+<!--    <input type="text" class="form-control" id="name" placeholder="image name" [(ngModel)]="imageName"-->
+<!--           name="name"/>-->
+<!--  </div>-->
+<!--  <div class="col-md-6">-->
+<!--    <input type="button" (click)="getImage()" value="Get Image">-->
+<!--  </div>-->
+<!--</div>-->
+<!--<div class="container row">-->
+<!--  <div class="col-md-12">-->
+<!--    <div *ngIf=retrievedImage>-->
+<!--      <img [src]="imgURL">-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash;  <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="file" style="display: block" (change)="onFileChanged($event)"/>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+<!--&lt;!&ndash;  <div class="col-md-6">&ndash;&gt;-->
+<!--&lt;!&ndash;    <input type="button" (click)="onUpload()" value="upload"/>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+<!--<br><br><br>-->
+
+<!--<div class="container">-->
+<!--  <div class="row">-->
+<!--    <div class="dropzone col-4" appDnd *ngIf="!selectedFile">-->
+<!--      <input type="file" #fileDropRef id="fileDropRef" hidden accept="image/*" style="display: block"-->
+<!--             (change)="onFileChanged($event); preview(fileDropRef.files) "/>-->
+<!--      <img src="assets/img/baseline-file-upload.svg" alt="">-->
+<!--      <h3>Drag and drop file here</h3>-->
+<!--    </div>-->
+
+<!--    <div class="col-4" *ngIf="selectedFile" [ngStyle]="{'background-image': 'url(' + imgURL + ')'}"-->
+<!--         style="background-size:400px 250px; background-repeat: no-repeat; height: 250px">-->
+<!--    </div>-->
+
+<!--    <div class="col-8 text-justify">-->
+<!--      <h4 *ngIf="!selectedFile">A good profile picture can make a huge difference when clients find you! </h4>-->
+<!--      <h3 *ngIf="selectedFile"> You look just fine! </h3>-->
+<!--      <label *ngIf="!selectedFile" for="fileDropRef" class="fileLabel"> Browse for file</label>-->
+<!--      <label *ngIf="selectedFile" for="fileDropRef" class="fileLabel"> Upload another one!</label>-->
+<!--      <input *ngIf="selectedFile" type="button" class="btn btn-success" (click)="onUpload()" value="upload"/>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<div class="container">
+  <form class="m-3 p-3" (ngSubmit)="onUpload()">
+    <!--    Upload img section-->
+    <div>
+      <input type="file" #fileDropRef id="fileDropRef" hidden accept="image/*" style="display: block"
+             (change)="onFileChanged($event); preview(fileDropRef.files) "/>
+
+      <div class="text-center" *ngIf="!selectedFile">
+        <h3> Upload a profile picture!</h3>
+        <p> A profile picture will definitely increase the number of clients!</p>
+        <label for="fileDropRef" class="fileLabel"> Upload profile picture!</label>
+      </div>
+
+      <div *ngIf="selectedFile" class="row">
+        <div class="col-4">
+          <img [src]="imgURL">
+        </div>
+        <div class="col-8 text-center">
+          <p class="display-3 lead m-3 p-3">You look amazing!</p>
+          <label for="fileDropRef" class="fileLabel">I want to upload a new picture!</label>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <!--    User questions -->
+    <div>
+      <h4>1. Do you have any pets? If yes, please tell us what pets!</h4>
+      <textarea wrap="nowarp" class="p-3 mt-3" style="height: 100px; width: 100%"></textarea>
+      <hr>
+      <h4>2. Do you have a backyard or you live in a flat?</h4>
+      <textarea wrap="nowarp" class="p-3 mt-3" style="height: 100px; width: 100%"></textarea>
+      <hr>
+      <h4>3. Do you haven any experience working with animals?</h4>
+      <textarea wrap="nowarp" class="p-3 mt-3" style="height: 100px; width: 100%"></textarea>
+    </div>
+
+    <!--    Terms and conditions -->
+    <div class="text-center">
+      <h4> Do you agree with our <a href="tcs"> Terms and conditions?</a></h4>
+      <input type="checkbox" #check> Accept terms and conditions!
+    </div>
+<!--    submit  -->
+    <div class="text-center" *ngIf="selectedFile">
+      <input type="submit" class="btn btn-primary" id="submit">
+    </div>
+
+
+
+  </form>
+
+</div>

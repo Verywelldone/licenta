@@ -1,0 +1,144 @@
+<!--<div class="col-md-12">-->
+<!--  <div class="card card-container">-->
+<!--    <div class="card-title text-center">-->
+<!--      <h3>-->
+<!--        Register to Happypets!-->
+<!--      </h3>-->
+<!--    </div>-->
+<!--    <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>-->
+<!--      <div class="form-group">-->
+<!--        <label for="username">Username</label>-->
+<!--        <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required minlength="3"-->
+<!--               maxlength="20" #username="ngModel"/>-->
+<!--        <div class="alert-danger" *ngIf="f.submitted && username.invalid">-->
+<!--          <div *ngIf="username.errors.required">Username is required</div>-->
+<!--          <div *ngIf="username.errors.minlength">-->
+<!--            Username must be at least 3 characters-->
+<!--          </div>-->
+<!--          <div *ngIf="username.errors.maxlength">-->
+<!--            Username must be at most 20 characters-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="form-group">-->
+<!--        <label for="email">Email</label>-->
+<!--        <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required email #email="ngModel"/>-->
+<!--        <div class="alert-danger" *ngIf="f.submitted && email.invalid">-->
+<!--          <div *ngIf="email.errors.required">Email is required</div>-->
+<!--          <div *ngIf="email.errors.email">-->
+<!--            Email must be a valid email address-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="form-group">-->
+<!--        <label for="password">Password</label>-->
+<!--        <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6" #password="ngModel"/>-->
+<!--        <div class="alert-danger" *ngIf="f.submitted && password.invalid">-->
+<!--          <div *ngIf="password.errors.required">Password is required</div>-->
+<!--          <div *ngIf="password.errors.minlength">-->
+<!--            Password must be at least 6 characters-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="row">-->
+<!--        <div class="form-group col-md-6 col-sm-12">-->
+<!--          <button  class="btn btn-primary btn-block action-button"> Already registered?</button>-->
+<!--        </div>-->
+<!--        <div class="form-group col-md-6 col-sm-12">-->
+<!--          <button class="btn btn-primary btn-block">Sign Up</button>-->
+<!--        </div>-->
+<!--      </div>-->
+
+
+<!--      <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">-->
+<!--        Signup failed!<br/>{{ errorMessage }}-->
+<!--      </div>-->
+<!--    </form>-->
+
+<!--    <div class="alert alert-success" *ngIf="isSuccessful">-->
+<!--      Your registration is successful!-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--&lt;!&ndash;&ndash;&gt;-->
+
+
+<div class="container">
+  <div class="text-center">
+    <div class="col-sm-9 main-section ">
+      <div class="modal-content">
+        <div class="col-12 text-center padding">
+          <h1>Sign up to Happypets</h1>
+        </div>
+        <hr>
+        <div class="col-12 form-input">
+          <form class="padding" name="form" *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+            <!--Username-->
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder=" Username" name="username" [(ngModel)]="form.username" required minlength="3" maxlength="20" #username="ngModel"/>
+            </div>
+            <div class="alert-danger" *ngIf="f.submitted && username.invalid">
+              <div *ngIf="username.errors.required">Username is required</div>
+              <div *ngIf="username.errors.minlength">Username must be at least 3 characters</div>
+            </div>
+
+            <!--Email-->
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder=" Email" name="email" [(ngModel)]="form.email" required  email #email="ngModel">
+            </div>
+
+            <!--Password-->
+            <div class="form-group">
+              <input type="password" class="form-control" placeholder=" Password" name="password" [(ngModel)]="form.password" required minlength="6" #password="ngModel">
+            </div>
+            <div class="alert-danger" *ngIf="f.submitted && password.invalid">
+              <div *ngIf="password.errors.required">Password is required</div>
+              <div *ngIf="password.errors.minlength">
+                Password must be at least 6 characters
+              </div>
+            </div>
+
+            <!--Fist name-->
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder=" First Name" name="fname" [(ngModel)]="userDetails.firstName" required #fname="ngModel">
+            </div>
+
+            <!--Last name-->
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder=" Last Name" name="lname" [(ngModel)]="userDetails.lastName" required #lname="ngModel">
+            </div>
+
+            <!--Address-->
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder=" Address" name="address" [(ngModel)]="userDetails.address" required minlength="3" maxlength="20" #address="ngModel">
+            </div>
+
+            <!--Phone Number-->
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Phone Number" name="number" [(ngModel)]="userDetails.phone" required minlength="3" maxlength="20" #phone="ngModel">
+            </div>
+
+
+              <button type="submit" class="btn btn-large btn-block btn-login">Register</button>
+
+          </form>
+
+          <p class="small-text text-center margin-v-x6">By signing in or signing up, I agree to Happypets.com's Terms of
+            Service and Privacy Policy, confirm that I am 18 years of age or older, and consent to receiving email
+            communication.</p>
+        </div>
+
+        <hr>
+        <div class="row">
+          <div class="col-md-6 forgot" id="registerLink">
+            <a href="/register">Register now here!</a>
+          </div>
+
+          <div class="col-md-6 forgot">
+            <a href="#"> Forgot Password?</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

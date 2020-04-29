@@ -1,0 +1,26 @@
+
+.fileLabel {
+  color: white;
+  width: auto;
+  height: auto;
+  border-radius: 21.5px;
+  background-color: #db202f;
+  padding: 8px 16px;
+}
+
+form {
+  border: 1px dashed black;
+}
+
+img {
+  width: 300px;
+  max-height: 400px;
+}
+
+div {
+  margin-top: 15px;
+}
+
+#submit{
+  width: 25%;
+}

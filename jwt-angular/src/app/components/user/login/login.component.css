@@ -1,0 +1,66 @@
+h2{
+  font-size: 35px;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+.container{
+  height: 50vh;
+}
+
+.modal-content{
+  text-align: center;
+  padding: 50px;
+  margin-top:30%;
+  margin-left: 55px;
+  margin-right: -55px;
+  background-color: #E8EBED;
+}
+
+.btn-facebook{
+  background-color: #3959A0;
+  color: white;
+  font-family: "Roboto", sans-serif;
+}
+
+.btn-google{
+  background-color: #2A75F3;
+  color: white;
+  font-family: "Roboto", sans-serif;
+}
+
+.btn-login{
+  background-color: #11925E;
+  color: white;
+}
+
+.login-options-separator{
+  margin-top: 10px;
+  margin-bottom: -20px;
+}
+
+.modal-content{
+  margin-top: 75px;
+}
+
+
+.small-text{
+  font-size: 12px;
+  line-height: 1.6;
+}

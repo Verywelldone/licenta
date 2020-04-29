@@ -1,0 +1,43 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-3 border">
+      <h3 style="text-align: center"> Host list </h3>
+
+      <ul class="heroes">
+        <li class="p-3 border"  *ngFor="let user of users" (click)="onSelect(user)">
+          <span class="badge">{{user.id}}</span>
+          {{user.username}}
+        </li>
+      </ul>
+
+
+
+    </div>
+
+    <div class="col-6 border">
+      <agm-map [latitude]="latitude" [longitude]="longitude">
+        <agm-marker *ngIf="selectedUser"
+                    [latitude]="selectedUser.userDetails.userCoordinates.latitude"
+                    [longitude]="selectedUser.userDetails.userCoordinates.longitude"
+        ></agm-marker>
+      </agm-map>
+    </div>
+
+    <div class="user-info col-3 border" *ngIf="selectedUser">
+      <h3 style="text-align: center"> Selected Host Details </h3>
+
+      <div class="user-details-name">
+        {{selectedUser.username}}
+      </div>
+      <ul>
+        <li> Email: {{selectedUser.email}}</li>
+        <li>First Name: {{selectedUser.userDetails.firstName}}</li>
+        <li>Last Name: {{selectedUser.userDetails.lastName}}</li>
+        <li>Address Name: {{selectedUser.userDetails.address}}</li>
+      </ul>
+    </div>
+  </div>
+
+
+</div>

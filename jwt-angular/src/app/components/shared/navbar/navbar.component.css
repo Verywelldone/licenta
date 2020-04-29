@@ -1,0 +1,31 @@
+#dog-logo {
+  height: 55px;
+}
+
+.navbar {
+  background-color: #23415C;
+  font-size: 1em;
+  padding: 0em;
+}
+
+.navbar-brand {
+  min-height: 45px;
+  padding: 0 15px 5px;
+}
+
+.navbar-nav li {
+  padding-left: 20px;
+}
+
+.nav-link {
+  font-size: 1.1em;
+  font-weight: bolder;
+}
+
+.navbar-default .navbar-nav li a {
+  color: #D5D5D5;
+}
+
+.navbar-default .navbar-nav li a:hover, .navbar-default .navbar-nav li a:active {
+  color: #FFF;
+}

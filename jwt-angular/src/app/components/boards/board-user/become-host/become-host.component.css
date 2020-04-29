@@ -1,0 +1,31 @@
+h3{
+  text-align: center;
+}
+
+.btn{
+  width: 25%;
+}
+
+.landing-page{
+  background-image: url("src/assets/img/testBC.jpg");
+  background-blend-mode: darken;
+  height: 35vh;
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+}
+
+.no-blur{
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  padding: 20px;
+  text-align: center;
+}
+
+.earn{
+  font-size: 2rem;
+  font-weight: bolder;
+}
