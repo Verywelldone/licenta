@@ -1,3 +1,8 @@
+.container {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
 
 .fileLabel {
   color: white;
@@ -8,8 +13,13 @@
   padding: 8px 16px;
 }
 
-form {
-  border: 1px dashed black;
+mat-form-field {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.mat-card {
+  text-align: center;
 }
 
 img {
@@ -17,10 +27,21 @@ img {
   max-height: 400px;
 }
 
-div {
-  margin-top: 15px;
+mat-card {
+  margin-top: .9rem !important;
+  padding: .9rem !important;
 }
 
-#submit{
+mat-checkbox, mat-radio-button {
+  margin: .3rem;
+  padding: .3rem;
+}
+
+button {
+  width: auto;
+  height: auto;
+  border-radius: 21.5px;
+  background-color: #db202f;
   width: 25%;
+  padding: 8px 16px;
 }

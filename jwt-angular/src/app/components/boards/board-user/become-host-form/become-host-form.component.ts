@@ -1,6 +1,8 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {TokenStorageService} from '../../../../services/token-storage.service';
+
 
 @Component({
   selector: 'app-become-host-form',
@@ -9,31 +11,62 @@ import {Router} from '@angular/router';
 })
 export class BecomeHostFormComponent implements OnInit {
 
-  constructor(private httpClient: HttpClient, private router: Router) {
-  }
-
   selectedFile: File;
-  retrievedImage: any;
-  base64Data: any;
-  retrieveResonse: any;
   message: string;
-  imageName: any;
-  //preview
   public imagePath;
   imgURL: any;
 
+  hostForm = {
+    animalsAccepted: new Array(),
+    acceptedDogSize: new Array(),
+    placeToLive: String,
+    holdsPets: Boolean,
+    tcsAccepted: Boolean
+  };
+
+
+  constructor(private httpClient: HttpClient, private router: Router, private token: TokenStorageService) {
+  }
+
   ngOnInit(): void {
+    // this.services = new Service();
   }
 
   public onFileChanged(event) {
     this.selectedFile = event.target.files[0];
   }
 
-  onUpload() {
-    console.log(this.selectedFile);
+  onSubmit() {
+    console.log(this.hostForm);
+  }
 
+
+  handleAnimalAcceptance(animal) {
+    if (this.hostForm.animalsAccepted.includes(animal)) {
+      const index: number = this.hostForm.animalsAccepted.indexOf(animal);
+      this.hostForm.animalsAccepted.splice(index, 1);
+    } else {
+      this.hostForm.animalsAccepted.push(animal);
+    }
+  }
+
+  handleDogSize(dogSize) {
+    if (this.hostForm.acceptedDogSize.includes(dogSize)) {
+      const index: number = this.hostForm.acceptedDogSize.indexOf(dogSize);
+      this.hostForm.acceptedDogSize.splice(index, 1);
+    } else {
+      this.hostForm.acceptedDogSize.push(dogSize);
+    }
+  }
+
+
+  onUpload() {
+    // console.log(this.selectedFile);
+    const userID = this.token.getUser().id;
     const uploadImageData = new FormData();
     uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+    uploadImageData.append('userId', userID);
+
 
     this.httpClient.post('http://localhost:8080/image/upload', uploadImageData, {observe: 'response'})
       .subscribe((response) => {
@@ -45,19 +78,9 @@ export class BecomeHostFormComponent implements OnInit {
         }
       );
 
-    this.router.navigate(['/home']);
+    // this.router.navigate(['/home']);
   }
 
-  // getImage() {
-  //   this.httpClient.get('http://localhost:8080/image/get/' + this.imageName)
-  //     .subscribe(
-  //       res => {
-  //         this.retrieveResonse = res;
-  //         this.base64Data = this.retrieveResonse.picByte;
-  //         this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
-  //       }
-  //     );
-  // }
 
   preview(files) {
     if (files.length === 0) {
@@ -77,9 +100,6 @@ export class BecomeHostFormComponent implements OnInit {
     reader.onload = (_event) => {
       this.imgURL = reader.result;
     };
-
   }
-
-
 
 }

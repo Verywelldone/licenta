@@ -1,6 +1,6 @@
 package jwtspring.security.jwt;
 
-import jwtspring.security.services.UserDetailsServiceImpl;
+import jwtspring.service.userDetails.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package jwtspring.security.jwt;
 
 import io.jsonwebtoken.*;
-import jwtspring.security.services.UserDetailsImpl;
+import jwtspring.service.userDetails.UserDetailsImpl;
 import org.springframework.security.core.Authentication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

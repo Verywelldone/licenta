@@ -1,4 +1,4 @@
-package jwtspring.security.services;
+package jwtspring.service.userDetails;
 
 import java.util.Collection;
 import java.util.List;

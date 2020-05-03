@@ -1,4 +1,4 @@
-package jwtspring.security.services;
+package jwtspring.service.userDetails;
 
 import jwtspring.models.User;
 import jwtspring.repository.UserRepository;

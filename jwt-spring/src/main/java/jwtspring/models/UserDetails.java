@@ -30,7 +30,19 @@ public class UserDetails {
     @JoinColumn(name = "user_coordinatesid")
     private UserCoordinates userCoordinates;
 
-    
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_profileImage")
+    private UserProfileImage profileImage;
+
+
+    public UserProfileImage getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(UserProfileImage profileImage) {
+        this.profileImage = profileImage;
+    }
 
     public UserCoordinates getUserCoordinates() {
         return userCoordinates;
@@ -75,11 +87,13 @@ public class UserDetails {
     @Override
     public String toString() {
         return "UserDetails{" +
-                "firstName='" + firstName + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
                 ", userCoordinates=" + userCoordinates +
+                ", profileImage=" + profileImage +
                 '}';
     }
 }

@@ -25,6 +25,8 @@ import { BecomeHostFormComponent } from './components/boards/board-user/become-h
 import {FileUploadModule} from 'ng2-file-upload';
 import { DndDirective } from './components/boards/board-user/become-host-form/dnd.directive';
 import { UserTcsComponent } from './components/boards/board-user/user-tcs/user-tcs.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MaterialModule} from './material-module';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import { UserTcsComponent } from './components/boards/board-user/user-tcs/user-t
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyBYeSZf4AVXQ3CNVDTcU3i_JCIv8001CLA'
         }),
-        FileUploadModule
+        FileUploadModule,
+        BrowserAnimationsModule,
+        MaterialModule
     ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

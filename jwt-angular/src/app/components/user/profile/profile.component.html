@@ -1,4 +1,8 @@
 <div class="container" *ngIf="currentUser; else loggedOut">
+
+
+  <img [src]="retrievedImage" alt="">
+
   <header class="jumbotron">
     <h3>
       <strong>{{ currentUser.username }}</strong> Profile
