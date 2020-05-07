@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
   retrievedImage: any;
   base64Data: any;
   retrieveResonse: any;
-
+  
   constructor(private token: TokenStorageService, private httpClient: HttpClient) {
   }
 
@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getImage() {
-    console.log( this.token.getUser().id);
+    console.log(this.token.getUser().id);
     this.httpClient.get('http://localhost:8080/image/get/' + this.token.getUser().id)
       .subscribe(
         res => {
@@ -34,5 +34,4 @@ export class ProfileComponent implements OnInit {
         }
       );
   }
-
 }

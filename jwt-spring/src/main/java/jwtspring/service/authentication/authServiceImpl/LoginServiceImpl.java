@@ -26,8 +26,6 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     JwtUtils jwtUtils;
 
-
-
     @Override
     public ResponseEntity<?> authenticateUser(@Valid LoginRequest loginRequest) {
 
@@ -38,7 +36,9 @@ public class LoginServiceImpl implements LoginService {
         String jwt = jwtUtils.generateJwtToken(authentication);
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        List<String> roles = userDetails.getAuthorities().stream()
+        List<String> roles = userDetails
+                .getAuthorities()
+                .stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 

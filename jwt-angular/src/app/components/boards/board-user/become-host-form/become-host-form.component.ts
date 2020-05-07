@@ -2,6 +2,8 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {TokenStorageService} from '../../../../services/token-storage.service';
+import {FormControl, FormGroup} from '@angular/forms';
+import {requireCheckboxesToBeCheckedValidator} from '../../../../helpers/require-checkboxes-to-be-checked.validator';
 
 
 @Component({
@@ -12,7 +14,7 @@ import {TokenStorageService} from '../../../../services/token-storage.service';
 export class BecomeHostFormComponent implements OnInit {
 
   selectedFile: File;
-  message: string;
+
   public imagePath;
   imgURL: any;
 
@@ -23,6 +25,29 @@ export class BecomeHostFormComponent implements OnInit {
     holdsPets: Boolean,
     tcsAccepted: Boolean
   };
+
+  isDogSizeFormValid;
+  dogSizemessage: string;
+
+  isHostServiceGroupValid;
+  serviceGroupMessage: string;
+
+  hostFormValidator = new FormGroup({
+    dogSizeGroup: new FormGroup({
+      small: new FormControl(false),
+      medium: new FormControl(false),
+      large: new FormControl(false),
+      giant: new FormControl(false)
+    }, requireCheckboxesToBeCheckedValidator()),
+
+    hostServiceGroup: new FormGroup({
+      boarding: new FormControl(false),
+      houseSitting: new FormControl(false),
+      dropInVisits: new FormControl(false),
+      dogWalking: new FormControl(false),
+      doggyDayCare: new FormControl(false)
+    }, requireCheckboxesToBeCheckedValidator())
+  });
 
 
   constructor(private httpClient: HttpClient, private router: Router, private token: TokenStorageService) {
@@ -37,7 +62,24 @@ export class BecomeHostFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.hostForm);
+
+    this.isDogSizeFormValid = this.hostFormValidator.get('dogSizeGroup').status;
+    this.isHostServiceGroupValid = this.hostFormValidator.get('hostServiceGroup').status;
+
+    console.log(this.isDogSizeFormValid + ' dogSizeForm ');
+    console.log(this.isHostServiceGroupValid + ' isHostServiceGroupValid ');
+
+    if (this.isDogSizeFormValid === 'INVALID') {
+      this.dogSizemessage = ' Select at least one checkbox!';
+      this.isDogSizeFormValid = false;
+    }
+
+    if (this.isHostServiceGroupValid === 'INVALID') {
+      this.serviceGroupMessage = 'Select at least one service';
+      this.isHostServiceGroupValid = false;
+    }
+
+
   }
 
 
@@ -71,9 +113,9 @@ export class BecomeHostFormComponent implements OnInit {
     this.httpClient.post('http://localhost:8080/image/upload', uploadImageData, {observe: 'response'})
       .subscribe((response) => {
           if (response.status === 200) {
-            this.message = 'Image uploaded successfully';
+            // this.message = 'Image uploaded successfully';
           } else {
-            this.message = 'Image not uploaded successfully';
+            // this.message = 'Image not uploaded successfully';
           }
         }
       );
@@ -89,7 +131,7 @@ export class BecomeHostFormComponent implements OnInit {
 
     const mimeType = files[0].type;
     if (mimeType.match(/image\/*/) == null) {
-      this.message = 'Only images are supported.';
+      // this.message = 'Only images are supported.';
       return;
     }
 

@@ -1,7 +1,7 @@
 <div class="container">
 
   <mat-card>
-    <form (ngSubmit)="onUpload()">
+    <form (ngSubmit)="onSubmit()" [formGroup]="hostFormValidator">
       <!--    Upload img section-->
       <mat-card>
         <input type="file" #fileDropRef id="fileDropRef" hidden accept="image/*" style="display: block"
@@ -35,39 +35,93 @@
         </mat-checkbox>
       </mat-card>
 
-      <mat-card *ngIf="dogs.checked" class=" p-3">
+      <mat-card *ngIf="dogs.checked" class=" p-3" formGroupName="dogSizeGroup">
         <h5>Dog size:</h5>
-        <mat-checkbox (change)="handleDogSize($event.source.value)" color="primary" value="small" class="">Small: 0-6
-          Kg
-        </mat-checkbox>
-        <mat-checkbox (change)="handleDogSize($event.source.value)" color="primary" value="medium" class="">Medium: 7-18
-          Kg
-        </mat-checkbox>
-        <mat-checkbox (change)="handleDogSize($event.source.value)" color="primary" value="large" class="">large: 19-45
-          Kg
-        </mat-checkbox>
-        <mat-checkbox (change)="handleDogSize($event.source.value)" color="primary" value="giant" class="">Giant: 45+
-          Kg
-        </mat-checkbox>
-      </mat-card>
-      <!--  Services   -->
 
-      <mat-card class=" services">
-        <h5>What service type do you offer?</h5>
-        <mat-checkbox #boarding color="primary" value="Boarding" class="col-2 col-md-6 col-sm-6 col-xs-6 p-3">Boarding
+        <mat-checkbox (change)="handleDogSize($event.source.value)"
+                      formControlName="small"
+                      color="primary"
+                      value="small"
+                      id="small">
+          Small: 0-6 Kg
         </mat-checkbox>
-        <mat-checkbox #houseSitting color="primary" value="House sitting" class="col-2 col-md-6 col-sm-6 col-xs-6 p-3">
+
+        <mat-checkbox (change)="handleDogSize($event.source.value)"
+                      formControlName="medium"
+                      color="primary"
+                      id="medium"
+                      value="medium">
+          Medium: 7-18 Kg
+        </mat-checkbox>
+
+        <mat-checkbox (change)="handleDogSize($event.source.value)"
+                      formControlName="large"
+                      color="primary"
+                      value="large"
+                      id="large">
+          Large: 19-45 Kg
+        </mat-checkbox>
+
+        <mat-checkbox (change)="handleDogSize($event.source.value)"
+                      formControlName="giant"
+                      color="primary"
+                      value="giant"
+                      id="giant">
+          Giant: 45+ Kg
+        </mat-checkbox>
+        <br>
+        <mat-error *ngIf="!isDogSizeFormValid ">
+          {{this.dogSizemessage}}
+        </mat-error>
+
+      </mat-card>
+
+
+      <!--  Services   -->
+      <mat-card class="services" formGroupName="hostServiceGroup">
+        <h5>What service type do you offer?</h5>
+        <mat-checkbox #boarding
+                      color="primary"
+                      value="Boarding"
+                      formControlName="boarding"
+                      class="col-2 col-md-6 col-sm-6 col-xs-6 p-3">
+          Boarding
+        </mat-checkbox>
+
+        <mat-checkbox #houseSitting
+                      color="primary"
+                      value="House sitting"
+                      formControlName="houseSitting"
+                      class="col-2 col-md-6 col-sm-6 col-xs-6 p-3">
           House Sitting
         </mat-checkbox>
-        <mat-checkbox #dropInVisits color="primary" value="Drop In Visits" class="col-2 col-md-6 col-sm-6 col-xs-6 p-3">
+
+        <mat-checkbox #dropInVisits
+                      color="primary"
+                      value="Drop In Visits"
+                      formControlName="dropInVisits"
+                      class="col-2 col-md-6 col-sm-6 col-xs-6 p-3">
           Drop in Visits
         </mat-checkbox>
-        <mat-checkbox #dogWalking color="primary" value="Dog Walking" class="col-2 col-md-6 col-sm-6 col-xs-6 p-3">Dog
-          Walking
+        <mat-checkbox #dogWalking
+                      color="primary"
+                      value="Dog Walking"
+                      formControlName="dogWalking"
+                      class="col-2 col-md-6 col-sm-6 col-xs-6 p-3">
+          Dog Walking
         </mat-checkbox>
-        <mat-checkbox #doggyDayCare color="primary" value="Doggy Day Care" class="col-2 col-md-6 col-sm-6 col-xs-6 p-3">
+
+        <mat-checkbox #doggyDayCare
+                      color="primary"
+                      value="Doggy Day Care"
+                      formControlName="doggyDayCare"
+                      class="col-2 col-md-6 col-sm-6 col-xs-6 p-3">
           Doggy Day Care
         </mat-checkbox>
+        <br>
+        <mat-error *ngIf="!isHostServiceGroupValid">
+          {{this.serviceGroupMessage}}
+        </mat-error>
       </mat-card>
 
       <!--      Service Pricing -->
@@ -125,8 +179,8 @@
         <mat-checkbox type="checkbox" color="warn" #acceptCheck> Accept terms and conditions!</mat-checkbox>
       </mat-card>
 
-            <button [disabled]="!selectedFile || !acceptCheck.checked" mat-raised-button class="m-4" color="primary" >Primary</button>
-<!--      <button mat-raised-button class="m-4" color="primary">Primary</button>-->
+      <!--   <button [disabled]="!selectedFile || !acceptCheck.checked" mat-raised-button class="m-4" color="primary" >Primary</button>-->
+      <button mat-raised-button class="m-4" color="primary">Primary</button>
 
     </form>
 

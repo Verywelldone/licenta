@@ -32,7 +32,8 @@ public class RegisterServiceImpl implements RegisterService {
 
     @Override
     public ResponseEntity<?> registerUser(@Valid SignupRequest signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+        if
+        (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username is already taken!"));
@@ -44,11 +45,13 @@ public class RegisterServiceImpl implements RegisterService {
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
 
-        User user = new User(signUpRequest.getUsername(),
+        User user = new User(
+                signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()),
                 signUpRequest.getUserDetails(),
-                signUpRequest.getUserAccountStatus());
+                signUpRequest.getUserAccountStatus()
+        );
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
