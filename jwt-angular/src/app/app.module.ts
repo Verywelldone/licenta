@@ -21,9 +21,9 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { BecomeClientComponent } from './components/boards/board-user/become-client/become-client.component';
 import { BecomeHostComponent } from './components/boards/board-user/become-host/become-host.component';
 import { AgmCoreModule } from '@agm/core';
-import { BecomeHostFormComponent } from './components/boards/board-user/become-host-form/become-host-form.component';
+import { BecomeSitterFormComponent } from './components/boards/board-user/become-sitter-form/become-sitter-form.component';
 import {FileUploadModule} from 'ng2-file-upload';
-import { DndDirective } from './components/boards/board-user/become-host-form/dnd.directive';
+import { DndDirective } from './components/boards/board-user/become-sitter-form/dnd.directive';
 import { UserTcsComponent } from './components/boards/board-user/user-tcs/user-tcs.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialModule} from './material-module';
@@ -45,7 +45,7 @@ import {MaterialModule} from './material-module';
     NavbarComponent,
     BecomeClientComponent,
     BecomeHostComponent,
-    BecomeHostFormComponent,
+    BecomeSitterFormComponent,
     DndDirective,
     UserTcsComponent
   ],

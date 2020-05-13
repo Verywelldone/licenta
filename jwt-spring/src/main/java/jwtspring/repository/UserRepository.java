@@ -1,6 +1,6 @@
 package jwtspring.repository;
 
-import jwtspring.models.User;
+import jwtspring.models.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,5 +14,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Boolean existsByEmail(String email);
 
-    User findUserById(long id);
+    User findUserById(int id);
 }

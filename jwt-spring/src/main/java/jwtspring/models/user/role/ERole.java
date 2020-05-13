@@ -1,4 +1,4 @@
-package jwtspring.models;
+package jwtspring.models.user.role;
 
 public enum ERole {
     ROLE_USER,

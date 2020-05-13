@@ -1,7 +1,7 @@
 package jwtspring.payload.response;
 
-import jwtspring.models.UserAccountStatus;
-import jwtspring.models.UserDetails;
+import jwtspring.models.user.UserAccountStatus;
+import jwtspring.models.user.UserDetails;
 
 import java.util.List;
 
@@ -9,14 +9,14 @@ public class JwtResponse {
 
     private String token;
     private String type = "Bearer";
-    private Long id;
+    private int id;
     private String username;
     private String email;
     private List<String> roles;
     private UserDetails userData;
     private UserAccountStatus userStatus;
 
-    public JwtResponse(String accessToken, Long id, String username, String email, List<String> roles, UserDetails userDetails, UserAccountStatus userAccountStatus) {
+    public JwtResponse(String accessToken, int id, String username, String email, List<String> roles, UserDetails userDetails, UserAccountStatus userAccountStatus) {
         this.token = accessToken;
         this.id = id;
         this.username = username;
@@ -50,11 +50,11 @@ public class JwtResponse {
         this.type = tokenType;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

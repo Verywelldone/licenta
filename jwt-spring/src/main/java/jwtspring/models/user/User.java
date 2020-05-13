@@ -1,4 +1,7 @@
-package jwtspring.models;
+package jwtspring.models.user;
+
+import jwtspring.models.service.HostService;
+import jwtspring.models.user.role.Role;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -7,7 +10,6 @@ import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Entity
 @Table(name = "users",
         uniqueConstraints = {
@@ -15,9 +17,11 @@ import java.util.Set;
                 @UniqueConstraint(columnNames = "email")
         })
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    private int id;
 
     @NotBlank
     @Size(max = 20)
@@ -32,13 +36,27 @@ public class User {
     @Size(max = 120)
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_detailsid")
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "user_detailsid")
+//    private UserDetails userDetails;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private UserDetails userDetails;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_statusid")
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "user_statusid")
+//    private UserAccountStatus userAccountStatus;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserAccountStatus userAccountStatus;
+
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private HostService hostService;
+
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "host_serviceid")
+//    private HostService hostService;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
@@ -55,7 +73,16 @@ public class User {
         this.email = email;
         this.password = password;
         this.userDetails= userDetails;
-        this.userAccountStatus = userAccountStatus;
+//        this.userAccountStatus = userAccountStatus;
+    }
+
+
+    public HostService getHostService() {
+        return hostService;
+    }
+
+    public void setHostService(HostService hostService) {
+        this.hostService = hostService;
     }
 
     public UserAccountStatus getUserAccountStatus() {
@@ -66,11 +93,11 @@ public class User {
         this.userAccountStatus = userAccountStatus;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -122,7 +149,6 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", userDetails=" + userDetails +
-                ", userAccountStatus=" + userAccountStatus +
                 ", roles=" + roles +
                 '}';
     }

@@ -1,4 +1,4 @@
-package jwtspring.models;
+package jwtspring.models.user;
 
 import javax.persistence.*;
 
@@ -7,12 +7,8 @@ import javax.persistence.*;
 public class UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_detailsid")
-    private long id;
-
-    @OneToOne(mappedBy = "userDetails")
-    private User user;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -26,15 +22,29 @@ public class UserDetails {
     @Column(name = "address")
     private String address;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    private User user;
+
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_coordinatesid")
     private UserCoordinates userCoordinates;
-
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_profileImage")
     private UserProfileImage profileImage;
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public UserProfileImage getProfileImage() {
         return profileImage;

@@ -1,4 +1,4 @@
-package jwtspring.models;
+package jwtspring.models.user.role;
 
 import javax.persistence.*;
 

@@ -1,8 +1,8 @@
 package jwtspring.service.authentication.authServiceImpl;
 
-import jwtspring.models.ERole;
-import jwtspring.models.Role;
-import jwtspring.models.User;
+import jwtspring.models.user.*;
+import jwtspring.models.user.role.ERole;
+import jwtspring.models.user.role.Role;
 import jwtspring.payload.request.SignupRequest;
 import jwtspring.payload.response.MessageResponse;
 import jwtspring.repository.RoleRepository;
@@ -32,8 +32,7 @@ public class RegisterServiceImpl implements RegisterService {
 
     @Override
     public ResponseEntity<?> registerUser(@Valid SignupRequest signUpRequest) {
-        if
-        (userRepository.existsByUsername(signUpRequest.getUsername())) {
+        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username is already taken!"));
@@ -52,6 +51,16 @@ public class RegisterServiceImpl implements RegisterService {
                 signUpRequest.getUserDetails(),
                 signUpRequest.getUserAccountStatus()
         );
+
+//    Validare pentru @MapId @One-to-One
+        UserDetails userDetails = signUpRequest.getUserDetails();
+        userDetails.setUser(user);
+        user.setUserDetails(userDetails);
+
+//    Validare pentru @MapId @One-to-One
+        UserAccountStatus userAccountStatus = signUpRequest.getUserAccountStatus();
+        userAccountStatus.setUser(user);
+        user.setUserAccountStatus(userAccountStatus);
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();

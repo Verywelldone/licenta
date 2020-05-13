@@ -1,7 +1,7 @@
 package jwtspring.payload.request;
 
-import jwtspring.models.UserAccountStatus;
-import jwtspring.models.UserDetails;
+import jwtspring.models.user.UserAccountStatus;
+import jwtspring.models.user.UserDetails;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

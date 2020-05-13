@@ -1,6 +1,6 @@
 package jwtspring.service.userDetails;
 
-import jwtspring.models.User;
+import jwtspring.models.user.User;
 import jwtspring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

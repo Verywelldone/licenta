@@ -1,7 +1,7 @@
 package jwtspring.service.userImg.userImgImpl;
 
-import jwtspring.models.User;
-import jwtspring.models.UserProfileImage;
+import jwtspring.models.user.User;
+import jwtspring.models.user.UserProfileImage;
 import jwtspring.payload.response.MessageResponse;
 import jwtspring.repository.ImageRepository;
 import jwtspring.repository.UserRepository;
@@ -9,8 +9,6 @@ import jwtspring.service.userImg.UserImgService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,7 +28,7 @@ public class UserImgServiceImpl implements UserImgService {
     UserRepository userRepository;
 
 
-    public ResponseEntity uplaodImage(@RequestParam("imageFile") MultipartFile file, @RequestParam("userId") long userid) throws IOException {
+    public ResponseEntity uplaodImage(@RequestParam("imageFile") MultipartFile file, @RequestParam("userId") int userid) throws IOException {
 
         System.out.println("USER ID IS " + userid);
         User currentUser = userRepository.findUserById(userid);

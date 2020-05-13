@@ -5,8 +5,8 @@
       <h3 style="text-align: center"> Host list </h3>
 
       <ul class="heroes">
-        <li class="p-3 border"  *ngFor="let user of users" (click)="onSelect(user)">
-          <span class="badge">{{user.id}}</span>
+        <li class="p-3 border"  *ngFor="let user of users let i = index" [attr.data-index]="i" (click)="onSelect(user)">
+          <span class="badge">{{i+1}}</span>
           {{user.username}}
         </li>
       </ul>

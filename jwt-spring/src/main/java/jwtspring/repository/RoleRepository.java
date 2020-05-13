@@ -1,7 +1,7 @@
 package jwtspring.repository;
 
-import jwtspring.models.ERole;
-import jwtspring.models.Role;
+import jwtspring.models.user.role.ERole;
+import jwtspring.models.user.role.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

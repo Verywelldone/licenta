@@ -41,7 +41,10 @@ button {
   width: auto;
   height: auto;
   border-radius: 21.5px;
-  background-color: #db202f;
+  background-color: #3F51B5;
+  color: white;
+  font-weight: bolder;
   width: 25%;
-  padding: 8px 16px;
+  margin-top: 16px;
+  padding: 4px 8px;
 }

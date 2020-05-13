@@ -1,6 +1,7 @@
 export class UserAccountStatusModel {
-  isActive: string;
-  isBanned: string;
-  isHost: string;
-  isClient: string;
+  lastLogin: string;
+  createdAt: string;
+  updatedAt: string;
+  isConfirmed: boolean;
+  isBanned: boolean;
 }

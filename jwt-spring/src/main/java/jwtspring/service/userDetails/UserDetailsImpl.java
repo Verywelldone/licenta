@@ -6,9 +6,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jwtspring.models.User;
+import jwtspring.models.user.User;
 
-import jwtspring.models.UserAccountStatus;
+import jwtspring.models.user.UserAccountStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,7 +18,7 @@ public class UserDetailsImpl implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    private int id;
 
     private String username;
 
@@ -27,14 +27,14 @@ public class UserDetailsImpl implements UserDetails {
     @JsonIgnore
     private String password;
 
-    private jwtspring.models.UserDetails userDetails;
+    private jwtspring.models.user.UserDetails userDetails;
 
     private Collection<? extends GrantedAuthority> authorities;
 
     private UserAccountStatus userAccountStatus;
 
-    public UserDetailsImpl(Long id, String username, String email, String password,
-                           Collection<? extends GrantedAuthority> authorities, jwtspring.models.UserDetails userDetails, UserAccountStatus userAccountStatus) {
+    public UserDetailsImpl(int id, String username, String email, String password,
+                           Collection<? extends GrantedAuthority> authorities, jwtspring.models.user.UserDetails userDetails, UserAccountStatus userAccountStatus) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -60,11 +60,11 @@ public class UserDetailsImpl implements UserDetails {
                 user.getUserAccountStatus());
     }
 
-    public jwtspring.models.UserDetails getUserDetails() {
+    public jwtspring.models.user.UserDetails getUserDetails() {
         return userDetails;
     }
 
-    public void setUserDetails(jwtspring.models.UserDetails userDetails) {
+    public void setUserDetails(jwtspring.models.user.UserDetails userDetails) {
         this.userDetails = userDetails;
     }
 
@@ -73,7 +73,7 @@ public class UserDetailsImpl implements UserDetails {
         return authorities;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 

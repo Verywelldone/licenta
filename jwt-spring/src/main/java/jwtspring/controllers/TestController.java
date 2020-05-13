@@ -2,7 +2,7 @@ package jwtspring.controllers;
 
 
 import javassist.NotFoundException;
-import jwtspring.models.User;
+import jwtspring.models.user.User;
 import jwtspring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
