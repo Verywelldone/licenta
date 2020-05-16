@@ -1,11 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {TokenStorageService} from '../../../../services/token-storage.service';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {requireCheckboxesToBeCheckedValidator} from '../../../../helpers/require-checkboxes-to-be-checked.validator';
-import {BecomeHostComponent} from '../become-host/become-host.component';
-import {BecomeHostService} from '../../../../services/become-host.service';
+import {BecomeSitterService} from '../../../../services/sitter-service/become-sitter.service';
 
 
 // tslint:disable-next-line:class-name
@@ -21,8 +17,9 @@ export class ServiceExample {
 })
 export class BecomeSitterFormComponent implements OnInit {
 
-  // Anymal type variables
+  private isSitter = false;
 
+  // Anymal type variables
   public animalType: any[] = [];
   public dogSizeArray: any[] = [];
   public passStepOne = false;
@@ -36,7 +33,7 @@ export class BecomeSitterFormComponent implements OnInit {
   // other pets
   public otherPets = '';
 
-  constructor(private becomeHostService: BecomeHostService, private token: TokenStorageService) {
+  constructor(private becomeHostService: BecomeSitterService, private token: TokenStorageService, private route: Router) {
   }
 
   ngOnInit(): void {
@@ -123,11 +120,11 @@ export class BecomeSitterFormComponent implements OnInit {
     };
 
     const json = JSON.stringify(data);
-
-
-
-
-    this.becomeHostService.submitSitterRequest(json);
+    this.isSitter = true;
+    this.becomeHostService.submitSitterRequest(json).subscribe(value => {
+      console.log(value);
+      this.route.navigate(['sitter-profile']);
+    });
     // console.log(json);
   }
 

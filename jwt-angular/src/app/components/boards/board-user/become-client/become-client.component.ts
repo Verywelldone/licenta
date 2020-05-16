@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TokenStorageService} from '../../../../services/token-storage.service';
-import {UserService} from '../../../../services/user.service';
+import {UserAuthoritiesService} from '../../../../services/user-authorities.service';
+import {ClientPageService} from '../../../../services/client-service/client-page.service';
 
 @Component({
   selector: 'app-become-client',
@@ -16,7 +17,7 @@ export class BecomeClientComponent implements OnInit {
   users: any;
   selectedUser: any;
 
-  constructor(private token: TokenStorageService, private userService: UserService) {
+  constructor(private token: TokenStorageService, private clientPageService: ClientPageService) {
   }
 
   ngOnInit() {
@@ -33,12 +34,18 @@ export class BecomeClientComponent implements OnInit {
   }
 
   reloadData() {
-    this.userService.getUserList().subscribe(data => {
+    this.clientPageService.getSittersList().subscribe(data => {
         console.log(data);
         this.users = data;
+
+        const removeIndex = this.users.map(item => {
+          return item.id;
+        }).indexOf(this.curentUser.id);
+
+        this.users.splice(removeIndex, 1);
+
       }
-    )
-    ;
+    );
   }
 
   onChoseLocation(event) {

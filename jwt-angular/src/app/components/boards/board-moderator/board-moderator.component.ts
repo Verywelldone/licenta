@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from '../../../services/user.service';
+import {UserAuthoritiesService} from '../../../services/user-authorities.service';
 
 @Component({
   selector: 'app-board-moderator',
@@ -9,7 +9,7 @@ import {UserService} from '../../../services/user.service';
 export class BoardModeratorComponent implements OnInit {
   content: any;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserAuthoritiesService) {
   }
 
   ngOnInit() {

@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BecomeHostService {
+export class BecomeSitterService {
 
   SUBMIT_API = 'http://localhost:8080/sitter/';
 
@@ -15,12 +16,8 @@ export class BecomeHostService {
   constructor(private http: HttpClient) {
   }
 
-  submitSitterRequest(data: any) {
+  submitSitterRequest(data: any): Observable<any> {
     console.log(data);
-    this.http.post( 'http://localhost:8080/sitter/submit', data, this.httpOptions).subscribe(message => {
-      console.log(message);
-    });
+    return this.http.post('http://localhost:8080/sitter/submit', data, this.httpOptions);
   }
-
-
 }

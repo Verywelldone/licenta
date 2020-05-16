@@ -3,10 +3,10 @@ import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-become-host',
-  templateUrl: './become-host.component.html',
-  styleUrls: ['./become-host.component.css']
+  templateUrl: './become-sitter.component.html',
+  styleUrls: ['./become-sitter.component.css']
 })
-export class BecomeHostComponent implements OnInit {
+export class BecomeSitterComponent implements OnInit {
 
 
   constructor(private router: Router) {

@@ -1,5 +1,7 @@
 package jwtspring.payload.response;
 
+import jwtspring.models.SitterRequest;
+import jwtspring.models.service.HostService;
 import jwtspring.models.user.UserAccountStatus;
 import jwtspring.models.user.UserDetails;
 
@@ -15,6 +17,18 @@ public class JwtResponse {
     private List<String> roles;
     private UserDetails userData;
     private UserAccountStatus userStatus;
+    private HostService hostService;
+
+    public JwtResponse(String accessToken, int id, String username, String email, List<String> roles, UserDetails userDetails, UserAccountStatus userAccountStatus, HostService hostService) {
+        this.token = accessToken;
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.roles = roles;
+        this.userData = userDetails;
+        this.userStatus = userAccountStatus;
+        this.hostService = hostService;
+    }
 
     public JwtResponse(String accessToken, int id, String username, String email, List<String> roles, UserDetails userDetails, UserAccountStatus userAccountStatus) {
         this.token = accessToken;
@@ -24,6 +38,14 @@ public class JwtResponse {
         this.roles = roles;
         this.userData = userDetails;
         this.userStatus = userAccountStatus;
+    }
+
+    public HostService getHostService() {
+        return hostService;
+    }
+
+    public void setHostService(HostService hostService) {
+        this.hostService = hostService;
     }
 
     public UserAccountStatus getUserAccountStatus() {

@@ -6,10 +6,11 @@ import {RegisterComponent} from './components/user/register/register.component';
 import {ProfileComponent} from './components/user/profile/profile.component';
 import {BoardModeratorComponent} from './components/boards/board-moderator/board-moderator.component';
 import {BoardAdminComponent} from './components/boards/board-admin/board-admin.component';
-import {BecomeHostComponent} from './components/boards/board-user/become-host/become-host.component';
 import {BecomeClientComponent} from './components/boards/board-user/become-client/become-client.component';
 import {BecomeSitterFormComponent} from './components/boards/board-user/become-sitter-form/become-sitter-form.component';
 import {UserTcsComponent} from './components/boards/board-user/user-tcs/user-tcs.component';
+import {SitterProfileComponent} from './components/boards/board-user/sitter-profile/sitter-profile.component';
+import {BecomeSitterComponent} from './components/boards/board-user/become-sitter/become-sitter.component';
 
 
 const routes: Routes = [
@@ -18,8 +19,9 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
   // {path: 'user', component: BoardUserComponent},
-  {path: 'become-host', component: BecomeHostComponent},
+  {path: 'become-sitter', component: BecomeSitterComponent},
   {path: 'become-sitter-form', component: BecomeSitterFormComponent},
+  {path: 'sitter-profile', component: SitterProfileComponent},
   {path: 'become-client', component: BecomeClientComponent},
   {path: 'mod', component: BoardModeratorComponent},
   {path: 'admin', component: BoardAdminComponent},

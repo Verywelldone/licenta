@@ -20,8 +20,8 @@ public class BecomeSitterController {
     SitterRequestService sitterRequestService;
 
     @PostMapping(value = "/submit", consumes = "application/json", produces = "application/json")
-    public ResponseEntity getBecomeHostRequest(@RequestBody SitterRequest sitterRequest){
-        sitterRequestService.saveSitterRequest(sitterRequest);
-        return  ResponseEntity.ok(new MessageResponse("A INTRAT AICI"));
+    public ResponseEntity<?> getBecomeHostRequest(@RequestBody SitterRequest sitterRequest){
+
+        return sitterRequestService.saveSitterRequest(sitterRequest);
     }
 }

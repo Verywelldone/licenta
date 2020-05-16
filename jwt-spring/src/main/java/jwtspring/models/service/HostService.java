@@ -91,9 +91,9 @@ public class HostService {
         isActive = active;
     }
 
-    public User getUser() {
-        return user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
 
     public void setUser(User user) {
         this.user = user;
@@ -101,5 +101,17 @@ public class HostService {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "HostService{" +
+                "animalType='" + animalType + '\'' +
+                ", dogSize='" + dogSize + '\'' +
+                ", houseType='" + houseType + '\'' +
+                ", otherPets='" + otherPets + '\'' +
+                ", isActive=" + isActive +
+                ", serviceModelSet=" + serviceModelSet +
+                '}';
     }
 }

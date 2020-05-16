@@ -5,11 +5,13 @@ import jwtspring.models.SitterRequest;
 import jwtspring.models.service.HostService;
 import jwtspring.models.service.ServiceModel;
 import jwtspring.models.user.User;
+import jwtspring.payload.response.MessageResponse;
 import jwtspring.repository.ServiceRepository;
 import jwtspring.repository.SitterRequestRepository;
 import jwtspring.repository.UserRepository;
 import jwtspring.service.sitterRequest.SitterRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,7 +32,7 @@ public class SitterRequestServiceImp implements SitterRequestService {
     ServiceRepository serviceRepository;
 
     @Override
-    public void saveSitterRequest(SitterRequest sitterRequest) {
+    public ResponseEntity<?> saveSitterRequest(SitterRequest sitterRequest) {
         User user = userRepository.findUserById(sitterRequest.getUserId());
 
         String animalType = Arrays.toString(sitterRequest.getAnimalType());
@@ -66,5 +68,14 @@ public class SitterRequestServiceImp implements SitterRequestService {
             serviceModel.setHostServices(hostService);
             serviceRepository.save(serviceModel);
         });
+
+        return ResponseEntity.ok(new MessageResponse("User is now sitter"));
+    }
+
+    @Override
+    public HostService getSitterRequest(int userId) {
+        User user = userRepository.findUserById(userId);
+
+        return user.getHostService();
     }
 }

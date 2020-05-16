@@ -7,7 +7,7 @@ const API_URL = 'http://localhost:8080/api/test/';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserAuthoritiesService {
 
   users: any = [];
 
@@ -40,7 +40,4 @@ export class UserService {
     return this.http.get(API_URL + 'admin', {responseType: 'text'});
   }
 
-  getUserList(): Observable<any> {
-    return this.http.get(API_URL + 'user-list');
-  }
 }

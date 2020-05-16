@@ -42,15 +42,18 @@ public class LoginServiceImpl implements LoginService {
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(new JwtResponse(
-                jwt,
-                userDetails.getId(),
-                userDetails.getUsername(),
-                userDetails.getEmail(),
-                roles,
-                userDetails.getUserDetails(),
-                userDetails.getUserAccountStatus()));
+        System.out.println(userDetails.toString());
+
+
+        return ResponseEntity.ok(
+                new JwtResponse(
+                        jwt,
+                        userDetails.getId(),
+                        userDetails.getUsername(),
+                        userDetails.getEmail(),
+                        roles,
+                        userDetails.getUserDetails(),
+                        userDetails.getUserAccountStatus()
+                ));
     }
-
-
 }

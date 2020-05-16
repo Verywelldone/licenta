@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jwtspring.models.service.HostService;
 import jwtspring.models.user.User;
 
 import jwtspring.models.user.UserAccountStatus;
@@ -33,6 +34,7 @@ public class UserDetailsImpl implements UserDetails {
 
     private UserAccountStatus userAccountStatus;
 
+
     public UserDetailsImpl(int id, String username, String email, String password,
                            Collection<? extends GrantedAuthority> authorities, jwtspring.models.user.UserDetails userDetails, UserAccountStatus userAccountStatus) {
         this.id = id;
@@ -42,13 +44,13 @@ public class UserDetailsImpl implements UserDetails {
         this.authorities = authorities;
         this.userDetails = userDetails;
         this.userAccountStatus = userAccountStatus;
-
     }
 
     public static UserDetailsImpl build(User user) {
         List<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName().name()))
                 .collect(Collectors.toList());
+
 
         return new UserDetailsImpl(
                 user.getId(),
@@ -58,6 +60,8 @@ public class UserDetailsImpl implements UserDetails {
                 authorities,
                 user.getUserDetails(),
                 user.getUserAccountStatus());
+
+
     }
 
     public jwtspring.models.user.UserDetails getUserDetails() {
@@ -127,5 +131,18 @@ public class UserDetailsImpl implements UserDetails {
             return false;
         UserDetailsImpl user = (UserDetailsImpl) o;
         return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public String toString() {
+        return "UserDetailsImpl{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", userDetails=" + userDetails +
+                ", authorities=" + authorities +
+                ", userAccountStatus=" + userAccountStatus +
+                '}';
     }
 }

@@ -14,30 +14,15 @@
           <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
         </li>
         <li class="nav-item">
-          <a href="/become-host" class="nav-link" *ngIf="isLoggedIn" routerLink="become-host">Become Host</a>
+          <a href="/become-sitter" class="nav-link" *ngIf="isLoggedIn && !isSitter" routerLink="become-sitter">Become Host</a>
+        </li>
+        <li class="nav-item">
+          <a href="/sitter-profile" class="nav-link" *ngIf="isLoggedIn && isSitter" routerLink="sitter-profile">My Sitter Profile</a>
         </li>
         <li class="nav-item">
           <a href="/become-client" class="nav-link" *ngIf="isLoggedIn" routerLink="become-client">Become Client</a>
         </li>
       </ul>
-
-<!--      <ul class="navbar-nav ml-auto">-->
-<!--        <li class="nav-item active">-->
-<!--          <a class="nav-link" href="/home">Home</a>-->
-<!--        </li>-->
-<!--        <li class="nav-item active">-->
-<!--          <a class="nav-link" href="/about">About</a>-->
-<!--        </li>-->
-<!--        <li class="nav-item active">-->
-<!--          <a class="nav-link" href="/services">Services</a>-->
-<!--        </li>-->
-<!--        <li class="nav-item active">-->
-<!--          <a class="nav-link" href="/tesimonials">Tesimonials</a>-->
-<!--        </li>-->
-<!--        <li class="nav-item active">-->
-<!--          <a class="nav-link" href="/contact">Contact</a>-->
-<!--        </li>-->
-<!--      </ul>-->
       <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
         <li class="nav-item">
           <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
