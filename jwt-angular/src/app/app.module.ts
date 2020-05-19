@@ -20,14 +20,16 @@ import {MeetTheTeamComponent} from './components/main-pages/home/meet-the-team/m
 import {NavbarComponent} from './components/shared/navbar/navbar.component';
 import {AgmCoreModule} from '@agm/core';
 import {FileUploadModule} from 'ng2-file-upload';
-import {DndDirective} from './components/boards/board-user/become-sitter-form/dnd.directive';
-import {UserTcsComponent} from './components/boards/board-user/user-tcs/user-tcs.component';
+import {DndDirective} from './components/boards/board-user/sitter/become-sitter-form/dnd.directive';
+import {UserTcsComponent} from './components/shared/user-tcs/user-tcs.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from './material-module';
-import {SitterProfileComponent} from './components/boards/board-user/sitter-profile/sitter-profile.component';
-import {BecomeClientComponent} from './components/boards/board-user/become-client/become-client.component';
-import {BecomeSitterComponent} from './components/boards/board-user/become-sitter/become-sitter.component';
-import {BecomeSitterFormComponent} from './components/boards/board-user/become-sitter-form/become-sitter-form.component';
+import {SitterProfileComponent} from './components/boards/board-user/sitter/sitter-dashboard/sitter-profile/sitter-profile.component';
+import {BecomeClientComponent} from './components/boards/board-user/client/become-client/become-client.component';
+import {BecomeSitterComponent} from './components/boards/board-user/sitter/become-sitter/become-sitter.component';
+import {BecomeSitterFormComponent} from './components/boards/board-user/sitter/become-sitter-form/become-sitter-form.component';
+import { SitterDashboardComponent } from './components/boards/board-user/sitter/sitter-dashboard/sitter-dashboard.component';
+import { SitterPendingRequestsComponent } from './components/boards/board-user/sitter/sitter-dashboard/sitter-pending-requests/sitter-pending-requests.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import {BecomeSitterFormComponent} from './components/boards/board-user/become-s
     BecomeSitterFormComponent,
     DndDirective,
     UserTcsComponent,
-    SitterProfileComponent
+    SitterProfileComponent,
+    SitterDashboardComponent,
+    SitterPendingRequestsComponent
   ],
   imports: [
     BrowserModule,

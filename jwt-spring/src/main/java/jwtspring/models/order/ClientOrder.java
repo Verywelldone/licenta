@@ -1,55 +1,57 @@
 package jwtspring.models.order;
 
+import jwtspring.models.user.UserDetails;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "client_order")
+@Table
 public class ClientOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int orderId;
+    private int id;
 
-    //    sursa
-    @Column (name = "source_user")
-    private int sourceUser;
+    @Column
+    private int fromClient;
 
-    //    destinatie
-    @Column (name = "destination_user")
-    private int destinationUser;
+    @Column
+    private int toSitter;
 
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private OrderDetails orderDetails;
 
-    public int getId() {
-        return orderId;
+    public int getFromClient() {
+        return fromClient;
     }
 
-    public void setId(int id) {
-        this.orderId = id;
+    public void setFromClient(int fromClient) {
+        this.fromClient = fromClient;
     }
 
-    public int getSourceUser() {
-        return sourceUser;
+    public int getToSitter() {
+        return toSitter;
     }
 
-    public void setSourceUser(int sourceUser) {
-        this.sourceUser = sourceUser;
+    public void setToSitter(int toSitter) {
+        this.toSitter = toSitter;
     }
 
-    public int getDestinationUser() {
-        return destinationUser;
+    public OrderDetails getOrderDetails() {
+        return orderDetails;
     }
 
-    public void setDestinationUser(int destinationUser) {
-        this.destinationUser = destinationUser;
+    public void setOrderDetails(OrderDetails orderDetails) {
+        this.orderDetails = orderDetails;
     }
 
-    public ClientOrder() {
-    }
-
-    public ClientOrder(int id, int sourceUser, int destinationUser) {
-        this.orderId = id;
-        this.sourceUser = sourceUser;
-        this.destinationUser = destinationUser;
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", fromClient=" + fromClient +
+                ", toSitter=" + toSitter +
+                ", orderDetails=" + orderDetails +
+                '}';
     }
 }

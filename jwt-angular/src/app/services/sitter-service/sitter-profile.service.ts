@@ -10,11 +10,10 @@ export class SitterProfileService {
 
   private baseUrl = 'http://localhost:8080/api/';
 
-  constructor(private http: HttpClient, private token: TokenStorageService) {
+  constructor(private http: HttpClient) {
   }
 
-  getSitterData(): Observable<any> {
-    const userId = this.token.getUser().id;
+  getSitterData(userId: number): Observable<any> {
     return this.http.get(this.baseUrl + 'sitter/info/' + userId);
   }
 }

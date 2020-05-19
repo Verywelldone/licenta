@@ -1,6 +1,5 @@
 package jwtspring.controllers;
 
-import jwtspring.models.SitterRequest;
 import jwtspring.models.service.HostService;
 import jwtspring.service.sitterRequest.SitterRequestService;
 import org.springframework.beans.factory.annotation.Autowired;

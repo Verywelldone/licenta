@@ -1,0 +1,75 @@
+agm-map{
+  height: 70vh;
+}
+
+.heroes {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 15px 0;
+  box-shadow: 0 8px 12px 0 #3F51B5;
+
+}
+.heroes li {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  background-color: #EEE;
+  margin: .5em;
+  border-radius: 4px;
+}
+.heroes li:hover {
+  color: #607D8B;
+  background-color: #DDD;
+  left: .1em;
+}
+.heroes li.selected {
+  background-color: #CFD8DC;
+  color: white;
+}
+.heroes li.selected:hover {
+  background-color: #BBD8DC;
+  color: white;
+}
+.heroes .badge {
+  display: inline-block;
+  font-size: small;
+  color: white;
+  background-color:#405061;
+  line-height: 1em;
+  position: relative;
+  left: -1px;
+  top: -4px;
+  height: 1.8em;
+  margin-right: .8em;
+  border-radius: 4px 0 0 4px;
+}
+
+.user-info{
+  padding-right:0 ;
+}
+
+.container-fluid{
+  margin-top: 1em;
+}
+
+.mat-card{
+  box-shadow: 0 8px 12px 0 #3F51B5
+}
+.btn{
+  width: 65%;
+}
+
+.pick{
+  margin: 0 2rem;
+  width: 35%;
+}
+
+
+
+@media only screen and (max-width: 990px) {
+  agm-map{
+    height: 250px;
+    padding: .4rem;
+    margin: .4rem;
+  }
+}

@@ -1,6 +1,7 @@
 package jwtspring.service.client.implementation;
 
 import java.util.List;
+
 import jwtspring.models.user.User;
 import jwtspring.repository.UserRepository;
 import jwtspring.service.client.ClientService;
@@ -21,7 +22,7 @@ public class ClientServiceImp implements ClientService {
 
         List<User> sitterList = new ArrayList<>();
         for (User user : userList) {
-            if (user.getHostService()!= null && user.getHostService().isActive())
+            if (user.getHostService() != null && user.getHostService().isActive())
                 sitterList.add(user);
         }
 

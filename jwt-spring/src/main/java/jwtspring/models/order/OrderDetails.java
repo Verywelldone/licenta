@@ -1,57 +1,38 @@
 package jwtspring.models.order;
 
+import jwtspring.models.service.ServiceModel;
+
 import javax.persistence.*;
+import java.util.Set;
+
 
 @Entity
-@Table(name = "order_details")
+@Table
 public class OrderDetails {
 
-    // id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column
-    private String orderId;
-
-    //    service type
-    @Column
-    private String service;
-
-    //    start date
-    @Column
     private String startDate;
 
-    //    end date
     @Column
     private String endDate;
 
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
-    private ClientOrder clientOrder;
+    private ClientOrder order;
 
-    public int getId() {
-        return id;
+    @OneToMany(mappedBy = "orderDetails")
+    private Set<OrderServices> orderServices;
+
+    public Set<OrderServices> getOrderServices() {
+        return orderServices;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public String getService() {
-        return service;
-    }
-
-    public void setService(String service) {
-        this.service = service;
+    public void setOrderServices(Set<OrderServices> orderServices) {
+        this.orderServices = orderServices;
     }
 
     public String getStartDate() {
@@ -68,5 +49,23 @@ public class OrderDetails {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public ClientOrder getOrder() {
+        return order;
+    }
+
+    public void setOrder(ClientOrder order) {
+        this.order = order;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDetails{" +
+                "id=" + id +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", orderServices=" + orderServices +
+                '}';
     }
 }

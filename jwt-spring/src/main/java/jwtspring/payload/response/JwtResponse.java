@@ -1,6 +1,5 @@
 package jwtspring.payload.response;
 
-import jwtspring.models.SitterRequest;
 import jwtspring.models.service.HostService;
 import jwtspring.models.user.UserAccountStatus;
 import jwtspring.models.user.UserDetails;

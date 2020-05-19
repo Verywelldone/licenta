@@ -1,0 +1,204 @@
+<div class="container" *ngIf="!isSitter">
+
+  <mat-horizontal-stepper linear #stepper>
+
+    <!--     ANIMAL TYPE SECTION  -->
+
+    <mat-step>
+      <ng-template matStepLabel>Animal Type</ng-template>
+      <mat-card class=" animal-type">
+        <h5>What animal type do you accept?</h5>
+        <mat-checkbox value="Dogs" #dogs color="primary" class="p-3" (change)="selectAnymalType($event)">
+          Dogs
+        </mat-checkbox>
+        <mat-checkbox value="Cats" color="primary" class="p-3" (change)="selectAnymalType($event)">
+          Cats
+        </mat-checkbox>
+
+
+        <div *ngIf="dogs.checked" class="p-3">
+          <h5> What dog size do you accept working with?</h5>
+          <mat-checkbox color="primary" value="Small" id="small" (change)="selectDogSize($event)">
+            Small: 0-6 Kg
+          </mat-checkbox>
+
+          <mat-checkbox color="primary" id="" value="Medium" (change)="selectDogSize($event)">
+            Medium: 7-18 Kg
+          </mat-checkbox>
+
+          <mat-checkbox color="primary" value="Large" id="Large" (change)="selectDogSize($event)">
+            Large: 19-45 Kg
+          </mat-checkbox>
+
+          <mat-checkbox color="primary" value="Giant" id="Giant" (change)="selectDogSize($event)">
+            Giant: 45+ Kg
+          </mat-checkbox>
+        </div>
+
+        <div>
+          <button mat-button matStepperNext [disabled]="!passStepOne">Next</button>
+        </div>
+
+      </mat-card>
+    </mat-step>
+
+
+    <!--     SERVICE TYPE SECTION  -->
+
+    <mat-step>
+      <form>
+        <ng-template matStepLabel>Services</ng-template>
+        <mat-card class="services">
+          <h5>What service type do you offer?</h5>
+
+          <mat-checkbox #boarding color="primary" value="Boarding" (change)="deselectService($event)"
+                        class="col-2 col-md-6 col-sm-6 col-xs-6 p-3">
+            Boarding
+          </mat-checkbox>
+
+          <mat-checkbox #houseSitting color="primary" value="House sitting" (change)="deselectService($event)"
+                        class="col-2 col-md-6 col-sm-6 col-xs-6 p-3">
+            House Sitting
+          </mat-checkbox>
+
+          <mat-checkbox #dropInVisits color="primary" value="Drop In Visits" (change)="deselectService($event)"
+                        class="col-2 col-md-6 col-sm-6 col-xs-6 p-3">
+            Drop in Visits
+          </mat-checkbox>
+
+          <mat-checkbox #dogWalking color="primary" value="Dog Walking" (change)="deselectService($event)"
+                        class="col-2 col-md-6 col-sm-6 col-xs-6 p-3">
+            Dog Walking
+          </mat-checkbox>
+
+          <mat-checkbox #doggyDayCare color="primary" value="Doggy Day Care" (change)="deselectService($event)"
+                        class="col-2 col-md-6 col-sm-6 col-xs-6 p-3">
+            Doggy Day Care
+          </mat-checkbox>
+          <br>
+          <div
+            *ngIf="boarding.checked || houseSitting.checked || dropInVisits.checked || animalType.includes('Dogs')">
+            <h5>Select a price per hour for your services?</h5>
+
+            <div *ngIf="boarding.checked">
+              Price for {{boarding.value}}
+              <mat-slider min="10" max="50" step="1" value="10" #boardingSlider
+                          (change)="selectService(boarding.value, boardingSlider.value)"></mat-slider>
+              {{boardingSlider.value}} RON
+            </div>
+
+            <div *ngIf="houseSitting.checked">
+              Price for {{houseSitting.value}}
+              <mat-slider min="10" max="50" step="1" value="10" #houseSittingSlider
+                          (change)="selectService(houseSitting.value, houseSittingSlider.value)"></mat-slider>
+              {{houseSittingSlider.value}} RON
+            </div>
+
+            <div *ngIf="dropInVisits.checked">
+              Price for {{dropInVisits.value}}
+              <mat-slider min="10" max="50" step="1" value="10" #dropInVisitsSlider
+                          (change)="selectService(dropInVisits.value, dropInVisitsSlider.value)"></mat-slider>
+              {{dropInVisitsSlider.value}} RON
+            </div>
+
+            <div *ngIf="dogWalking.checked">
+              Price for {{dogWalking.value}}
+              <mat-slider min="10" max="50" step="1" value="10" #dogWalkingSlider
+                          (change)="selectService(dogWalking.value, dogWalkingSlider.value)"></mat-slider>
+              {{dogWalkingSlider.value}} RON
+            </div>
+
+            <div *ngIf="doggyDayCare.checked">
+              Price for {{doggyDayCare.value}}
+              <mat-slider min="10" max="50" step="1" value="10" #doggyDayCareSlider
+                          (change)="selectService(doggyDayCare.value, doggyDayCareSlider.value)"></mat-slider>
+              {{doggyDayCareSlider.value}} RON
+            </div>
+          </div>
+
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+
+        </mat-card>
+
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>House Type</ng-template>
+      <mat-card class="">
+        <h5>Where do you live?</h5>
+        <mat-radio-group required aria-label="Select an option" name="typeOfHouse">
+          <mat-radio-button (change)="handlePlaceToLive($event)" value="House" color="primary" class="">House
+          </mat-radio-button>
+          <mat-radio-button (change)="handlePlaceToLive($event)" value="Flat" color="primary" class="">Flat
+          </mat-radio-button>
+        </mat-radio-group>
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-card>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel> Other pets</ng-template>
+      <mat-card>
+        <h5>Do you have any pets?</h5>
+        <mat-radio-group required aria-label="Select an option" name="typeOfHouse">
+          <mat-radio-button (change)="handleOtherPetsRadio($event)" value="Yes" color="primary" class="">Yes
+          </mat-radio-button>
+          <mat-radio-button (change)="handleOtherPetsRadio($event)" value="No" color="primary" class="">No
+          </mat-radio-button>
+        </mat-radio-group>
+
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-card>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are all done.</p>
+
+
+      <mat-card>
+        <p>Are these informations correct?</p>
+        <h4>Animal type</h4>
+        <div *ngFor="let animal of animalType">
+          {{animal}}
+        </div>
+        <br>
+        <h4>Services</h4>
+        <div *ngFor="let service of serviceArray">
+          {{service.name}} with price {{service.price}} RON
+        </div>
+        <br>
+        <h4>Where do you live?</h4>
+        <p>I live in a: <b>{{this.placeToLive}}</b></p>
+        <br>
+        <h4>Do you have any other animals?</h4>
+        <p><b> {{this.otherPets}} </b> </p>
+
+      </mat-card>
+
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-button (click)="dataWrapper()">Finish</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
+
+
+<div class="container" *ngIf="isSitter">
+
+  You are now a sitter!
+
+</div>

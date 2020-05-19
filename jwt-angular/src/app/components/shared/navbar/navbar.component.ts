@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit {
   showAdminBoard = false;
   showModeratorBoard = false;
   username: string;
-  isSitter
+  isSitter;
 
   constructor(private tokenStorageService: TokenStorageService, private sitterProfileService: SitterProfileService) {
   }
@@ -31,9 +31,11 @@ export class NavbarComponent implements OnInit {
       this.username = user.username;
     }
 
-    this.sitterProfileService.getSitterData().subscribe(data => {
-      console.log(data);
-      this.isSitter = data.active;
+    this.sitterProfileService.getSitterData(this.tokenStorageService.getUser().id).subscribe(data => {
+      if (data) {
+        console.log(data);
+        this.isSitter = data.active;
+      }
     });
   }
 

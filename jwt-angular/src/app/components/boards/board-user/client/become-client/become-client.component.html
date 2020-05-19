@@ -1,0 +1,119 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-3 border">
+      <h3 style="text-align: center"> Sitter list </h3>
+
+      <ul class="heroes">
+        <li class="p-3 border" *ngFor="let user of users let i = index" [attr.data-index]="i" (click)="onSelect(user)">
+          <span class="badge">{{i + 1}}</span>
+          {{user.username}}
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-6 border" *ngIf="!isSitterChosen">
+      <agm-map [latitude]="latitude" [longitude]="longitude">
+        <agm-marker *ngIf="selectedUser"
+                    [latitude]="selectedUser.userDetails.userCoordinates.latitude"
+                    [longitude]="selectedUser.userDetails.userCoordinates.longitude">
+        </agm-marker>
+        <agm-marker
+          [latitude]="curentUser.userDetails.userCoordinates.latitude"
+          [longitude]="curentUser.userDetails.userCoordinates.longitude"
+          [label]="labelOptions">
+        </agm-marker>
+      </agm-map>
+    </div>
+
+    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-6 border" *ngIf="isSitterChosen">
+
+      <form (ngSubmit)="submitRequest()" class="text-center">
+        <div>
+          <span
+            class="font-weight-bold">{{this.selectedUser.userDetails.firstName}} {{this.selectedUser.userDetails.lastName}}</span>
+          offers:
+        </div>
+
+
+        <div *ngFor="let service of selectedSitterData.serviceModelSet">
+          <mat-checkbox  (change)="handleSitterService($event, service)">
+            {{service.name}} - {{service.price}} RON
+            <br>
+          </mat-checkbox>
+        </div>
+
+        <p>Pick at least one service from the following:</p>
+
+        <div class="date m-3">
+          <mat-form-field>
+            <mat-label>Starting date</mat-label>
+            <input matInput [matDatepicker]="startDate" dataformatas="dd/MM/yyyy"
+                   (dateChange)="addEvent('startDate', $event)" [min]="todayDate" required>
+            <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+            <mat-datepicker #startDate [startAt]="startAtDate"></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field class="m-3">
+            <mat-label>End date</mat-label>
+            <input matInput [matDatepicker]="endDate" (dateChange)="addEvent('endDate', $event)" [min]="startAtDate"
+                   required>
+            <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+            <mat-datepicker #endDate></mat-datepicker>
+          </mat-form-field>
+
+          <div *ngIf="dateDifference">
+            Number of days: {{dateDifference * -1}}
+          </div>
+
+        </div>
+
+
+        <button class="btn btn-primary pick" style="float: left" (click)="pickSitter()"> Back to map</button>
+                <button class="btn btn-primary pick" type="submit" style="float: right"> Submit request</button>
+
+        <mat-error *ngIf="hasErrors">
+          {{requestMessage}}
+        </mat-error>
+      </form>
+    </div>
+
+
+    <div class="user-info col-xs-12 col-sm-12 col-md-12 col-lg-3 border" *ngIf="selectedUser">
+      <h3 style="text-align: center"> Selected Sitter Details </h3>
+
+      <mat-card class="m-3">
+        <h3>General info</h3>
+        <ul>
+          <li style="overflow: paged-x"> Email: {{selectedUser.email}}</li>
+          <li> First Name: {{selectedUser.userDetails.firstName}}</li>
+          <li> Last Name: {{selectedUser.userDetails.lastName}}</li>
+          <li> Address: {{selectedUser.userDetails.address}}</li>
+        </ul>
+      </mat-card>
+
+      <mat-card class="m-3">
+        <h3>Services acceptance</h3>
+        <ul>
+          <li>Accepts: {{selectedSitterData.animalType}}</li>
+          <li>Dog sizes: {{selectedSitterData.dogSize}}</li>
+          <li>Lives in a: {{selectedSitterData.houseType}}</li>
+          <li>Has other pets: {{selectedSitterData.otherPets}}</li>
+        </ul>
+      </mat-card>
+
+      <mat-card class="m-3">
+        <h3>Services provided</h3>
+        <ul>
+          <li *ngFor="let service of selectedSitterData.serviceModelSet">
+            {{service.name}} - {{service.price}} RON
+          </li>
+        </ul>
+      </mat-card>
+
+      <div class="text-center">
+        <button class="btn btn-primary" (click)="pickSitter()"> Pick sitter</button>
+        <p class="lead"> DISTANCE: {{distanceBetween}} KM AWAY FROM YOU</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 package jwtspring.service.sitterRequest.sitterRequestImp;
 
-import jwtspring.models.ServiceArray;
-import jwtspring.models.SitterRequest;
+import jwtspring.models.DTO.ServiceArray;
+import jwtspring.models.DTO.SitterRequest;
 import jwtspring.models.service.HostService;
 import jwtspring.models.service.ServiceModel;
 import jwtspring.models.user.User;
@@ -35,8 +35,18 @@ public class SitterRequestServiceImp implements SitterRequestService {
     public ResponseEntity<?> saveSitterRequest(SitterRequest sitterRequest) {
         User user = userRepository.findUserById(sitterRequest.getUserId());
 
+        System.out.println(sitterRequest.toString());
         String animalType = Arrays.toString(sitterRequest.getAnimalType());
+        animalType = animalType.replace("[", "");
+        animalType = animalType.replace("]", "");
+
         String dogSize = Arrays.toString(sitterRequest.getDogSizeArray());
+
+        dogSize = dogSize.replace("[", "");
+        dogSize = dogSize.replace("]", "");
+
+        System.out.println(dogSize);
+        System.out.println(animalType);
 
         HostService hostService = new HostService();
         hostService.setAnimalType(animalType);

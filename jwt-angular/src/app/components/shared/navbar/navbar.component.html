@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="#"> <img alt="logo" id="dog-logo" src="assets/img/dog-logo.png"> </a>
@@ -14,10 +13,12 @@
           <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
         </li>
         <li class="nav-item">
-          <a href="/become-sitter" class="nav-link" *ngIf="isLoggedIn && !isSitter" routerLink="become-sitter">Become Host</a>
+          <a href="/become-sitter" class="nav-link" *ngIf="isLoggedIn && !isSitter" routerLink="become-sitter">Become
+            Sitter</a>
         </li>
         <li class="nav-item">
-          <a href="/sitter-profile" class="nav-link" *ngIf="isLoggedIn && isSitter" routerLink="sitter-profile">My Sitter Profile</a>
+          <a href="/sitter-profile" class="nav-link" *ngIf="isLoggedIn && isSitter" routerLink="sitter-profile">My
+            Sitter Profile</a>
         </li>
         <li class="nav-item">
           <a href="/become-client" class="nav-link" *ngIf="isLoggedIn" routerLink="become-client">Become Client</a>

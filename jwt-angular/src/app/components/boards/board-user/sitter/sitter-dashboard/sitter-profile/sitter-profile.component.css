@@ -1,0 +1,32 @@
+
+.mat-card{
+  display: inline-block;
+  margin:1rem;
+  box-shadow: 0 8px 12px 0 #3F51B5;
+  background-color: #EEEEEE;
+}
+
+.mat-tab {
+  display: inline;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+.mat-card-title{
+  text-align: center;
+  background-color: #3b5998;
+  color:white;
+}
+
+@media only screen and (max-width: 990px) {
+  .mat-card{
+    padding-top: 10px;
+    margin: 10px 0 0 0;
+    width: auto;
+    display: block;
+  }
+}
+
+.text-center{
+  margin-top:1.3rem;
+}

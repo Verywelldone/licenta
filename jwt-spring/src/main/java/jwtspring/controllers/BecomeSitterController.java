@@ -1,14 +1,10 @@
 package jwtspring.controllers;
 
-import jwtspring.models.SitterRequest;
-import jwtspring.payload.response.MessageResponse;
+import jwtspring.models.DTO.SitterRequest;
 import jwtspring.service.sitterRequest.SitterRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.ArrayList;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -21,7 +17,7 @@ public class BecomeSitterController {
 
     @PostMapping(value = "/submit", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> getBecomeHostRequest(@RequestBody SitterRequest sitterRequest){
-
+        System.out.println();
         return sitterRequestService.saveSitterRequest(sitterRequest);
     }
 }

@@ -1,6 +1,6 @@
 package jwtspring.service.sitterRequest;
 
-import jwtspring.models.SitterRequest;
+import jwtspring.models.DTO.SitterRequest;
 import jwtspring.models.service.HostService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
