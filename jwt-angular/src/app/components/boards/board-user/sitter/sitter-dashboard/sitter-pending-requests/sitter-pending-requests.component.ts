@@ -24,7 +24,9 @@ export class SitterPendingRequestsComponent implements OnInit {
     this.snackBar.open('Request Accepted', 'OK', {
       duration: 2000,
     });
-    this.sitterProfileService.acceptRequest(id);
+    this.sitterProfileService.acceptRequest(id).subscribe(response => {
+      // console.log(response)
+    });
 
     const removeIndex = this.clientPendingRequests.map(request => {
       return request.id;
@@ -37,7 +39,9 @@ export class SitterPendingRequestsComponent implements OnInit {
     this.snackBar.open('Request deleted', 'OK', {
       duration: 2000,
     });
-    this.sitterProfileService.declineRequest(id);
+    this.sitterProfileService.declineRequest(id).subscribe(response => {
+
+    });
 
     const removeIndex = this.clientPendingRequests.map(request => {
       return request.id;

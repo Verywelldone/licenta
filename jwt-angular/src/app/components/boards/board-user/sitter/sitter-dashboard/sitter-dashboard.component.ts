@@ -22,7 +22,7 @@ export class SitterDashboardComponent implements OnInit {
 
   getPendingRequests() {
     this.sitterProfileService.getSitterPendingRequests(this.token.getUser().id).subscribe(response => {
-      // console.log(response);
+
       this.pendingRequests = response;
     });
   }
@@ -57,6 +57,5 @@ export class SitterDashboardComponent implements OnInit {
       default:
         break;
     }
-    console.log(event.index);
   }
 }
