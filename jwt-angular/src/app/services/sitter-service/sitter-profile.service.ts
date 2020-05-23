@@ -1,7 +1,11 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {TokenStorageService} from '../token-storage.service';
+
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
 
 @Injectable({
   providedIn: 'root'
@@ -16,4 +20,25 @@ export class SitterProfileService {
   getSitterData(userId: number): Observable<any> {
     return this.http.get(this.baseUrl + 'sitter/info/' + userId);
   }
+
+  getSitterPendingRequests(userId: number): Observable<any> {
+    return this.http.get(this.baseUrl + 'sitter/pending-requests/' + userId);
+  }
+
+  getSitterAcceptedRequests(userId: any): Observable<any> {
+    return this.http.get(this.baseUrl + 'sitter/accepted-requests/' + userId);
+  }
+
+  getSitterDeclinedRequests(userId: any) {
+    return this.http.get(this.baseUrl + 'sitter/declined-requests/' + userId);
+  }
+
+  acceptRequest(serviceId: number): Observable<any> {
+    return this.http.post(this.baseUrl + 'sitter/accept-request', serviceId, httpOptions);
+  }
+
+  declineRequest(serviceId: number): Observable<any> {
+    return this.http.post(this.baseUrl + 'sitter/decline-request', serviceId, httpOptions);
+  }
+
 }

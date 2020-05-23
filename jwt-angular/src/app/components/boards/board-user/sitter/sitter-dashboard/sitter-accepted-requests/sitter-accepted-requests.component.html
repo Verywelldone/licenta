@@ -1,8 +1,8 @@
 <div class="container">
 
-  <mat-expansion-panel *ngFor="let clientRequest of clientPendingRequests" class="m-3">
+  <mat-expansion-panel *ngFor="let clientRequest of sitterAcceptedRequests" class="m-3">
     <mat-expansion-panel-header class="font-weight-bold">
-    From client:  {{clientRequest.fromClient.firstName}} {{clientRequest.fromClient.lastName}}
+      From client:  {{clientRequest.fromClient.firstName}} {{clientRequest.fromClient.lastName}}
     </mat-expansion-panel-header>
 
     <mat-card class="m-2">
@@ -26,8 +26,8 @@
     </mat-card>
 
     <mat-action-row>
-      <button color="primary" class="border border-dark" mat-button (click)="acceptRequest(clientRequest.id)">Accept</button>
-      <button color="accent" class="border border-dark" mat-button (click)="declineRequest(clientRequest.id)">Decline</button>
+      <!--      <button color="primary" class="border border-dark" mat-button (click)="acceptRequest(clientRequest.id)">Accept</button>-->
+      <!--      <button color="accent" class="border border-dark" mat-button (click)="declineRequest(clientRequest.id)">Decline</button>-->
     </mat-action-row>
   </mat-expansion-panel>
 </div>

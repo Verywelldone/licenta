@@ -59,11 +59,10 @@ public class SitterRequestServiceImp implements SitterRequestService {
         ArrayList<ServiceArray> servicesFromRequest = sitterRequest.getServiceArray();
         Set<ServiceModel> serviceModels = new HashSet<>();
 
-        servicesFromRequest.forEach(serv -> {
+        servicesFromRequest.forEach(service -> {
             ServiceModel serviceModel = new ServiceModel();
-            serviceModel.setName(serv.getName());
-            serviceModel.setPrice(serv.getPrice());
-
+            serviceModel.setName(service.getName());
+            serviceModel.setPrice(service.getPrice());
 
             serviceModels.add(serviceModel);
         });

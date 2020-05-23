@@ -1,5 +1,6 @@
 package jwtspring.models.user;
 
+import jwtspring.models.order.ClientOrder;
 import jwtspring.models.service.HostService;
 import jwtspring.models.user.role.Role;
 
@@ -54,6 +55,14 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private HostService hostService;
 
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @MapsId
+//    private ClientOrder fromClient;
+//
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @MapsId
+//    private ClientOrder toSitter;
+
 //    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    @JoinColumn(name = "host_serviceid")
 //    private HostService hostService;
@@ -68,14 +77,13 @@ public class User {
     public User() {
     }
 
-    public User(String username,String email, String password, UserDetails userDetails, UserAccountStatus userAccountStatus){
+    public User(String username, String email, String password, UserDetails userDetails, UserAccountStatus userAccountStatus) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.userDetails= userDetails;
+        this.userDetails = userDetails;
 //        this.userAccountStatus = userAccountStatus;
     }
-
 
 
     public HostService getHostService() {
@@ -93,6 +101,7 @@ public class User {
     public void setUserAccountStatus(UserAccountStatus userAccountStatus) {
         this.userAccountStatus = userAccountStatus;
     }
+
 
     public int getId() {
         return id;
@@ -153,4 +162,5 @@ public class User {
                 ", roles=" + roles +
                 '}';
     }
+
 }

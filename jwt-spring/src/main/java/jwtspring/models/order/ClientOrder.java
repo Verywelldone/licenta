@@ -45,6 +45,10 @@ public class ClientOrder {
         this.orderDetails = orderDetails;
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "Order{" +

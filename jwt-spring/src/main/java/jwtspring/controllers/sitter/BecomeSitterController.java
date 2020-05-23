@@ -1,4 +1,4 @@
-package jwtspring.controllers;
+package jwtspring.controllers.sitter;
 
 import jwtspring.models.DTO.SitterRequest;
 import jwtspring.service.sitterRequest.SitterRequestService;

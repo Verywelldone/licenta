@@ -7,6 +7,8 @@ import java.util.Set;
 
 public class ClientOrderDTO {
 
+    private int id;
+
     private int fromClient;
     private int toSitter;
 
@@ -64,5 +66,13 @@ public class ClientOrderDTO {
                 ", endDate='" + endDate + '\'' +
                 ", services=" + services +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

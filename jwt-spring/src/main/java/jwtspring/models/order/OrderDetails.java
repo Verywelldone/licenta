@@ -20,6 +20,12 @@ public class OrderDetails {
     @Column
     private String endDate;
 
+    @Column
+    private Boolean isAccepted;
+
+    @Column
+    private Boolean isDecline;
+
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     private ClientOrder order;
@@ -51,12 +57,28 @@ public class OrderDetails {
         this.endDate = endDate;
     }
 
-    public ClientOrder getOrder() {
-        return order;
-    }
+//    public ClientOrder getOrder() {
+//        return order;
+//    }
 
     public void setOrder(ClientOrder order) {
         this.order = order;
+    }
+
+    public Boolean getAccepted() {
+        return isAccepted;
+    }
+
+    public void setAccepted(Boolean accepted) {
+        isAccepted = accepted;
+    }
+
+    public Boolean getDecline() {
+        return isDecline;
+    }
+
+    public void setDecline(Boolean decline) {
+        isDecline = decline;
     }
 
     @Override

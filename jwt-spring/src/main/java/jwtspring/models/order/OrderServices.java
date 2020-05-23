@@ -10,6 +10,7 @@ public class OrderServices {
 
     @Id
     @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column
@@ -45,7 +46,6 @@ public class OrderServices {
     public void setOrderDetails(OrderDetails orderDetails) {
         this.orderDetails = orderDetails;
     }
-
 
 
     @Override

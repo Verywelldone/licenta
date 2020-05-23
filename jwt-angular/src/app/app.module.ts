@@ -30,6 +30,8 @@ import {BecomeSitterComponent} from './components/boards/board-user/sitter/becom
 import {BecomeSitterFormComponent} from './components/boards/board-user/sitter/become-sitter-form/become-sitter-form.component';
 import { SitterDashboardComponent } from './components/boards/board-user/sitter/sitter-dashboard/sitter-dashboard.component';
 import { SitterPendingRequestsComponent } from './components/boards/board-user/sitter/sitter-dashboard/sitter-pending-requests/sitter-pending-requests.component';
+import { SitterAcceptedRequestsComponent } from './components/boards/board-user/sitter/sitter-dashboard/sitter-accepted-requests/sitter-accepted-requests.component';
+import { SitterDeclinedRequestsComponent } from './components/boards/board-user/sitter/sitter-dashboard/sitter-declined-requests/sitter-declined-requests.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { SitterPendingRequestsComponent } from './components/boards/board-user/s
     UserTcsComponent,
     SitterProfileComponent,
     SitterDashboardComponent,
-    SitterPendingRequestsComponent
+    SitterPendingRequestsComponent,
+    SitterAcceptedRequestsComponent,
+    SitterDeclinedRequestsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,17 @@
-<mat-tab-group class="container">
+<mat-tab-group class="container" (selectedTabChange)="onTabClickEvent($event)">
   <mat-tab label="Profile">
     <app-sitter-profile></app-sitter-profile>
   </mat-tab>
+
   <mat-tab label="Pending requests">
-    <app-sitter-pending-requests></app-sitter-pending-requests>
+    <app-sitter-pending-requests [clientPendingRequests]="pendingRequests"></app-sitter-pending-requests>
+  </mat-tab>
+
+  <mat-tab label="Accepted requests">
+    <app-sitter-accepted-requests [sitterAcceptedRequests]="acceptedRequests"></app-sitter-accepted-requests>
+  </mat-tab>
+
+  <mat-tab label="Declined requests">
+    <app-sitter-declined-requests [sitterDeclinedRequests]="declinedRequests"></app-sitter-declined-requests>
   </mat-tab>
 </mat-tab-group>

@@ -2,25 +2,25 @@
   <h3 class="text-center"> General informations</h3>
 
   <div class="row p-3">
-    <mat-card class="col-12 col-xs-12 col-sm-12 col-md-3 col-lg-3">
+    <mat-card class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-3">
       <mat-card-title>Accepted animals</mat-card-title>
       <mat-divider></mat-divider>
       <mat-card-content>{{animalType}}</mat-card-content>
     </mat-card>
 
-    <mat-card class="col-12 col-xs-12 col-sm-12 col-md-3 col-lg-3">
+    <mat-card class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-3">
       <mat-card-title>Accepted dog size</mat-card-title>
       <mat-divider></mat-divider>
       <mat-card-content>{{dogSize}}</mat-card-content>
     </mat-card>
 
-    <mat-card class="col-12 col-xs-12 col-sm-12 col-md-3 col-lg-3">
+    <mat-card class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-3">
       <mat-card-title>House type</mat-card-title>
       <mat-divider></mat-divider>
       <mat-card-content>{{houseType}}</mat-card-content>
     </mat-card>
 
-    <mat-card class="col-12 col-xs-12 col-sm-12 col-md-3 col-lg-3">
+    <mat-card class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-3">
       <mat-card-title>Other pets</mat-card-title>
       <mat-divider></mat-divider>
       <mat-card-content>{{otherPets}}</mat-card-content>
@@ -31,7 +31,7 @@
 <mat-divider></mat-divider>
 <div class="container-fluid overflow-hidden p-3">
   <h3 class="text-center"> Services and pricing</h3>
-  <mat-card *ngFor="let service of userServices" class="col-12 col-xs-12 col-sm-12 col-md-3 col-lg-3">
+  <mat-card *ngFor="let service of userServices" class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-3">
     <mat-card-title>{{service.name}}</mat-card-title>
     <mat-divider></mat-divider>
     <mat-card-content>{{service.price}} RON</mat-card-content>

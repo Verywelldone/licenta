@@ -1,4 +1,4 @@
-package jwtspring.controllers;
+package jwtspring.controllers.client;
 
 
 import jwtspring.models.user.User;
