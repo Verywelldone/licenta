@@ -17,7 +17,6 @@ public class BecomeSitterController {
 
     @PostMapping(value = "/submit", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> getBecomeHostRequest(@RequestBody SitterRequest sitterRequest){
-        System.out.println();
         return sitterRequestService.saveSitterRequest(sitterRequest);
     }
 }

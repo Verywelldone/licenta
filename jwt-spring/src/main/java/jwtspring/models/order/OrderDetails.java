@@ -3,6 +3,7 @@ package jwtspring.models.order;
 import jwtspring.models.service.ServiceModel;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 
@@ -15,10 +16,10 @@ public class OrderDetails {
     private int id;
 
     @Column
-    private String startDate;
+    private Date startDate;
 
     @Column
-    private String endDate;
+    private Date endDate;
 
     @Column
     private Boolean isAccepted;
@@ -41,19 +42,19 @@ public class OrderDetails {
         this.orderServices = orderServices;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 

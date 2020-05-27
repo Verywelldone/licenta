@@ -3,11 +3,12 @@ import {TokenStorageService} from '../../../../../services/token-storage.service
 import {UserAuthoritiesService} from '../../../../../services/user-authorities.service';
 import {ClientPageService} from '../../../../../services/client-service/client-page.service';
 import {SitterProfileService} from '../../../../../services/sitter-service/sitter-profile.service';
-import {MatDatepickerInputEvent} from '@angular/material';
+import {MatDatepickerInputEvent, MatSnackBar} from '@angular/material';
 import {formatDate} from '@angular/common';
-import {ClientRequestModel} from '../../../../../model/client/client-request.model';
-import {ClientRequestServiceModel} from '../../../../../model/client/client-request-service.model';
+import {SitterResponseModel} from '../../../../../model/client/client-request.model';
+import {sitterResponseServiceModel} from '../../../../../model/client/client-request-service.model';
 import {ClientSitterRequestService} from '../../../../../services/client-service/client-sitter-request.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-become-client',
@@ -32,8 +33,8 @@ export class BecomeClientComponent implements OnInit {
     text: 'You',
   };
   isSitterChosen: boolean;
-  startAtDate = '';
-  endAtDate = '';
+  startAtDate: Date;
+  endAtDate: Date;
   todayDate = new Date();
   dateDifference: any;
   clientSelectedServices;
@@ -45,6 +46,8 @@ export class BecomeClientComponent implements OnInit {
     private token: TokenStorageService,
     private clientPageService: ClientPageService,
     private sitterProfileService: SitterProfileService,
+    private router: Router,
+    private snackBar: MatSnackBar,
     private clientSitterRequestService: ClientSitterRequestService) {
   }
 
@@ -56,7 +59,7 @@ export class BecomeClientComponent implements OnInit {
     this.todayDate = new Date();
     this.selectedSitterData = 'test';
 
-    this.clientSelectedServices = new Array<ClientRequestServiceModel>();
+    this.clientSelectedServices = new Array<sitterResponseServiceModel>();
     this.reloadData();
   }
 
@@ -126,17 +129,25 @@ export class BecomeClientComponent implements OnInit {
   addEvent(change: string, event: MatDatepickerInputEvent<unknown>) {
 
     if (change === 'startDate') {
-      this.startAtDate = event.value;
+      this.startAtDate = new Date(event.value);
     } else {
-      this.endAtDate = event.value;
+      this.endAtDate = new Date(event.value);
     }
-    // this.dateDifference = (this.startAtDate - this.endAtDate) / 1000 / 60 / 60 / 24;
+
+    if (this.startAtDate && this.endAtDate) {
+      this.dateDifference = -Math.floor((
+        Date.UTC(this.endAtDate.getFullYear(), this.endAtDate.getMonth(), this.endAtDate.getDate()) -
+        Date.UTC(this.startAtDate.getFullYear(), this.startAtDate.getMonth(), this.startAtDate.getDate()))
+        / (1000 * 60 * 60 * 24)
+      );
+    }
+
 
   }
 
   submitRequest() {
 
-    if (this.endAtDate === '' || this.startAtDate === '') {
+    if (this.endAtDate.getDate() == null || this.endAtDate.getDate() == null) {
       this.hasErrors = true;
       this.requestMessage = 'Please, select a Starting date and an Ending date!';
     } else if (this.clientSelectedServices.length === 0) {
@@ -145,28 +156,39 @@ export class BecomeClientComponent implements OnInit {
     } else {
       this.requestMessage = '';
       this.hasErrors = false;
-      const format = ' dd/MM/yyy';
+      // const format = ' dd/MM/yyy';
 
-      this.startAtDate = formatDate(this.startAtDate, format, 'en');
-      this.endAtDate = formatDate(this.endAtDate, format, 'en');
+      // this.startAtDate = formatDate(this.startAtDate, format, 'en');
+      // this.endAtDate = formatDate(this.endAtDate, format, 'en');
 
-      const clientRequest = new ClientRequestModel();
-      clientRequest.fromClient = this.token.getUser().id;
-      clientRequest.toSitter = this.selectedUser.id;
-      clientRequest.startDate = this.startAtDate;
-      clientRequest.endDate = this.endAtDate;
+      const sitterResponse = new SitterResponseModel();
+      sitterResponse.fromClient = this.token.getUser().id;
+      sitterResponse.toSitter = this.selectedUser.id;
+      sitterResponse.startDate = this.startAtDate;
+      sitterResponse.endDate = this.endAtDate;
 
-      clientRequest.services = this.clientSelectedServices;
+      sitterResponse.services = this.clientSelectedServices;
 
-      this.clientSitterRequestService.submitSitterRequest(clientRequest).subscribe(response => {
-        console.log(response);
+      this.clientSitterRequestService.submitSitterRequest(sitterResponse).subscribe(response => {
+        this.snackBar.open(response, 'OK', {
+          duration: 4000,
+        });
+        this.router.navigate(['client-dashboard']).then();
+
+      }, error => {
+        console.log(error);
+        this.snackBar.open(error.error, 'OK', {
+          duration: 4000,
+        });
       });
+
+      // this.router.navigate(['/client-dashboard']).then(r => this.router.navigate(['/client-dashboard']));
     }
   }
 
   handleSitterService(event, service) {
 
-    const clientReq = new ClientRequestServiceModel();
+    const clientReq = new sitterResponseServiceModel();
     clientReq.name = service.name;
     clientReq.price = service.price;
 

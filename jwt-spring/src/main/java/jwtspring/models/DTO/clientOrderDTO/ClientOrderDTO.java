@@ -2,6 +2,8 @@ package jwtspring.models.DTO.clientOrderDTO;
 
 import jwtspring.models.DTO.ServiceArray;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -12,8 +14,8 @@ public class ClientOrderDTO {
     private int fromClient;
     private int toSitter;
 
-    private String startDate;
-    private String endDate;
+    private Date startDate;
+    private Date endDate;
 
     private Set<ServiceArray> services;
 
@@ -33,19 +35,19 @@ public class ClientOrderDTO {
         this.toSitter = toSitter;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 

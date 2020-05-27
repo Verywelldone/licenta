@@ -21,7 +21,7 @@ public class TestController {
 
     @GetMapping("/all")
     public String allAccess() {
-        System.out.println(userRepository.findAll());
+//        System.out.println(userRepository.findAll());
         return "Public Content.";
     }
 

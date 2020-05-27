@@ -1,7 +1,9 @@
 package jwtspring.models.user;
 
+//import jwtspring.models.chat.Conversation;
 import jwtspring.models.order.ClientOrder;
 import jwtspring.models.service.HostService;
+import jwtspring.models.service.ServiceModel;
 import jwtspring.models.user.role.Role;
 
 import javax.persistence.*;
@@ -37,16 +39,8 @@ public class User {
     @Size(max = 120)
     private String password;
 
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "user_detailsid")
-//    private UserDetails userDetails;
-
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private UserDetails userDetails;
-
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "user_statusid")
-//    private UserAccountStatus userAccountStatus;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserAccountStatus userAccountStatus;
@@ -55,17 +49,12 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private HostService hostService;
 
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @MapsId
-//    private ClientOrder fromClient;
+//    //chat
+//    @OneToMany(mappedBy = "senderId")
+//    private Set<Conversation> senderConversations;
 //
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @MapsId
-//    private ClientOrder toSitter;
-
-//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinColumn(name = "host_serviceid")
-//    private HostService hostService;
+//    @OneToMany(mappedBy = "reciverId")
+//    private Set<Conversation> reciverConversations;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
@@ -85,6 +74,21 @@ public class User {
 //        this.userAccountStatus = userAccountStatus;
     }
 
+//    public Set<Conversation> getSenderConversations() {
+//        return senderConversations;
+//    }
+//
+//    public void setSenderConversations(Set<Conversation> senderConversations) {
+//        this.senderConversations = senderConversations;
+//    }
+//
+//    public Set<Conversation> getReciverConversations() {
+//        return reciverConversations;
+//    }
+//
+//    public void setReciverConversations(Set<Conversation> reciverConversations) {
+//        this.reciverConversations = reciverConversations;
+//    }
 
     public HostService getHostService() {
         return hostService;

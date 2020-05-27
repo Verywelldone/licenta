@@ -1,0 +1,32 @@
+<div class="container">
+
+  <mat-expansion-panel *ngFor="let sitterResponse of sitterAcceptedRequests" class="m-3">
+    <mat-expansion-panel-header class="font-weight-bold">
+      From sitter:  {{sitterResponse.fromClient.firstName}} {{sitterResponse.fromClient.lastName}}
+    </mat-expansion-panel-header>
+
+    <mat-card class="m-2">
+      <mat-card-title>
+        Start date and End date
+      </mat-card-title>
+      <mat-card-content>
+        From {{sitterResponse.startDate}} to {{sitterResponse.endDate}}
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="m-2">
+      <mat-card-title>Services requested</mat-card-title>
+      <mat-card-content>
+        <ul *ngFor="let service of sitterResponse.orderServicesSet">
+          <div>
+            {{service.name}} - {{service.price}} RON
+          </div>
+        </ul>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-action-row>
+
+    </mat-action-row>
+  </mat-expansion-panel>
+</div>

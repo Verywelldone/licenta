@@ -1,10 +1,10 @@
-import {ClientRequestServiceModel} from './client-request-service.model';
+import {sitterResponseServiceModel} from './client-request-service.model';
 
-export class ClientRequestModel {
-  startDate: string;
-  endDate: string;
+export class SitterResponseModel {
+  startDate: Date;
+  endDate: Date;
   fromClient: number;
   toSitter: number;
-  services: ClientRequestServiceModel[];
+  services: sitterResponseServiceModel[];
 
 }

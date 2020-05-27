@@ -42,7 +42,7 @@ public class LoginServiceImpl implements LoginService {
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
-        System.out.println(userDetails.toString());
+//        System.out.println(userDetails.toString());
 
 
         return ResponseEntity.ok(

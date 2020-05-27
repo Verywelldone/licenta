@@ -1,13 +1,11 @@
 package jwtspring.controllers.client;
 
 
+import jwtspring.models.DTO.clientOrderDTO.SitterOrdersModelDTO;
 import jwtspring.models.user.User;
 import jwtspring.service.client.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,4 +21,22 @@ public class ClientController {
     public List<User> getSitterList() {
         return clientService.getSitterList();
     }
+
+
+    @GetMapping("/pending-requests/{userId}")
+    List<SitterOrdersModelDTO> getPendingRequests(@PathVariable(value = "userId") int userId) {
+        return clientService.getPendingClientOrders(userId);
+    }
+
+    @GetMapping("/accepted-requests/{userId}")
+    List<SitterOrdersModelDTO> getAcceptedRequests(@PathVariable(value = "userId") int userId) {
+        return clientService.getAcceptedRequests(userId);
+    }
+
+
+    @GetMapping("/declined-requests/{userId}")
+    List<SitterOrdersModelDTO> getDeclinedRequests(@PathVariable(value = "userId") int userId) {
+        return clientService.getDeclinedRequests(userId);
+    }
+
 }

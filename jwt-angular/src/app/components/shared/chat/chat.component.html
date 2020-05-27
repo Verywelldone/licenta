@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <h2>Users</h2>
+
+      <mat-card *ngFor="let user of arr" class="m-2 p-3 darker">
+        {{user.name}}
+      </mat-card>
+    </div>
+    <div class="col-8">
+      <app-chat-thread></app-chat-thread>
+    </div>
+  </div>
+</div>

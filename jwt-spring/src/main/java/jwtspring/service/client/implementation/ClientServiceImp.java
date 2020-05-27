@@ -1,20 +1,25 @@
 package jwtspring.service.client.implementation;
 
-import java.util.List;
-
+import jwtspring.models.DTO.clientOrderDTO.SitterOrdersModelDTO;
+import jwtspring.models.order.ClientOrder;
 import jwtspring.models.user.User;
+import jwtspring.repository.ClientOrderRepository;
 import jwtspring.repository.UserRepository;
 import jwtspring.service.client.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ClientServiceImp implements ClientService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ClientOrderRepository clientOrderRepository;
 
     @Override
     public List<User> getSitterList() {
@@ -27,6 +32,59 @@ public class ClientServiceImp implements ClientService {
         }
 
         return sitterList;
+    }
+
+    @Override
+    public List<SitterOrdersModelDTO> getPendingClientOrders(int userId) {
+        List<ClientOrder> clientOrderList = clientOrderRepository.getAllByFromClient(userId);
+        List<SitterOrdersModelDTO> pendingOrders = new ArrayList<>();
+        clientOrderList
+                .stream()
+                .filter(clientOrder -> !clientOrder.getOrderDetails().getAccepted() && !clientOrder.getOrderDetails().getDecline())
+                .forEach(clientOrder -> extractedMethod(pendingOrders, clientOrder));
+        System.out.println(
+                " Intra in pending"
+        );
+        return pendingOrders;
+    }
+
+    @Override
+    public List<SitterOrdersModelDTO> getAcceptedRequests(int userId) {
+        List<ClientOrder> clientOrderList = clientOrderRepository.getAllByFromClient(userId);
+        List<SitterOrdersModelDTO> acceptedRequests = new ArrayList<>();
+
+        clientOrderList
+                .stream()
+                .filter(clientOrder -> clientOrder.getOrderDetails().getAccepted() && !clientOrder.getOrderDetails().getDecline())
+                .forEach(clientOrder ->
+                        extractedMethod(acceptedRequests, clientOrder));
+        System.out.println(acceptedRequests);
+        return acceptedRequests;
+    }
+
+    @Override
+    public List<SitterOrdersModelDTO> getDeclinedRequests(int userId) {
+        List<ClientOrder> clientOrderList = clientOrderRepository.getAllByFromClient(userId);
+        List<SitterOrdersModelDTO> declinedRequests = new ArrayList<>();
+        clientOrderList
+                .stream()
+                .filter(clientOrder -> !clientOrder.getOrderDetails().getAccepted() && clientOrder.getOrderDetails().getDecline())
+                .forEach(clientOrder -> extractedMethod(declinedRequests, clientOrder));
+
+        System.out.println(declinedRequests);
+        return declinedRequests;
+    }
+
+
+    private void extractedMethod(List<SitterOrdersModelDTO> pendingOrders, ClientOrder clientOrder) {
+        SitterOrdersModelDTO sitterOrdersModelDTO = new SitterOrdersModelDTO();
+        sitterOrdersModelDTO.setFromClient(userRepository.findUserById(clientOrder.getFromClient()).getUserDetails());
+        sitterOrdersModelDTO.setToSitter(userRepository.findUserById(clientOrder.getToSitter()).getUserDetails());
+        sitterOrdersModelDTO.setStartDate(clientOrder.getOrderDetails().getStartDate());
+        sitterOrdersModelDTO.setEndDate(clientOrder.getOrderDetails().getEndDate());
+        sitterOrdersModelDTO.setOrderServicesSet(clientOrder.getOrderDetails().getOrderServices());
+
+        pendingOrders.add(sitterOrdersModelDTO);
     }
 
 }

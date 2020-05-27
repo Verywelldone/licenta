@@ -3,7 +3,6 @@ package jwtspring.controllers.client;
 import jwtspring.models.DTO.clientOrderDTO.ClientOrderDTO;
 import jwtspring.service.clientOrder.ClientOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +16,8 @@ public class BecomeClientController {
 
     @PostMapping("/sitter-request")
     public ResponseEntity submitSitterRequest(@RequestBody ClientOrderDTO clientOrderDTO) {
-//        System.out.println(clientOrderDTO.toString());
+
+
         return clientOrderService.saveClientOrder(clientOrderDTO);
     }
 }

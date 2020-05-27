@@ -12,6 +12,7 @@ import {MatSnackBar} from '@angular/material';
 export class SitterPendingRequestsComponent implements OnInit {
 
   @Input() clientPendingRequests: any;
+  dateDifference;
 
   constructor(private token: TokenStorageService, private sitterProfileService: SitterProfileService, private snackBar: MatSnackBar) {
   }
@@ -52,6 +53,26 @@ export class SitterPendingRequestsComponent implements OnInit {
 
   refresh() {
     window.location.reload();
+  }
+
+  changeValue(startDate: any) {
+    const date = new Date(startDate);
+    const mnth = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+
+    return [day, mnth, date.getFullYear()].join('/');
+
+  }
+
+  getTimeLeftUntilServiceStarts(startDate: any) {
+    const today = new Date();
+
+    startDate = new Date(startDate);
+    return -Math.floor((
+      Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate()) -
+      Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()))
+      / (1000 * 60 * 60 * 24)
+    );
   }
 
 }

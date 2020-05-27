@@ -1,8 +1,8 @@
 <div class="container">
 
-  <mat-expansion-panel *ngFor="let clientRequest of clientPendingRequests" class="m-3">
+  <mat-expansion-panel *ngFor="let sitterResponse of clientPendingRequests" class="m-3">
     <mat-expansion-panel-header class="font-weight-bold">
-    From client:  {{clientRequest.fromClient.firstName}} {{clientRequest.fromClient.lastName}}
+      From client:  {{sitterResponse.fromClient.firstName}} {{sitterResponse.fromClient.lastName}}
     </mat-expansion-panel-header>
 
     <mat-card class="m-2">
@@ -10,14 +10,34 @@
         Start date and End date
       </mat-card-title>
       <mat-card-content>
-        From {{clientRequest.startDate}} to {{clientRequest.endDate}}
+        <mat-form-field>
+          <mat-label>Start Date</mat-label>
+          <input matInput [value]="changeValue(sitterResponse.startDate)">
+          <!--          <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>-->
+          <!--          <mat-datepicker #dp1></mat-datepicker>-->
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>End Date</mat-label>
+          <input matInput [value]="changeValue(sitterResponse.endDate)">
+        </mat-form-field>
+
+        <div *ngIf="this.getTimeLeftUntilServiceStarts(sitterResponse.startDate) > 0">
+          Request is valabe {{this.getTimeLeftUntilServiceStarts(sitterResponse.startDate)}} more days!
+        </div>
+
+        <div *ngIf="this.getTimeLeftUntilServiceStarts(sitterResponse.startDate)==0 ">
+          This request is due today!
+        </div>
+
+        <!--        From {{sitterResponse.startDate}} to {{sitterResponse.endDate}}-->
+
       </mat-card-content>
     </mat-card>
 
     <mat-card class="m-2">
       <mat-card-title>Services requested</mat-card-title>
       <mat-card-content>
-        <ul *ngFor="let service of clientRequest.orderServicesSet">
+        <ul *ngFor="let service of sitterResponse.orderServicesSet">
           <div>
             {{service.name}} - {{service.price}} RON
           </div>
@@ -26,8 +46,10 @@
     </mat-card>
 
     <mat-action-row>
-      <button color="primary" class="border border-dark" mat-button (click)="acceptRequest(clientRequest.id)">Accept</button>
-      <button color="accent" class="border border-dark" mat-button (click)="declineRequest(clientRequest.id)">Decline</button>
+      <button color="primary" class="border border-dark" mat-button (click)="acceptRequest(sitterResponse.id)">Accept
+      </button>
+      <button color="accent" class="border border-dark" mat-button (click)="declineRequest(sitterResponse.id)">Decline
+      </button>
     </mat-action-row>
   </mat-expansion-panel>
 </div>

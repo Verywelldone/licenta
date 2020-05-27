@@ -28,10 +28,16 @@ import {SitterProfileComponent} from './components/boards/board-user/sitter/sitt
 import {BecomeClientComponent} from './components/boards/board-user/client/become-client/become-client.component';
 import {BecomeSitterComponent} from './components/boards/board-user/sitter/become-sitter/become-sitter.component';
 import {BecomeSitterFormComponent} from './components/boards/board-user/sitter/become-sitter-form/become-sitter-form.component';
-import { SitterDashboardComponent } from './components/boards/board-user/sitter/sitter-dashboard/sitter-dashboard.component';
-import { SitterPendingRequestsComponent } from './components/boards/board-user/sitter/sitter-dashboard/sitter-pending-requests/sitter-pending-requests.component';
-import { SitterAcceptedRequestsComponent } from './components/boards/board-user/sitter/sitter-dashboard/sitter-accepted-requests/sitter-accepted-requests.component';
-import { SitterDeclinedRequestsComponent } from './components/boards/board-user/sitter/sitter-dashboard/sitter-declined-requests/sitter-declined-requests.component';
+import {SitterDashboardComponent} from './components/boards/board-user/sitter/sitter-dashboard/sitter-dashboard.component';
+import {SitterPendingRequestsComponent} from './components/boards/board-user/sitter/sitter-dashboard/sitter-pending-requests/sitter-pending-requests.component';
+import {SitterAcceptedRequestsComponent} from './components/boards/board-user/sitter/sitter-dashboard/sitter-accepted-requests/sitter-accepted-requests.component';
+import {SitterDeclinedRequestsComponent} from './components/boards/board-user/sitter/sitter-dashboard/sitter-declined-requests/sitter-declined-requests.component';
+import { ChatComponent } from './components/shared/chat/chat.component';
+import { ChatThreadComponent } from './components/shared/chat/chat-thread/chat-thread.component';
+import { ClientDashboardComponent } from './components/boards/board-user/client/client-dashboard/client-dashboard.component';
+import { ClientPendingRequestsComponent } from './components/boards/board-user/client/client-dashboard/client-pending-requests/client-pending-requests.component';
+import { ClientDeclinedRequestsComponent } from './components/boards/board-user/client/client-dashboard/client-declined-requests/client-declined-requests.component';
+import { ClientAcceptedRequestsComponent } from './components/boards/board-user/client/client-dashboard/client-accepted-requests/client-accepted-requests.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +63,13 @@ import { SitterDeclinedRequestsComponent } from './components/boards/board-user/
     SitterDashboardComponent,
     SitterPendingRequestsComponent,
     SitterAcceptedRequestsComponent,
-    SitterDeclinedRequestsComponent
+    SitterDeclinedRequestsComponent,
+    ChatComponent,
+    ChatThreadComponent,
+    ClientDashboardComponent,
+    ClientPendingRequestsComponent,
+    ClientDeclinedRequestsComponent,
+    ClientAcceptedRequestsComponent
   ],
   imports: [
     BrowserModule,

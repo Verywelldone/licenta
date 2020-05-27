@@ -1,4 +1,4 @@
-export class ClientRequestServiceModel {
+export class sitterResponseServiceModel {
   name: string;
   price: number;
 }

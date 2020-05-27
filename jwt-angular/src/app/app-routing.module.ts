@@ -12,6 +12,8 @@ import {UserTcsComponent} from './components/shared/user-tcs/user-tcs.component'
 import {SitterProfileComponent} from './components/boards/board-user/sitter/sitter-dashboard/sitter-profile/sitter-profile.component';
 import {BecomeSitterComponent} from './components/boards/board-user/sitter/become-sitter/become-sitter.component';
 import {SitterDashboardComponent} from './components/boards/board-user/sitter/sitter-dashboard/sitter-dashboard.component';
+import {ChatComponent} from './components/shared/chat/chat.component';
+import {ClientDashboardComponent} from './components/boards/board-user/client/client-dashboard/client-dashboard.component';
 
 
 const routes: Routes = [
@@ -20,14 +22,18 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
   // {path: 'user', component: BoardUserComponent},
+
   {path: 'become-sitter', component: BecomeSitterComponent},
   {path: 'become-sitter-form', component: BecomeSitterFormComponent},
   {path: 'sitter-profile', component: SitterDashboardComponent},
+
   {path: 'become-client', component: BecomeClientComponent},
+  {path: 'client-dashboard', component: ClientDashboardComponent},
+
   {path: 'mod', component: BoardModeratorComponent},
   {path: 'admin', component: BoardAdminComponent},
   {path: 'tcs', component: UserTcsComponent},
-
+  {path: 'chat', component: ChatComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 

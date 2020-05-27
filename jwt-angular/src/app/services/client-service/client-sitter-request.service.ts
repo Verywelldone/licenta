@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {ClientRequestModel} from '../../model/client/client-request.model';
+import {SitterResponseModel} from '../../model/client/client-request.model';
 import {Observable} from 'rxjs';
 
 const httpOptions = {
@@ -16,8 +16,8 @@ export class ClientSitterRequestService {
   constructor(private http: HttpClient) {
   }
 
-  submitSitterRequest(clientSitterRequest: ClientRequestModel): Observable<any> {
-    return this.http.post(this.baseUrl + 'sitter-request', clientSitterRequest, httpOptions);
+  submitSitterRequest(clientSitterRequest: SitterResponseModel): Observable<any> {
+    return this.http.post(this.baseUrl + 'sitter-request', clientSitterRequest, {responseType: 'text'});
   }
 
 }

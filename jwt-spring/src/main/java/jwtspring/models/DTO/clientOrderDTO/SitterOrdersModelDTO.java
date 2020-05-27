@@ -4,6 +4,7 @@ import jwtspring.models.order.OrderServices;
 import jwtspring.models.user.User;
 import jwtspring.models.user.UserDetails;
 
+import java.util.Date;
 import java.util.Set;
 
 public class SitterOrdersModelDTO {
@@ -13,8 +14,8 @@ public class SitterOrdersModelDTO {
     UserDetails fromClient;
     UserDetails toSitter;
 
-    String startDate;
-    String endDate;
+    Date startDate;
+    Date endDate;
 
     Set<OrderServices> orderServicesSet;
 
@@ -42,19 +43,19 @@ public class SitterOrdersModelDTO {
         this.toSitter = toSitter;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
