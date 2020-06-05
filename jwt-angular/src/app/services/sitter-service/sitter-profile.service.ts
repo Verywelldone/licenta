@@ -41,4 +41,8 @@ export class SitterProfileService {
     return this.http.post(this.baseUrl + 'sitter/decline-request', serviceId, httpOptions);
   }
 
+  updateSitterProfile(userId: any, newSitterData): Observable<any> {
+    return this.http.put(`${this.baseUrl}sitter/update-sitter/${userId}`, newSitterData, httpOptions);
+  }
+
 }

@@ -33,44 +33,51 @@ import {SitterPendingRequestsComponent} from './components/boards/board-user/sit
 import {SitterAcceptedRequestsComponent} from './components/boards/board-user/sitter/sitter-dashboard/sitter-accepted-requests/sitter-accepted-requests.component';
 import {SitterDeclinedRequestsComponent} from './components/boards/board-user/sitter/sitter-dashboard/sitter-declined-requests/sitter-declined-requests.component';
 import { ChatComponent } from './components/shared/chat/chat.component';
-import { ChatThreadComponent } from './components/shared/chat/chat-thread/chat-thread.component';
 import { ClientDashboardComponent } from './components/boards/board-user/client/client-dashboard/client-dashboard.component';
 import { ClientPendingRequestsComponent } from './components/boards/board-user/client/client-dashboard/client-pending-requests/client-pending-requests.component';
 import { ClientDeclinedRequestsComponent } from './components/boards/board-user/client/client-dashboard/client-declined-requests/client-declined-requests.component';
 import { ClientAcceptedRequestsComponent } from './components/boards/board-user/client/client-dashboard/client-accepted-requests/client-accepted-requests.component';
+// import { CometChat } from '@cometchat-pro/chat';
 
+// import { CometchatAngularUiKitModule } from 'src/libs/cometchat-angular-ui-kit/src/lib/cometchat-angular-ui-kit.module';
+import { CometchatAngularUiKitModule } from '../libs/cometchat-angular-ui-kit/src/lib/cometchat-angular-ui-kit.module';
+import { UpdateSitterProfileComponent } from './components/boards/board-user/sitter/sitter-dashboard/update-sitter-profile/update-sitter-profile.component';
+import { CdkDetailRowDirective } from './components/boards/board-admin/cdk-detail-row.directive';
+// @ts-ignore
 @NgModule({
-  declarations: [
-    AppComponent,
-    BoardAdminComponent,
-    BoardModeratorComponent,
-    HomeComponent,
-    LoginComponent,
-    ProfileComponent,
-    RegisterComponent,
-    CarouselComponent,
-    SocialLinksComponent,
-    JumbotronComponent,
-    FooterComponent,
-    MeetTheTeamComponent,
-    NavbarComponent,
-    BecomeClientComponent,
-    BecomeSitterComponent,
-    BecomeSitterFormComponent,
-    DndDirective,
-    UserTcsComponent,
-    SitterProfileComponent,
-    SitterDashboardComponent,
-    SitterPendingRequestsComponent,
-    SitterAcceptedRequestsComponent,
-    SitterDeclinedRequestsComponent,
-    ChatComponent,
-    ChatThreadComponent,
-    ClientDashboardComponent,
-    ClientPendingRequestsComponent,
-    ClientDeclinedRequestsComponent,
-    ClientAcceptedRequestsComponent
-  ],
+    declarations: [
+        AppComponent,
+        BoardAdminComponent,
+        BoardModeratorComponent,
+        HomeComponent,
+        LoginComponent,
+        ProfileComponent,
+        RegisterComponent,
+        CarouselComponent,
+        SocialLinksComponent,
+        JumbotronComponent,
+        FooterComponent,
+        MeetTheTeamComponent,
+        NavbarComponent,
+        BecomeClientComponent,
+        BecomeSitterComponent,
+        BecomeSitterFormComponent,
+        DndDirective,
+        UserTcsComponent,
+        SitterProfileComponent,
+        SitterDashboardComponent,
+        SitterPendingRequestsComponent,
+        SitterAcceptedRequestsComponent,
+        SitterDeclinedRequestsComponent,
+        ChatComponent,
+        ClientDashboardComponent,
+        ClientPendingRequestsComponent,
+        ClientDeclinedRequestsComponent,
+        ClientAcceptedRequestsComponent,
+        UpdateSitterProfileComponent,
+        UpdateSitterProfileComponent,
+        CdkDetailRowDirective
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -82,7 +89,9 @@ import { ClientAcceptedRequestsComponent } from './components/boards/board-user/
     }),
     FileUploadModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    CometchatAngularUiKitModule
+
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]

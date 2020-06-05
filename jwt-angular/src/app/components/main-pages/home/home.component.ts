@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserAuthoritiesService} from '../../../services/user-authorities.service';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -22,5 +21,6 @@ export class HomeComponent implements OnInit {
         this.content = JSON.parse(err.error).message;
       }
     );
+
   }
 }

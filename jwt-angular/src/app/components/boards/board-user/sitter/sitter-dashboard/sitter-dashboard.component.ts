@@ -18,6 +18,9 @@ export class SitterDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getDeclinedRequests();
+    this.getAcceptedRequests();
+    this.getPendingRequests();
   }
 
   getPendingRequests() {

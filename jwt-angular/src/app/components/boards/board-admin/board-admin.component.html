@@ -1,75 +1,86 @@
-<div class="container">
-  <header class="jumbotron" style="text-align: center">
-    <p>{{ content }}</p>
-    <div>The Admin board should CRUD Admins. The moderator is the owner of the page!</div>
-  </header>
+<div class="container mat-elevation-z8">
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
 
-  <div class="row">
-    <div class="col-12" style="width: 100%;background-color: #607D8B; margin: 5px; padding: 10px; text-align: center">
-      <p>Search Admin by Email</p>
-      <input type="text" placeholder="Insert admin email" style="width: 75%">
+
+  <mat-table #table [dataSource]="dataSource">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Id</mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="username">
+      <mat-header-cell *matHeaderCellDef> Username</mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.username}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="fname">
+      <mat-header-cell *matHeaderCellDef> First Name</mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.userDetails.firstName}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="lname">
+      <mat-header-cell *matHeaderCellDef> Last Name</mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.userDetails.lastName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef> Email</mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{user.email}} </mat-cell>
+    </ng-container>
+
+    <!-- Expanded Content Column - The detail row is made up of this one column -->
+    <ng-container matColumnDef="expandedDetail">
+      <mat-cell *matCellDef="let user">
+        {{user.element.email}}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [cdkDetailRow]="row"
+             [cdkDetailRowTpl]="tpl">
+    </mat-row>
+
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[2, 5, 10, 25, 100]"></mat-paginator>
+
+  <ng-template #tpl let-user>
+    <div class="mat-row detail-row text-center font-weight-" [@detailExpand] style="overflow: hidden">
+      <!--      The symbol for {{user.id}} is {{user.userDetails.firstName}}-->
+      <div>
+        Information about: <strong style="color: #3F51B5">{{user.username.toLocaleUpperCase()}}</strong>
+      </div>
+      <div>
+        Last Login: <strong style="color: #3F51B5">{{user.userAccountStatus.lastLogin}}</strong>
+        <mat-divider></mat-divider>
+        Created at: <strong style="color: #3F51B5">{{user.userAccountStatus.createdAt}}</strong>
+        <mat-divider></mat-divider>
+
+
+        Updated at: <strong style="color: #3F51B5">{{user.userAccountStatus.updatedAt}}</strong>
+        <mat-divider></mat-divider>
+
+
+        Is Banned: <strong style="color: #3F51B5">{{!user.userAccountStatus.isBanned}}</strong>
+        <mat-divider></mat-divider>
+
+      </div>
+
+      <button mat-button color="error">Disable account</button>
+      <button mat-button color="primary">Edit account</button>
+
     </div>
-  </div>
-
-  <div class="panel-body">
-    <table class="table table-striped">
-
-
-      <thead style="background-color: #607D8B">
-      <tr>
-        <th>User ID</th>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Actions</th>
-
-      </tr>
-      </thead>
-      <tbody>
-
-      <tr>
-        <td>Mock Admin ID</td>
-        <td>Mock Username</td>
-        <td>Mock Email</td>
-        <td>
-          <button class="btn btn-danger">Delete</button>
-          <button class="btn btn-info" style="margin-left: 10px">Details</button>
-          <button class="btn alert-success" style="margin-left: 10px">Update</button>
-        </td>
-      </tr>
-      <tr>
-        <td>Mock Admin ID</td>
-        <td>Mock Username</td>
-        <td>Mock Email</td>
-        <td>
-          <button class="btn btn-danger">Delete</button>
-          <button class="btn btn-info" style="margin-left: 10px">Details</button>
-          <button class="btn alert-success" style="margin-left: 10px">Update</button>
-        </td>
-      </tr>
-      <tr>
-        <td>Mock Admin ID</td>
-        <td>Mock Username</td>
-        <td>Mock Email</td>
-        <td>
-          <button class="btn btn-danger">Delete</button>
-          <button class="btn btn-info" style="margin-left: 10px">Details</button>
-          <button class="btn alert-success" style="margin-left: 10px">Update</button>
-        </td>
-      </tr>
-      <tr>
-        <td>Mock Admin ID</td>
-        <td>Mock Username</td>
-        <td>Mock Email</td>
-        <td>
-          <button class="btn btn-danger">Delete</button>
-          <button class="btn btn-info" style="margin-left: 10px">Details</button>
-          <button class="btn alert-success" style="margin-left: 10px">Update</button>
-        </td>
-      </tr>
-
-      </tbody>
-    </table>
-  </div>
-
+  </ng-template>
 
 </div>
+

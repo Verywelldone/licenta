@@ -1,7 +1,6 @@
 package jwtspring.models.DTO.clientOrderDTO;
 
 import jwtspring.models.order.OrderServices;
-import jwtspring.models.user.User;
 import jwtspring.models.user.UserDetails;
 
 import java.util.Date;

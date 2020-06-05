@@ -1,40 +1,67 @@
-<div class="overflow-hidden">
-  <h3 class="text-center"> General informations</h3>
+<mat-horizontal-stepper linear #stepper *ngIf="!isEditModeEnable">
 
-  <div class="row p-3">
-    <mat-card class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-3">
-      <mat-card-title>Accepted animals</mat-card-title>
-      <mat-divider></mat-divider>
-      <mat-card-content>{{animalType}}</mat-card-content>
-    </mat-card>
+  <!--     ANIMAL TYPE SECTION  -->
+  <mat-step>
+    <ng-template matStepLabel>General Information</ng-template>
 
-    <mat-card class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-3">
-      <mat-card-title>Accepted dog size</mat-card-title>
-      <mat-divider></mat-divider>
-      <mat-card-content>{{dogSize}}</mat-card-content>
-    </mat-card>
+    <div class="text-center">
+      <h5>What animal type do you accept?</h5>
+      <span *ngFor="let animal of animalType" class="p-3">
+        {{animal}}
+      </span>
+    </div>
 
-    <mat-card class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-3">
-      <mat-card-title>House type</mat-card-title>
-      <mat-divider></mat-divider>
-      <mat-card-content>{{houseType}}</mat-card-content>
-    </mat-card>
-
-    <mat-card class="col-12 col-xs-12 col-sm-12 col-md-6 col-lg-3">
-      <mat-card-title>Other pets</mat-card-title>
-      <mat-divider></mat-divider>
-      <mat-card-content>{{otherPets}}</mat-card-content>
-    </mat-card>
-  </div>
-
-</div>
-<mat-divider></mat-divider>
-<div class="container-fluid overflow-hidden p-3">
-  <h3 class="text-center"> Services and pricing</h3>
-  <mat-card *ngFor="let service of userServices" class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-3">
-    <mat-card-title>{{service.name}}</mat-card-title>
     <mat-divider></mat-divider>
-    <mat-card-content>{{service.price}} RON</mat-card-content>
-  </mat-card>
-</div>
 
+    <div>
+      <div [hidden]="!animalType.includes('Dogs')" class="p-3 text-center">
+        <h5> What dog size do you accept working with?</h5>
+        <span *ngFor="let size of dogSize" class="p-2">
+          {{size}}
+        </span>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="text-center">
+      <h5>Where do you live?</h5>
+      <span>{{houseType}}</span>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="text-center">
+      <h5>Do you have any pets?</h5>
+      <span>{{otherPets}}</span>
+    </div>
+
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Service Information</ng-template>
+
+    <h5>Services and Pricing</h5>
+
+    <table mat-table [dataSource]="userServices" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> Name</th>
+        <td mat-cell *matCellDef="let service" aria-setsize="20px"> {{service.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Price">
+        <th mat-header-cell *matHeaderCellDef> Price</th>
+        <td mat-cell *matCellDef="let service"> {{service.price}} RON</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+    </table>
+  </mat-step>
+</mat-horizontal-stepper>
+
+<app-update-sitter-profile *ngIf="isEditModeEnable"></app-update-sitter-profile>
+
+<button mat-button color="primary" (click)="toggleEditMode()">
+  Update Profile
+</button>

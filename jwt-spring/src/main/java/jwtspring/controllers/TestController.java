@@ -47,17 +47,10 @@ public class TestController {
     public ResponseEntity<List<User>> getAllUsers() throws NotFoundException {
         List<User> userList = userRepository.findAll();
 
-        if (!userList.isEmpty()) {
+        if (!userList.isEmpty())
             return ResponseEntity.ok().body(userList);
-        } else {
+        else
             throw new NotFoundException("No users found!");
-        }
     }
 
-//    @GetMapping("/user-list")
-//    @PreAuthorize("hasRole('USER')")
-//    public List<User> getAllUsers(){
-//        System.out.println(userRepository.findAll());
-//        return null;
-//    }
 }

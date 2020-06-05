@@ -16,6 +16,7 @@ export class SitterProfileComponent implements OnInit {
   private otherPets;
   private userServices;
 
+   columnsToDisplay = ['Name', 'Price'];
 
   isEditModeEnable = false;
 
@@ -34,10 +35,11 @@ export class SitterProfileComponent implements OnInit {
       this.otherPets = data.otherPets;
       this.userServices = data.serviceModelSet;
 
+      console.log(this.userServices)
+
     }, err => {
       console.log(err);
     });
-
   }
 
   getAnimalType(animalType: string) {
@@ -46,6 +48,7 @@ export class SitterProfileComponent implements OnInit {
     animalType = animalType.replace(' ', '');
     this.animalType = animalType.split(',');
 
+    console.log(this.animalType)
   }
 
   getDogSize(dogSize: string) {

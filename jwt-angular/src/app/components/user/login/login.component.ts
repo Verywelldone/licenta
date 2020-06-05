@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../services/auth.service';
 import {TokenStorageService} from '../../../services/token-storage.service';
+import {CometChat} from '@cometchat-pro/chat/CometChat';
+import {environment} from '../../../../environments/environment';
+import {COMETCHAT_CONSTANTS} from '../../shared/CONSTS';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +18,7 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
 
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService) {
+
   }
 
   ngOnInit() {
@@ -34,7 +38,22 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
-        this.reloadPage();
+
+        // CometChat Login
+
+        const uid = data.email.substring(0,data.email.indexOf('@'));
+
+        CometChat.login(uid, COMETCHAT_CONSTANTS.apiKey).then(
+          user => {
+            console.log("CometChat Login Successful:", { user });
+            this.reloadPage();
+          },
+          error => {
+            console.log("CometChat Login failed with exception:", { error });
+          }
+        );
+
+
       },
       err => {
         this.errorMessage = err.error.message;

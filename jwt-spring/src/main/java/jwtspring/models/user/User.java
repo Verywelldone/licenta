@@ -1,9 +1,14 @@
+/*
+ * Copyright (c) 2020.
+ * @Fatu Ionut Bogdan
+ * This project is for educational purpose only!
+ * It serves only as a Bachelor's Thesis
+ */
+
 package jwtspring.models.user;
 
-//import jwtspring.models.chat.Conversation;
-import jwtspring.models.order.ClientOrder;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jwtspring.models.service.HostService;
-import jwtspring.models.service.ServiceModel;
 import jwtspring.models.user.role.Role;
 
 import javax.persistence.*;
@@ -12,6 +17,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
+
+
 
 @Entity
 @Table(name = "users",
@@ -36,6 +43,7 @@ public class User {
     private String email;
 
     @NotBlank
+    @JsonIgnore
     @Size(max = 120)
     private String password;
 
@@ -48,13 +56,6 @@ public class User {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private HostService hostService;
-
-//    //chat
-//    @OneToMany(mappedBy = "senderId")
-//    private Set<Conversation> senderConversations;
-//
-//    @OneToMany(mappedBy = "reciverId")
-//    private Set<Conversation> reciverConversations;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
@@ -71,24 +72,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.userDetails = userDetails;
-//        this.userAccountStatus = userAccountStatus;
     }
-
-//    public Set<Conversation> getSenderConversations() {
-//        return senderConversations;
-//    }
-//
-//    public void setSenderConversations(Set<Conversation> senderConversations) {
-//        this.senderConversations = senderConversations;
-//    }
-//
-//    public Set<Conversation> getReciverConversations() {
-//        return reciverConversations;
-//    }
-//
-//    public void setReciverConversations(Set<Conversation> reciverConversations) {
-//        this.reciverConversations = reciverConversations;
-//    }
 
     public HostService getHostService() {
         return hostService;

@@ -1,7 +1,7 @@
 <div class="container-fluid">
 
   <div class="row">
-    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-3 border">
+    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-3 border" *ngIf="users.length>0">
       <h3 style="text-align: center"> Sitter list </h3>
 
       <ul class="heroes">
@@ -10,6 +10,15 @@
           {{user.username}}
         </li>
       </ul>
+    </div>
+
+    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-3 border" *ngIf="users.length==0">
+      <h3 style="text-align: center"> Sitter list ... is empty :( </h3>
+
+      <div class="text-center">
+        <p class="lead"> Oups... it looks like there is no sitters around!</p>
+      </div>
+
     </div>
 
     <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-6 border" *ngIf="!isSitterChosen">
@@ -37,7 +46,7 @@
 
 
         <div *ngFor="let service of selectedSitterData.serviceModelSet">
-          <mat-checkbox  (change)="handleSitterService($event, service)">
+          <mat-checkbox (change)="handleSitterService($event, service)">
             {{service.name}} - {{service.price}} RON
             <br>
           </mat-checkbox>
@@ -69,7 +78,7 @@
 
 
         <button class="btn btn-primary pick" style="float: left" (click)="pickSitter()"> Back to map</button>
-                <button class="btn btn-primary pick" type="submit" style="float: right"> Submit request</button>
+        <button class="btn btn-primary pick" type="submit" style="float: right"> Submit request</button>
 
         <mat-error *ngIf="hasErrors">
           {{requestMessage}}

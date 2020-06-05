@@ -1,15 +1,15 @@
 <div class="container" *ngIf="!isSitter">
 
-  <mat-horizontal-stepper linear #stepper>
+  <mat-vertical-stepper linear #stepper>
 
     <!--     ANIMAL TYPE SECTION  -->
 
-    <mat-step>
+    <mat-step [stepControl]="passStepOne">
       <ng-template matStepLabel>Animal Type</ng-template>
       <mat-card class=" animal-type">
         <h5>What animal type do you accept?</h5>
         <mat-checkbox value="Dogs" #dogs color="primary" class="p-3" (change)="selectAnymalType($event)">
-          Dogs
+          <i class="fa fa-dog"></i>Dogs
         </mat-checkbox>
         <mat-checkbox value="Cats" color="primary" class="p-3" (change)="selectAnymalType($event)">
           Cats
@@ -38,14 +38,13 @@
         <div>
           <button mat-button matStepperNext [disabled]="!passStepOne">Next</button>
         </div>
-
       </mat-card>
     </mat-step>
 
 
     <!--     SERVICE TYPE SECTION  -->
 
-    <mat-step>
+    <mat-step [stepControl]="passStepOne">
       <form>
         <ng-template matStepLabel>Services</ng-template>
         <mat-card class="services">
@@ -66,18 +65,19 @@
             Drop in Visits
           </mat-checkbox>
 
-          <mat-checkbox #dogWalking color="primary" value="Dog Walking" (change)="deselectService($event)"
+          <mat-checkbox [hidden]="!animalType.includes('Dogs')" #dogWalking color="primary" value="Dog Walking"
+                        (change)="deselectService($event)"
                         class="col-2 col-md-6 col-sm-6 col-xs-6 p-3">
             Dog Walking
           </mat-checkbox>
 
-          <mat-checkbox #doggyDayCare color="primary" value="Doggy Day Care" (change)="deselectService($event)"
+          <mat-checkbox [hidden]="!animalType.includes('Dogs')" #doggyDayCare color="primary" value="Doggy Day Care"
+                        (change)="deselectService($event)"
                         class="col-2 col-md-6 col-sm-6 col-xs-6 p-3">
             Doggy Day Care
           </mat-checkbox>
           <br>
-          <div
-            *ngIf="boarding.checked || houseSitting.checked || dropInVisits.checked || animalType.includes('Dogs')">
+          <div *ngIf="boarding.checked || houseSitting.checked || dropInVisits.checked || animalType.includes('Dogs')">
             <h5>Select a price per hour for your services?</h5>
 
             <div *ngIf="boarding.checked">
@@ -101,14 +101,14 @@
               {{dropInVisitsSlider.value}} RON
             </div>
 
-            <div *ngIf="dogWalking.checked">
+            <div *ngIf="dogWalking.checked" [hidden]="!animalType.includes('Dogs')">
               Price for {{dogWalking.value}}
               <mat-slider min="10" max="50" step="1" value="10" #dogWalkingSlider
                           (change)="selectService(dogWalking.value, dogWalkingSlider.value)"></mat-slider>
               {{dogWalkingSlider.value}} RON
             </div>
 
-            <div *ngIf="doggyDayCare.checked">
+            <div *ngIf="doggyDayCare.checked" [hidden]="!animalType.includes('Dogs')">
               Price for {{doggyDayCare.value}}
               <mat-slider min="10" max="50" step="1" value="10" #doggyDayCareSlider
                           (change)="selectService(doggyDayCare.value, doggyDayCareSlider.value)"></mat-slider>
@@ -164,36 +164,37 @@
 
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
-      <p>You are all done.</p>
-
-
-      <mat-card>
-        <p>Are these informations correct?</p>
-        <h4>Animal type</h4>
-        <div *ngFor="let animal of animalType">
-          {{animal}}
+      <mat-card *ngIf="checkIfIsFormReady()">
+        <div class="mat-display-1">
+            Everything looks all awesome!
         </div>
-        <br>
-        <h4>Services</h4>
-        <div *ngFor="let service of serviceArray">
-          {{service.name}} with price {{service.price}} RON
+        <button mat-button (click)="dataWrapper()">Finish</button>
+      </mat-card>
+      <mat-card *ngIf="!checkIfIsFormReady()" class="text-left">
+        <div>
+          <mat-error *ngIf="animalType.length === 0"> You must select at least one animal type!</mat-error>
         </div>
-        <br>
-        <h4>Where do you live?</h4>
-        <p>I live in a: <b>{{this.placeToLive}}</b></p>
-        <br>
-        <h4>Do you have any other animals?</h4>
-        <p><b> {{this.otherPets}} </b> </p>
-
+        <div>
+          <mat-error *ngIf="dogSizeArray.length === 0"> You have selected Dogs, but have not selected any size!
+          </mat-error>
+        </div>
+        <div>
+          <mat-error *ngIf="serviceArray.length === 0"> You must select at least one service to offer!</mat-error>
+        </div>
+        <div>
+          <mat-error *ngIf="placeToLive === ''"> You must select whether you live in a flat or in a house!</mat-error>
+        </div>
+        <div>
+          <mat-error *ngIf="otherPets === ''"> You must select wheter you have other pets!</mat-error>
+        </div>
       </mat-card>
 
-      <div>
+      <div class="text-center">
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button (click)="stepper.reset()">Reset</button>
-        <button mat-button (click)="dataWrapper()">Finish</button>
       </div>
     </mat-step>
-  </mat-horizontal-stepper>
+  </mat-vertical-stepper>
 </div>
 
 

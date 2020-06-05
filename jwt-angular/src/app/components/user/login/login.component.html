@@ -1,79 +1,76 @@
-<div class="container">
-  <div class="text-center">
-    <div class="col-sm-9 main-section ">
-      <div *ngIf="!isLoggedIn" class="modal-content">
-        <div class="col-12 text-center padding">
-          <h1>Sign in to Happypets</h1>
-        </div>
+<mat-card *ngIf="!isLoggedIn" class="mr-auto ml-auto">
+  <div class="col-12 text-center padding">
+    <mat-card-title>Sign in to Happypets</mat-card-title>
+  </div>
+  <hr>
+  <div class="social-btn text-center">
+    <div class="text-center w-50 ml-auto mr-auto">
+      <a href="#" class="btn btn-block btn-facebook"><i class="fab fa-facebook"></i> &nbsp;Facebook</a>
+      <a href="#" class="btn btn-block btn-google"><i class="fab fa-google"></i> &nbsp;Google</a>
 
-        <div class="text-center social-btn">
-          <a href="#" class="btn btn-block btn-facebook"><i class="fab fa-facebook"></i> &nbsp;Continue with
-            Facebook</a>
-          <a href="#" class="btn btn-block btn-google"><i class="fab fa-google"></i> &nbsp;Continue with Google</a>
-        </div>
-        <p class="text-center lead login-options-separator"> -or-</p>
-        <hr>
-        <div class="col-12 form-input">
-          <form *ngIf="!isLoggedIn" class="padding" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"
-                novalidate>
-
-            <!--USERNAME FIELD-->
-
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Enter Username" name="username"
-                     [(ngModel)]="form.username" required #username="ngModel">
-            </div>
-            <div class="alert alert-danger" role="alert" *ngIf="f.submitted && username.invalid">
-              Username is required!
-            </div>
-
-            <!--PASSWORD FIELD-->
-            <div class="form-group">
-              <input type="password" class="form-control" placeholder="Enter Password" name="password"
-                     [(ngModel)]="form.password" required minlength="6"
-                     #password="ngModel">
-            </div>
-            <div *ngIf="password.errors?.required">Password is required</div>
-            <div *ngIf="password.errors?.minlength">
-              Password must be at least 6 characters
-            </div>
-
-            <button type="submit" class="btn btn-large btn-block btn-login">Login</button>
-
-            <div class="form-group">
-              <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
-                Login failed: {{ errorMessage }}
-              </div>
-            </div>
-          </form>
-
-          <p class="small-text text-center margin-v-x6">By signing in or signing up, I agree to Happypets.com's Terms of
-            Service and Privacy Policy, confirm that I am 18 years of age or older, and consent to receiving email
-            communication.</p>
-        </div>
-
-        <hr>
-
-        <div class="row">
-          <div class="col-md-6 forgot" id="registerLink">
-            <a href="/register">Register now here!</a>
-          </div>
-
-          <div class="col-md-6 forgot">
-            <a href="#"> Forgot Password?</a>
-          </div>
-        </div>
-      </div>
-
-<!--      <div *ngIf="isLoggedIn" class="modal-content">-->
-<!--        <div class="post-login-text">-->
-<!--          <h3>-->
-<!--            Wellcome to Happypets.-->
-<!--            <p> You will be redirected soon to main page!</p>-->
-<!--          </h3>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      -->
     </div>
   </div>
-</div>
+  <p class="text-center lead login-options-separator">-or-</p>
+  <hr>
+  <mat-card-content class="col-12 form-input">
+    <form *ngIf="!isLoggedIn" class="ml-auto text-center" name="form" (ngSubmit)="f.form.valid && onSubmit()"
+          #f="ngForm"
+          novalidate>
+
+      <!--USERNAME FIELD-->
+      <mat-form-field class="w-50 m-2">
+        <mat-label>Username</mat-label>
+        <input type="text"
+               matInput
+               class="w-100"
+               autocomplete="off"
+               placeholder="Enter Username"
+               name="username"
+               [(ngModel)]="form.username" required #username="ngModel">
+
+        <mat-error *ngIf="f.submitted || username.invalid">Username is required!</mat-error>
+      </mat-form-field>
+
+      <!--PASSWORD FIELD-->
+      <mat-form-field class="w-50 mb-3">
+        <mat-label>Password</mat-label>
+        <input type="password"
+               class="w-100"
+               matInput
+               placeholder="Enter Password"
+               name="password"
+               [(ngModel)]="form.password"
+               required minlength="6"
+               #password="ngModel">
+        <mat-error *ngIf="password.errors?.required">Password is required</mat-error>
+        <mat-error *ngIf="password.errors?.minlength">Password must be at least 6 characters</mat-error>
+      </mat-form-field>
+
+      <hr>
+      <div class="w-50 ml-auto mr-auto">
+        <button type="submit" class="btn btn-large btn-block btn-login">Login</button>
+      </div>
+
+      <div class="form-group">
+        <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">
+          Login failed: {{ errorMessage }}
+        </div>
+      </div>
+    </form>
+    <hr>
+    <p class="small-text text-center margin-v-x6">By signing in or signing up, I agree to Happypets.com's Terms of
+      Service and Privacy Policy, confirm that I am 18 years of age or older, and consent to receiving email
+      communication.</p>
+    <div class="row">
+      <div class="col-md-6 text-center" id="registerLink">
+        <a href="/register">Register now here!</a>
+      </div>
+
+      <div class="col-md-6 text-center">
+        <a href="#"> Forgot Password?</a>
+      </div>
+    </div>
+  </mat-card-content>
+
+
+</mat-card>

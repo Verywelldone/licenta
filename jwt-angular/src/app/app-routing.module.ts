@@ -14,6 +14,7 @@ import {BecomeSitterComponent} from './components/boards/board-user/sitter/becom
 import {SitterDashboardComponent} from './components/boards/board-user/sitter/sitter-dashboard/sitter-dashboard.component';
 import {ChatComponent} from './components/shared/chat/chat.component';
 import {ClientDashboardComponent} from './components/boards/board-user/client/client-dashboard/client-dashboard.component';
+import {CometchatEmbeddedComponent} from "../libs/cometchat-angular-ui-kit/src/lib/cometchat-embedded/cometchat-embedded.component";
 
 
 const routes: Routes = [
@@ -33,7 +34,7 @@ const routes: Routes = [
   {path: 'mod', component: BoardModeratorComponent},
   {path: 'admin', component: BoardAdminComponent},
   {path: 'tcs', component: UserTcsComponent},
-  {path: 'chat', component: ChatComponent},
+  {path: 'chat', component: CometchatEmbeddedComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 

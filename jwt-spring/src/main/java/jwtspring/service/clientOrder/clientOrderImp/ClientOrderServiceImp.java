@@ -1,12 +1,15 @@
 package jwtspring.service.clientOrder.clientOrderImp;
 
+
 import jwtspring.models.DTO.ServiceArray;
 import jwtspring.models.DTO.clientOrderDTO.ClientOrderDTO;
 import jwtspring.models.order.ClientOrder;
 import jwtspring.models.order.OrderDetails;
 import jwtspring.models.order.OrderServices;
+import jwtspring.models.service.ServiceModel;
 import jwtspring.repository.ClientOrderRepository;
 import jwtspring.repository.ClientOrderServicesRepository;
+import jwtspring.repository.ServiceRepository;
 import jwtspring.repository.UserRepository;
 import jwtspring.service.clientOrder.ClientOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +17,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -26,16 +31,25 @@ public class ClientOrderServiceImp implements ClientOrderService {
     UserRepository userRepository;
     @Autowired
     private ClientOrderRepository clientOrderRepository;
+    @Autowired
+    private ServiceRepository serviceRepository;
 
     @Override
     public ResponseEntity saveClientOrder(ClientOrderDTO clientOrderDTO) {
 
         if (clientOrderRepository
                 .getClientOrderByFromClientAndToSitter(clientOrderDTO.getFromClient(), clientOrderDTO.getToSitter()) != null) {
+            System.out.println(" Intra in primul IF");
             return ResponseEntity.unprocessableEntity().body("You already have an order placed for this sitter!");
 
         } else {
 
+            List<ServiceModel> serviceModels = serviceRepository.findAllByHostServices(userRepository.findUserById(clientOrderDTO.getToSitter()).getHostService());
+
+            if (!Collections.disjoint(serviceModels, clientOrderDTO.getServices())) {
+                System.out.println(" Intra in al 2-lea IF");
+                return ResponseEntity.unprocessableEntity().body("Siiter no longer have these services displayed. Please refresh the page!");
+            }
 //        Client Order Block
             ClientOrder clientOrder = new ClientOrder();
 

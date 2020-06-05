@@ -14,4 +14,5 @@ public interface SitterRequestService {
     public ResponseEntity<?> saveSitterRequest(@RequestBody SitterRequest sitterRequest);
     public HostService getSitterRequest(int userId);
 
+    ResponseEntity updateSitterRequest(int userId, SitterRequest sitterRequest);
 }

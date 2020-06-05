@@ -7,29 +7,25 @@
 
     <mat-card class="m-2">
       <mat-card-title>
-        Start date and End date
+        Start date - End date
       </mat-card-title>
       <mat-card-content>
         <mat-form-field>
           <mat-label>Start Date</mat-label>
-          <input matInput [value]="changeValue(sitterResponse.startDate)">
-          <!--          <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>-->
-          <!--          <mat-datepicker #dp1></mat-datepicker>-->
+          <input matInput readonly [value]="changeValue(sitterResponse.startDate)">
         </mat-form-field>
         <mat-form-field>
           <mat-label>End Date</mat-label>
-          <input matInput [value]="changeValue(sitterResponse.endDate)">
+          <input matInput readonly [value]="changeValue(sitterResponse.endDate)">
         </mat-form-field>
 
         <div *ngIf="this.getTimeLeftUntilServiceStarts(sitterResponse.startDate) > 0">
           Request is valabe {{this.getTimeLeftUntilServiceStarts(sitterResponse.startDate)}} more days!
         </div>
 
-        <div *ngIf="this.getTimeLeftUntilServiceStarts(sitterResponse.startDate)==0 ">
-          This request is due today!
-        </div>
-
-        <!--        From {{sitterResponse.startDate}} to {{sitterResponse.endDate}}-->
+        <mat-error *ngIf="this.getTimeLeftUntilServiceStarts(sitterResponse.startDate)==0 ">
+          This request starts today!
+        </mat-error>
 
       </mat-card-content>
     </mat-card>

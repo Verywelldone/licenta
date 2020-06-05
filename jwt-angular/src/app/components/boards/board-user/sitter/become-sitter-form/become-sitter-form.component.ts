@@ -1,7 +1,8 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {TokenStorageService} from '../../../../../services/token-storage.service';
-import {BecomeSitterService} from '../../../../../services/sitter-service/become-sitter.service';
+import {SitterHostService} from '../../../../../services/sitter-service/sitter-host.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 
 // tslint:disable-next-line:class-name
@@ -33,11 +34,13 @@ export class BecomeSitterFormComponent implements OnInit {
   // other pets
   public otherPets = '';
 
-  constructor(private becomeHostService: BecomeSitterService, private token: TokenStorageService, private route: Router) {
+  constructor(private becomeHostService: SitterHostService,
+              private token: TokenStorageService,
+              private fb: FormBuilder,
+              private route: Router) {
   }
 
   ngOnInit(): void {
-    console.log(this.passStepOne);
   }
 
   // ANIMAL TYPE SECTION
@@ -48,14 +51,13 @@ export class BecomeSitterFormComponent implements OnInit {
     } else {
       const index: number = this.animalType.indexOf(event.source.value);
       this.animalType.splice(index, 1);
-    }
 
-    if (this.animalType.includes('Cats') && !this.animalType.includes('Dogs')) {
-      this.passStepOne = true;
-    } else {
-      this.passStepOne = false;
+      if (event.source.value === 'Dogs') {
+        this.dogSizeArray.splice(0, this.dogSizeArray.length);
+      }
+      this.serviceArray.length = 0;
     }
-
+    this.checkIfPassStepOne();
   }
 
   selectDogSize(event: any) {
@@ -65,11 +67,7 @@ export class BecomeSitterFormComponent implements OnInit {
       const index: number = this.dogSizeArray.indexOf(event.source.value);
       this.dogSizeArray.splice(index, 1);
     }
-    if (this.animalType.includes('Dogs') && this.dogSizeArray.length > 0) {
-      this.passStepOne = true;
-    } else {
-      this.passStepOne = false;
-    }
+    this.checkIfPassStepOne();
   }
 
   // SERVICE TYPE SECTION
@@ -82,7 +80,9 @@ export class BecomeSitterFormComponent implements OnInit {
       selectedService.price = price;
       this.serviceArray.push(selectedService);
     }
+
     console.log(this.serviceArray);
+
   }
 
   deselectService(event: any) {
@@ -96,7 +96,6 @@ export class BecomeSitterFormComponent implements OnInit {
       console.log(selectedService);
       this.serviceArray.push(selectedService);
     }
-    console.log(this.serviceArray);
   }
 
   handlePlaceToLive(event: any) {
@@ -122,58 +121,37 @@ export class BecomeSitterFormComponent implements OnInit {
     const json = JSON.stringify(data);
     this.isSitter = true;
     this.becomeHostService.submitSitterRequest(json).subscribe(value => {
-      console.log(value);
       this.route.navigate(['sitter-profile']);
     });
-    // console.log(json);
   }
 
-  // selectedFile: File;
-  // public imagePath;
-  // imgURL: any;
+  checkIfPassStepOne() {
+    // include cats but not dogs
+    if (this.animalType.includes('Cats') && !this.animalType.includes('Dogs')) {
+      this.passStepOne = true;
+      //  include cats and dogs and at least one dog size is selected
+    } else if (this.animalType.includes('Cats') && this.animalType.includes('Dogs') && this.dogSizeArray.length !== 0) {
+      this.passStepOne = true;
+      //  Only dogs are included and at least one dog size is selected
+    } else if (!this.animalType.includes('Cats') && this.animalType.includes('Dogs') && this.dogSizeArray.length !== 0) {
+      this.passStepOne = true;
+      //  Dog selected but no dog size
+    } else if (this.animalType.includes('Dogs') && this.dogSizeArray.length === 0) {
+      this.passStepOne = false;
+      //  nothing selected
+    } else if (this.dogSizeArray.length === 0 || this.animalType.length === 0) {
+      this.passStepOne = false;
+      //  any other case
+    } else {
+      this.passStepOne = false;
+    }
+  }
 
-
-  // onUpload() {
-  //   // console.log(this.selectedFile);
-  //   const userID = this.token.getUser().id;
-  //   const uploadImageData = new FormData();
-  //   uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
-  //   uploadImageData.append('userId', userID);
-  //
-  //
-  //   this.httpClient.post('http://localhost:8080/image/upload', uploadImageData, {observe: 'response'})
-  //     .subscribe((response) => {
-  //         if (response.status === 200) {
-  //           // this.message = 'Image uploaded successfully';
-  //         } else {
-  //           // this.message = 'Image not uploaded successfully';
-  //         }
-  //       }
-  //     );
-  //
-  //   // this.router.navigate(['/home']);
-  // }
-  //
-  //
-  // preview(files) {
-  //   if (files.length === 0) {
-  //     return;
-  //   }
-  //
-  //   const mimeType = files[0].type;
-  //   if (mimeType.match(/image\/*/) == null) {
-  //     // this.message = 'Only images are supported.';
-  //     return;
-  //   }
-  //
-  //   const reader = new FileReader();
-  //   this.imagePath = files;
-  //   reader.readAsDataURL(files[0]);
-  //   // tslint:disable-next-line:variable-name
-  //   reader.onload = (_event) => {
-  //     this.imgURL = reader.result;
-  //   };
-  // }
-
-
+  checkIfIsFormReady() {
+    if (this.passStepOne && this.serviceArray.length !== 0 && this.placeToLive !== '' && this.otherPets !== '') {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

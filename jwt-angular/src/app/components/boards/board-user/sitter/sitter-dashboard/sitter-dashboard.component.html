@@ -3,15 +3,25 @@
     <app-sitter-profile></app-sitter-profile>
   </mat-tab>
 
-  <mat-tab label="Pending requests">
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <span matBadge="{{pendingRequests.length}}" matBadgeOverlap="false">Pending requests</span>
+    </ng-template>
     <app-sitter-pending-requests [clientPendingRequests]="pendingRequests"></app-sitter-pending-requests>
   </mat-tab>
 
-  <mat-tab label="Accepted requests">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <span matBadge="{{acceptedRequests.length}}" matBadgeOverlap="false">Accepted requests</span>
+    </ng-template>
     <app-sitter-accepted-requests [sitterAcceptedRequests]="acceptedRequests"></app-sitter-accepted-requests>
   </mat-tab>
 
-  <mat-tab label="Declined requests">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <span matBadge="{{declinedRequests.length}}" matBadgeOverlap="false">Declined requests</span>
+    </ng-template>
     <app-sitter-declined-requests [sitterDeclinedRequests]="declinedRequests"></app-sitter-declined-requests>
   </mat-tab>
 </mat-tab-group>

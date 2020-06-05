@@ -1,36 +1,46 @@
-
-.mat-card{
-  display: inline-block;
-  margin:1rem;
+.mat-card {
   box-shadow: 0 8px 12px 0 #3F51B5;
   background-color: #EEEEEE;
 }
-
-.mat-tab {
-  display: inline;
-  overflow-x: hidden;
-  text-align: center;
+.mat-row:nth-child(even){
+  background-color:whitesmoke;
 }
 
-.mat-card-title{
-  text-align: center;
-  background-color: #3b5998;
-  color:white;
+.mat-row:nth-child(odd){
+  background-color:Gainsboro;
 }
 
-.mat-card-content{
+table {
+  width: 100%;
+}
+
+.mat-header-cell {
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.mat-cell {
+  font-size: 18px;
+}
+
+span{
+  font-size: 18px;
+  font-weight: 500;
+}
+
+h5 {
   text-align: center;
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: bolder;
 }
 
 @media only screen and (max-width: 990px) {
-  .mat-card{
+  .mat-card {
+    width: 100%;
     padding-top: 10px;
     margin: 10px 0 0 0;
-    width: auto;
     display: block;
   }
 }
 
-.text-center{
-  margin-top:1.3rem;
-}

@@ -6,6 +6,9 @@ import {UserCoordinates} from '../../../model/user-coordinates.model';
 import {formatDate} from '@angular/common';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
+import {CometChat} from '@cometchat-pro/chat/CometChat';
+import {environment} from '../../../../environments/environment';
+import {COMETCHAT_CONSTANTS} from '../../shared/CONSTS';
 
 let viewChild = ViewChild;
 
@@ -24,7 +27,6 @@ export class RegisterComponent implements OnInit {
   errorMessage = '';
   latitude;
   longitude;
-
 
 
   constructor(private authService: AuthService, private router: Router, public dialog: MatDialog) {
@@ -52,10 +54,26 @@ export class RegisterComponent implements OnInit {
         this.isSuccessful = true;
         this.isSignUpFailed = false;
 
-        setTimeout(() => {
 
+        console.log(this.form.email);
+
+        // Start CometChat
+
+        const name = this.userDetails.firstName + ' ' + this.userDetails.lastName;
+        const uid = this.form.email.substring(0,this.form.email.indexOf('@'));
+        const user = new CometChat.User(uid);
+        user.setName(name);
+
+        CometChat.createUser(user, COMETCHAT_CONSTANTS.apiKey).then(
+          user => {
+            console.log('CometChat user created', user);
+          }, error => {
+            console.log('CometChat error', error);
+          }
+        );
+        setTimeout(() => {
           this.router.navigate(['login']);
-        }, 5000);
+        }, 3000);
 
       },
       err => {

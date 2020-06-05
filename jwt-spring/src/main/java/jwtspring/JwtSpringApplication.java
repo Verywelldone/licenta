@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2020.
+ * @Fatu Ionut Bogdan
+ * This project is for educational purpose only!
+ * It serves only as a Bachelor's Thesis
+ */
+
 package jwtspring;
 
 import org.springframework.boot.SpringApplication;

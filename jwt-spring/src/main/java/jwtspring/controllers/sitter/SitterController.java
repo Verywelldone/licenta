@@ -1,15 +1,16 @@
 package jwtspring.controllers.sitter;
 
-import jwtspring.models.DTO.clientOrderDTO.ClientOrderDTO;
+import jwtspring.models.DTO.SitterRequest;
 import jwtspring.models.DTO.clientOrderDTO.SitterOrdersModelDTO;
-import jwtspring.models.order.ClientOrder;
 import jwtspring.models.service.HostService;
 import jwtspring.service.sitterRequest.SitterOrdersService;
 import jwtspring.service.sitterRequest.SitterRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -53,6 +54,11 @@ public class SitterController {
     @PostMapping("/decline-request")
     ResponseEntity declineRequest(@RequestBody int serviceId) {
         return this.sitterOrdersService.declineClientRequest(serviceId);
+    }
+
+    @PutMapping(value = "/update-sitter/{userId}",  consumes = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity updateSitter(@PathVariable(value = "userId") int userId, @Valid @RequestBody SitterRequest sitterRequest) {
+        return this.sitterRequestService.updateSitterRequest(userId, sitterRequest);
     }
 
 }

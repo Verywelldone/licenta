@@ -79,11 +79,15 @@ export class BecomeClientComponent implements OnInit {
 
         //remove current user
         const removeIndex = this.users.map(item => {
+          console.log(item);
           return item.id;
         }).indexOf(this.curentUser.id);
 
-        this.users.splice(removeIndex, 1);
-
+        if (removeIndex !== -1) {
+          console.log(removeIndex + ' removeindex');
+          this.users.splice(removeIndex, 1);
+        }
+        //
       }
     );
   }
@@ -173,16 +177,13 @@ export class BecomeClientComponent implements OnInit {
         this.snackBar.open(response, 'OK', {
           duration: 4000,
         });
-        this.router.navigate(['client-dashboard']).then();
-
+        this.router.navigate(['/client-dashboard']).then(r => this.router.navigate(['/client-dashboard']));
       }, error => {
         console.log(error);
         this.snackBar.open(error.error, 'OK', {
           duration: 4000,
         });
       });
-
-      // this.router.navigate(['/client-dashboard']).then(r => this.router.navigate(['/client-dashboard']));
     }
   }
 

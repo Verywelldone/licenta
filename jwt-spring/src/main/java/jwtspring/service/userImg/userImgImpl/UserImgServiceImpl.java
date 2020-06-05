@@ -44,13 +44,15 @@ public class UserImgServiceImpl implements UserImgService {
     }
 
 
-    public UserProfileImage getImage(int userImgId)   {
+    public UserProfileImage getImage(int userImgId) {
         final UserProfileImage retrievedImage = userRepository.findUserById(userImgId).getUserDetails().getProfileImage();
-        UserProfileImage img = new UserProfileImage(retrievedImage.getName(), retrievedImage.getType(),
+
+        UserProfileImage img = new UserProfileImage(
+                retrievedImage.getName(),
+                retrievedImage.getType(),
                 decompressBytes(retrievedImage.getPicByte()));
         return img;
     }
-
 
 
     // compress the image bytes before storing it in the database
