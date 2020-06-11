@@ -1,7 +1,5 @@
 package jwtspring.models.order;
 
-import jwtspring.models.service.ServiceModel;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;

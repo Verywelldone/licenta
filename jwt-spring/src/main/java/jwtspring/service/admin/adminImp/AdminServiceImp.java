@@ -3,6 +3,7 @@ package jwtspring.service.admin.adminImp;
 
 import jwtspring.models.user.User;
 import jwtspring.models.user.role.ERole;
+import jwtspring.payload.response.MessageResponse;
 import jwtspring.repository.RoleRepository;
 import jwtspring.repository.UserRepository;
 import jwtspring.service.admin.AdminService;
@@ -26,4 +27,21 @@ public class AdminServiceImp implements AdminService {
         List<User> userList = userRepository.findAllByRoles(roleRepository.findByName(ERole.ROLE_USER));
         return ResponseEntity.ok(userList);
     }
+
+    @Override
+    public ResponseEntity disableAccount(int userId) {
+        User user = userRepository.findUserById(userId);
+        user.getUserAccountStatus().setBanned(true);
+        userRepository.save(user);
+        return ResponseEntity.ok(new MessageResponse("Account disabled successfully!"));
+    }
+
+    @Override
+    public ResponseEntity enableAccount(int userId) {
+        User user = userRepository.findUserById(userId);
+        user.getUserAccountStatus().setBanned(false);
+        userRepository.save(user);
+        return ResponseEntity.ok(new MessageResponse("Account enabled successfully!"));
+    }
+
 }

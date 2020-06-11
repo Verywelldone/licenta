@@ -1,7 +1,5 @@
 package jwtspring.models.order;
 
-import jwtspring.models.user.UserDetails;
-
 import javax.persistence.*;
 
 @Entity

@@ -28,7 +28,6 @@
         <mat-error *ngIf="username.errors">Username is required</mat-error>
       </mat-form-field>
 
-
       <!--Email-->
       <mat-form-field class="w-50 m-2">
         <mat-label>Email</mat-label>
@@ -59,6 +58,8 @@
 
       <ng-template matStepLabel>Account data</ng-template>
       <!--Fist name-->
+
+
       <mat-form-field class="w-50 m-2">
         <mat-label>First name</mat-label>
         <input type="text"
@@ -83,6 +84,7 @@
                #lname="ngModel">
         <mat-error *ngIf="lname.errors">Last name is required!</mat-error>
       </mat-form-field>
+
 
       <!--Address-->
       <mat-form-field class="w-50 m-2">
@@ -113,10 +115,36 @@
                #phone="ngModel">
         <mat-error *ngIf="phone.errors">Phone number is required</mat-error>
       </mat-form-field>
+      <br>
 
-      <div class="w-50">
-        <button type="submit" class="btn btn-large btn-block btn-login">Register</button>
+      <mat-form-field class="w-25">
+        <mat-label>Security Question</mat-label>
+        <mat-select matNativeControl required>
+          <mat-option value="volvo">What is your pet's name?</mat-option>
+          <mat-option value="saab">In what year was your mother born?</mat-option>
+          <mat-option value="mercedes">In what county where you born?</mat-option>
+          <mat-option value="audi">What is the color of your eyes?</mat-option>
+          <mat-option value="audi">What is your favorite animal?</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="w-25 m-2">
+        <mat-label>Security Answer</mat-label>
+        <input type="text"
+               matInput
+               name="securityQuestion"
+               class="w-100"
+               [(ngModel)]="userDetails.securityQuestion"
+               required
+               minlength="3"
+               (change)="print()"
+               maxlength="20">
+      </mat-form-field>
+
+
+      <div class="w-50 ml-auto mr-auto">
+        <button type="submit" class=" btn btn-large btn-block btn-login">Register</button>
       </div>
+
     </form>
 
     <p class="small-text text-center margin-v-x6">By signing in or signing up, I agree to Happypets.com's Terms of

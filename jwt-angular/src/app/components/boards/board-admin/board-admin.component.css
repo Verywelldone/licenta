@@ -29,9 +29,21 @@
 }
 
 .element-row:not(.expanded):hover {
-  background: #f5f5f5;
+  background: lightblue;
 }
 
 .element-row.expanded {
   border-bottom-color: transparent;
+}
+
+.accountBanned {
+  background-color: palevioletred;
+}
+
+.mat-row:nth-child(even) {
+  background-color: Gainsboro;
+}
+
+.mat-row:nth-child(odd) {
+  background-color: WhiteSmoke;
 }

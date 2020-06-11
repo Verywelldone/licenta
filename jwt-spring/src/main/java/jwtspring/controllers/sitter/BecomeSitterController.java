@@ -1,6 +1,6 @@
 package jwtspring.controllers.sitter;
 
-import jwtspring.models.DTO.SitterRequest;
+import jwtspring.models.DTO.sitter.SitterRequest;
 import jwtspring.service.sitterRequest.SitterRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

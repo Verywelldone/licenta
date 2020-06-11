@@ -5,25 +5,41 @@
       From client:  {{sitterResponse.fromClient.firstName}} {{sitterResponse.fromClient.lastName}}
     </mat-expansion-panel-header>
 
-    <mat-card class="m-2">
-      <mat-card-title>
-        Start date and End date
-      </mat-card-title>
-      <mat-card-content>
-        From {{sitterResponse.startDate}} to {{sitterResponse.endDate}}
-      </mat-card-content>
-    </mat-card>
+    <div class="row">
+      <div class="col-md-4">
+        <mat-card>
+          <mat-card-title>
+            Start date and End date
+          </mat-card-title>
+          <mat-card-content>
+            <mat-form-field>
+              <mat-label>Start Date</mat-label>
+              <input matInput readonly [value]="changeValue(sitterResponse.startDate)">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>End Date</mat-label>
+              <input matInput readonly [value]="changeValue(sitterResponse.endDate)">
+            </mat-form-field>
+          </mat-card-content>
+        </mat-card>
+      </div>
 
-    <mat-card class="m-2">
-      <mat-card-title>Services requested</mat-card-title>
-      <mat-card-content>
-        <ul *ngFor="let service of sitterResponse.orderServicesSet">
-          <div>
-            {{service.name}} - {{service.price}} RON
-          </div>
-        </ul>
-      </mat-card-content>
-    </mat-card>
+
+      <div class="col-md-8">
+        <mat-card>
+          <mat-card-title>Services requested</mat-card-title>
+          <mat-card-content>
+            <ul *ngFor="let service of sitterResponse.orderServicesSet">
+              <div>
+                {{service.name}} - {{service.price}} RON
+              </div>
+            </ul>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+    </div>
+
 
     <mat-action-row>
       <!--      <button color="primary" class="border border-dark" mat-button (click)="acceptRequest(sitterResponse.id)">Accept</button>-->

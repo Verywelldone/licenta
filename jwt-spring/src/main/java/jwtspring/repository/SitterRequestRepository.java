@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SitterRequestRepository extends JpaRepository<HostService, Integer> {
 
-    public HostService findHostServiceByUser(User user);
+    HostService findHostServiceByUser(User user);
 }

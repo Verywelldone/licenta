@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ChatService} from '../../../services/chat/chat.service';
 import {TokenStorageService} from '../../../services/token-storage.service';
-import { CometChat } from "@cometchat-pro/chat";
+import {CometChat} from '@cometchat-pro/chat';
 
 
 @Component({

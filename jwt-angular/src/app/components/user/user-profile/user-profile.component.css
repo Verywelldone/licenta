@@ -1,0 +1,98 @@
+.container {
+  box-sizing: border-box;
+  background-color: 	#F8F8F8;
+}
+
+.img-circle {
+  border-radius: 50%;
+  height: 225px;
+  width: 225px;
+}
+
+.text-sitter-name {
+  font-weight: 900;
+  line-height: 1.4;
+  margin-top: 3rem;
+  margin-bottom: 11px;
+  padding-left: 24px;
+  padding-top: 30px;
+}
+
+.hero {
+  margin-top: 30px;
+}
+
+
+/* STAR RATING STYLES*/
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 1.5rem;
+  color: #d3d3d3;
+}
+
+.full {
+  color: red;
+}
+
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: red;
+}
+
+/* SERVICE CONTAINER */
+.service-item {
+  display: flex;
+  justify-content: space-between !important;
+}
+
+.service-box, .card-body {
+  background-color: #F0F0F0;
+}
+
+
+/*USER REVIEW*/
+.review-section {
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.notfound {
+  background-image: url("src/assets/img/reviewsnotfound.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  /*background-size: cover;*/
+  background-size: contain;
+  /*background-size: 750px;*/
+}
+
+
+.sitter-not-found {
+  background-image: url("src/assets/img/servicesnotfound.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  /*background-size: cover;*/
+  /*background-size: 450px;*/
+  background-size: contain;
+}
+
+@media (max-width: 768px) {
+  .col-md-8 {
+    text-align: center;
+  }
+}
+
+@media (min-width: 768px) {
+
+  .review-section {
+    margin-left: 25px;
+    margin-top: 25px;
+  }
+
+  .col-md-4, .col-md-7 {
+    margin-top: 25px;
+  }
+
+}

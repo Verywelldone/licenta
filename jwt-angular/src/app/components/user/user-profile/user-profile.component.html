@@ -1,0 +1,125 @@
+<div class="container hero-container">
+
+  <div class="row hero">
+    <div class="col-md-4 text-center">
+      <img [src]="retrievedImage" alt="" class="img-circle">
+    </div>
+
+
+    <div class="col-md-8">
+      <h1>
+        <strong>
+          <span class="text-sitter-name">
+            {{user.userDetails.firstName}} {{user.userDetails.lastName}}
+          </span>
+        </strong>
+      </h1>
+      <h5>
+        <div class="m-4 lead">
+          {{user.userDetails.country}}, {{user.userDetails.city}}
+          <br>
+          <ng-template #t let-fill="fill">
+            <span class="star" [class.full]="fill === 100">
+              <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+            </span>
+          </ng-template>
+          <ngb-rating [(rate)]="currentRate" disabled="true" [starTemplate]="t" [readonly]="true"
+                      [max]="5"></ngb-rating>
+          <div>
+            <!--            Rating: <b>{{currentRate}}</b>-->
+            Rates: <b>{{userRatings.length}}</b>
+          </div>
+        </div>
+      </h5>
+    </div>
+  </div>
+
+
+  <div class="row text-center" [hidden]="token.getUser().id === user.id">
+    <mat-card class="col-md-12">
+      <mat-card-title>Leave this user a review!</mat-card-title>
+      <mat-card-content class="row">
+        <mat-form-field class="w-75">
+          <mat-label>Leave a comment</mat-label>
+          <textarea matInput [(ngModel)]="visitorMessage" placeholder="My experience with this user was..."></textarea>
+        </mat-form-field>
+
+        <div>
+          <ng-template #t let-fill="fill">
+            <span class="star" [class.full]="fill === 100">
+              <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+            </span>
+          </ng-template>
+
+          <ngb-rating [(rate)]="visitorRating" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+
+          <pre>Rate: <b>{{visitorRating}}</b></pre>
+          <button class="btn btn-sm btn-outline-primary mr-2" (click)="visitorRating = 1">1</button>
+          <button class="btn btn-sm btn-outline-primary mr-2" (click)="visitorRating = 2">2</button>
+          <button class="btn btn-sm btn-outline-primary mr-2" (click)="visitorRating = 3">3</button>
+          <button class="btn btn-sm btn-outline-primary mr-2" (click)="visitorRating = 4">4</button>
+          <button class="btn btn-sm btn-outline-primary mr-2" (click)="visitorRating = 5">5</button>
+          <hr>
+
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="row">
+
+    <mat-card class="col-md-4 service-box">
+      <mat-card-title class="text-center"><strong>Services</strong></mat-card-title>
+      <mat-divider></mat-divider>
+      <div *ngFor="let service of sitterServices" class="service-item p-1">
+        <div>
+          <h4>
+            {{service.name}}
+          </h4>
+        </div>
+        <div>
+
+          <h5>
+            <p>{{service.price}} RON <sub>/day</sub></p>
+          </h5>
+        </div>
+      </div>
+    </mat-card>
+
+    <div class="col-md-7 review-section" >
+      <div class="card mb-2" *ngFor="let rating of userRatings">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-2">
+              <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
+              <p class="text-secondary text-center" style="font-size: smaller">{{rating.rateDate}}</p>
+            </div>
+            <div class="col-md-10">
+              <a class="float-right" href="https://maniruzzaman-akash.blogspot.com/p/contact.html">
+                <strong>Maniruzzaman Akash</strong>
+              </a>
+              <!--              STAR RATING-->
+              <ng-template #t let-fill="fill">
+                <span class="star" [class.full]="fill === 100">
+                  <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                </span>
+              </ng-template>
+              <ngb-rating
+                [(rate)]="rating.stars"
+                disabled="true"
+                [starTemplate]="t"
+                [readonly]="true"
+                [max]="5"></ngb-rating>
+              <!--              END STAR RATING-->
+              <div class="clearfix"></div>
+              <p class="lead mt-4">{{rating.message}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br><br><br><br><br>
+<app-footer></app-footer>

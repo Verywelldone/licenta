@@ -1,7 +1,5 @@
 package jwtspring.models.order;
 
-import jwtspring.models.service.HostService;
-
 import javax.persistence.*;
 
 @Table

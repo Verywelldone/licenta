@@ -1,7 +1,7 @@
 package jwtspring.service.sitterRequest.sitterRequestImp;
 
-import jwtspring.models.DTO.ServiceArray;
-import jwtspring.models.DTO.SitterRequest;
+import jwtspring.models.DTO.sitter.ServiceArray;
+import jwtspring.models.DTO.sitter.SitterRequest;
 import jwtspring.models.service.HostService;
 import jwtspring.models.service.ServiceModel;
 import jwtspring.models.user.User;

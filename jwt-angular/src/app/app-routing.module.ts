@@ -14,7 +14,9 @@ import {BecomeSitterComponent} from './components/boards/board-user/sitter/becom
 import {SitterDashboardComponent} from './components/boards/board-user/sitter/sitter-dashboard/sitter-dashboard.component';
 import {ChatComponent} from './components/shared/chat/chat.component';
 import {ClientDashboardComponent} from './components/boards/board-user/client/client-dashboard/client-dashboard.component';
-import {CometchatEmbeddedComponent} from "../libs/cometchat-angular-ui-kit/src/lib/cometchat-embedded/cometchat-embedded.component";
+import {CometchatEmbeddedComponent} from '../libs/cometchat-angular-ui-kit/src/lib/cometchat-embedded/cometchat-embedded.component';
+import {UserProfileComponent} from './components/user/user-profile/user-profile.component';
+import {ForgotPasswordComponent} from './components/user/forgot-password/forgot-password.component';
 
 
 const routes: Routes = [
@@ -22,7 +24,9 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
-  // {path: 'user', component: BoardUserComponent},
+
+  {path: 'user-profile/:username', component: UserProfileComponent},
+  {path: 'forgot-password', component: ForgotPasswordComponent},
 
   {path: 'become-sitter', component: BecomeSitterComponent},
   {path: 'become-sitter-form', component: BecomeSitterFormComponent},

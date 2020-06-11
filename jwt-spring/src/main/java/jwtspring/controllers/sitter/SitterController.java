@@ -1,6 +1,6 @@
 package jwtspring.controllers.sitter;
 
-import jwtspring.models.DTO.SitterRequest;
+import jwtspring.models.DTO.sitter.SitterRequest;
 import jwtspring.models.DTO.clientOrderDTO.SitterOrdersModelDTO;
 import jwtspring.models.service.HostService;
 import jwtspring.service.sitterRequest.SitterOrdersService;

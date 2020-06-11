@@ -4,10 +4,7 @@ import jwtspring.models.user.User;
 import jwtspring.service.admin.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +19,15 @@ public class AdminController {
     @GetMapping("/user-list")
     public ResponseEntity<List<User>> getUserList() {
         return this.adminService.getUserList();
+    }
+
+    @PostMapping("/disable-account")
+    public ResponseEntity disableAccount(@RequestBody int userId) {
+        return this.adminService.disableAccount(userId);
+    }
+
+    @PostMapping("/enable-account")
+    public ResponseEntity enableAccount(@RequestBody int userId) {
+        return this.adminService.enableAccount(userId);
     }
 }

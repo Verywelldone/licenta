@@ -1,36 +1,34 @@
 package jwtspring.service.userDetails;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jwtspring.models.service.HostService;
 import jwtspring.models.user.User;
-
 import jwtspring.models.user.UserAccountStatus;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 
 public class UserDetailsImpl implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 
-    private int id;
+    private final int id;
 
-    private String username;
+    private final String username;
 
-    private String email;
+    private final String email;
 
     @JsonIgnore
-    private String password;
+    private final String password;
 
     private jwtspring.models.user.UserDetails userDetails;
 
-    private Collection<? extends GrantedAuthority> authorities;
+    private final Collection<? extends GrantedAuthority> authorities;
 
     private UserAccountStatus userAccountStatus;
 

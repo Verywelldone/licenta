@@ -8,15 +8,12 @@ import java.util.Set;
 
 public class SitterOrdersModelDTO {
 
-    private int id;
-
     UserDetails fromClient;
     UserDetails toSitter;
-
     Date startDate;
     Date endDate;
-
     Set<OrderServices> orderServicesSet;
+    private int id;
 
     public int getId() {
         return id;

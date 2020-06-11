@@ -40,9 +40,13 @@ import { ClientAcceptedRequestsComponent } from './components/boards/board-user/
 // import { CometChat } from '@cometchat-pro/chat';
 
 // import { CometchatAngularUiKitModule } from 'src/libs/cometchat-angular-ui-kit/src/lib/cometchat-angular-ui-kit.module';
+
 import { CometchatAngularUiKitModule } from '../libs/cometchat-angular-ui-kit/src/lib/cometchat-angular-ui-kit.module';
 import { UpdateSitterProfileComponent } from './components/boards/board-user/sitter/sitter-dashboard/update-sitter-profile/update-sitter-profile.component';
 import { CdkDetailRowDirective } from './components/boards/board-admin/cdk-detail-row.directive';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
+import { ForgotPasswordComponent } from './components/user/forgot-password/forgot-password.component';
 // @ts-ignore
 @NgModule({
     declarations: [
@@ -76,7 +80,9 @@ import { CdkDetailRowDirective } from './components/boards/board-admin/cdk-detai
         ClientAcceptedRequestsComponent,
         UpdateSitterProfileComponent,
         UpdateSitterProfileComponent,
-        CdkDetailRowDirective
+        CdkDetailRowDirective,
+        UserProfileComponent,
+        ForgotPasswordComponent
     ],
   imports: [
     BrowserModule,
@@ -90,7 +96,8 @@ import { CdkDetailRowDirective } from './components/boards/board-admin/cdk-detai
     FileUploadModule,
     BrowserAnimationsModule,
     MaterialModule,
-    CometchatAngularUiKitModule
+    CometchatAngularUiKitModule,
+    NgbModule
 
   ],
   providers: [authInterceptorProviders],

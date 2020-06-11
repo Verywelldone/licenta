@@ -1,4 +1,4 @@
-<div class="container mat-elevation-z8">
+<div class="mat-elevation-z8">
   <div class="example-header">
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
@@ -52,33 +52,37 @@
     </mat-row>
 
   </mat-table>
-  <mat-paginator [pageSizeOptions]="[2, 5, 10, 25, 100]"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 
   <ng-template #tpl let-user>
-    <div class="mat-row detail-row text-center font-weight-" [@detailExpand] style="overflow: hidden">
-      <!--      The symbol for {{user.id}} is {{user.userDetails.firstName}}-->
+    <div class="mat-row detail-row text-center" [@detailExpand] style="overflow: hidden">
       <div>
         Information about: <strong style="color: #3F51B5">{{user.username.toLocaleUpperCase()}}</strong>
       </div>
       <div>
         Last Login: <strong style="color: #3F51B5">{{user.userAccountStatus.lastLogin}}</strong>
         <mat-divider></mat-divider>
+
         Created at: <strong style="color: #3F51B5">{{user.userAccountStatus.createdAt}}</strong>
         <mat-divider></mat-divider>
-
 
         Updated at: <strong style="color: #3F51B5">{{user.userAccountStatus.updatedAt}}</strong>
         <mat-divider></mat-divider>
 
-
-        Is Banned: <strong style="color: #3F51B5">{{!user.userAccountStatus.isBanned}}</strong>
+        Is Confirmed: <strong style="color: #3F51B5">{{user.userAccountStatus.confirmed}}</strong>
         <mat-divider></mat-divider>
 
+        <strong style="color: darkred" *ngIf="user.userAccountStatus.banned">ACCOUNT IS BANNED</strong>
+        <mat-divider></mat-divider>
+
+
+        <button mat-button color="error" *ngIf="user.userAccountStatus.banned == false"
+                (click)="disableAccount(this.user.id)">Disable account
+        </button>
+        <button mat-button color="success" *ngIf="user.userAccountStatus.banned == true"
+                (click)="enableAccount(this.user.id)">Enable account
+        </button>
       </div>
-
-      <button mat-button color="error">Disable account</button>
-      <button mat-button color="primary">Edit account</button>
-
     </div>
   </ng-template>
 

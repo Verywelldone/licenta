@@ -1,6 +1,8 @@
 package jwtspring.service.authentication.authServiceImpl;
 
-import jwtspring.models.user.*;
+import jwtspring.models.user.User;
+import jwtspring.models.user.UserAccountStatus;
+import jwtspring.models.user.UserDetails;
 import jwtspring.models.user.role.ERole;
 import jwtspring.models.user.role.Role;
 import jwtspring.payload.request.SignupRequest;
@@ -31,7 +33,8 @@ public class RegisterServiceImpl implements RegisterService {
 
 
     @Override
-    public ResponseEntity<?> registerUser(@Valid SignupRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(SignupRequest signUpRequest) {
+
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
@@ -51,9 +54,15 @@ public class RegisterServiceImpl implements RegisterService {
                 signUpRequest.getUserDetails(),
                 signUpRequest.getUserAccountStatus()
         );
+//        user.getUserDetails().setSecurityQuestion(encoder.encode(signUpRequest.getSecurityQuestion()));
 
 //    Validare pentru @MapId @One-to-One
         UserDetails userDetails = signUpRequest.getUserDetails();
+
+//        System.out.println(signUpRequest.getSecurityQuestion());
+        System.out.println(signUpRequest.getUserDetails().toString());
+
+        userDetails.setSecurityQuestion(encoder.encode(signUpRequest.getUserDetails().getSecurityQuestion()));
         userDetails.setUser(user);
         user.setUserDetails(userDetails);
 

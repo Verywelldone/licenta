@@ -24,6 +24,16 @@ public class UserProfileImage {
     @Column(name = "picByte", length = 100000000)
     private byte[] picByte;
 
+    public UserProfileImage() {
+        super();
+    }
+
+    public UserProfileImage(String name, String type, byte[] picByte) {
+        this.name = name;
+        this.type = type;
+        this.picByte = picByte;
+    }
+
     public String getName() {
         return name;
     }
@@ -45,16 +55,6 @@ public class UserProfileImage {
     }
 
     public void setPicByte(byte[] picByte) {
-        this.picByte = picByte;
-    }
-
-    public UserProfileImage() {
-        super();
-    }
-
-    public UserProfileImage(String name, String type, byte[] picByte) {
-        this.name = name;
-        this.type = type;
         this.picByte = picByte;
     }
 

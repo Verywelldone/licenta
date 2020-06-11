@@ -99,6 +99,10 @@ public class JwtResponse {
         return roles;
     }
 
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
+
     public UserDetails getUserDetails() {
         return userData;
     }
@@ -121,10 +125,6 @@ public class JwtResponse {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
     }
 
     public UserDetails getUserData() {

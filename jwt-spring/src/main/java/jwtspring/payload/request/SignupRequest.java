@@ -27,7 +27,7 @@ public class SignupRequest {
     private UserDetails userDetails;
 
     private UserAccountStatus userAccountStatus;
-
+    
     public String getUsername() {
         return username;
     }
@@ -68,6 +68,14 @@ public class SignupRequest {
         this.userDetails = userDetails;
     }
 
+    public UserAccountStatus getUserAccountStatus() {
+        return userAccountStatus;
+    }
+
+    public void setUserAccountStatus(UserAccountStatus userAccountStatus) {
+        this.userAccountStatus = userAccountStatus;
+    }
+
     @Override
     public String toString() {
         return "SignupRequest{" +
@@ -80,12 +88,5 @@ public class SignupRequest {
                 '}';
     }
 
-    public UserAccountStatus getUserAccountStatus() {
-        return userAccountStatus;
-    }
-
-    public void setUserAccountStatus(UserAccountStatus userAccountStatus) {
-        this.userAccountStatus = userAccountStatus;
-    }
 
 }

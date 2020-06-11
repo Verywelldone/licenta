@@ -15,4 +15,13 @@ export class SitterAcceptedRequestsComponent implements OnInit {
   ngOnInit() {
   }
 
+
+  changeValue(startDate: any) {
+    const date = new Date(startDate);
+    const mnth = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+
+    return [day, mnth, date.getFullYear()].join('/');
+
+  }
 }

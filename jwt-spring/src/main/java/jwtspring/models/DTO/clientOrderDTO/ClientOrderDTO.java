@@ -1,10 +1,8 @@
 package jwtspring.models.DTO.clientOrderDTO;
 
-import jwtspring.models.DTO.ServiceArray;
+import jwtspring.models.DTO.sitter.ServiceArray;
 
-import java.sql.Timestamp;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 public class ClientOrderDTO {

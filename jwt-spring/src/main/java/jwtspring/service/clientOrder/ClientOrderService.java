@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ClientOrderService {
 
-    public ResponseEntity saveClientOrder(ClientOrderDTO clientOrderDTO);
+    ResponseEntity saveClientOrder(ClientOrderDTO clientOrderDTO);
 }

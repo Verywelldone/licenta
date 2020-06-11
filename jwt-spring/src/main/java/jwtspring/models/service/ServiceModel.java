@@ -23,14 +23,14 @@ public class ServiceModel {
     public ServiceModel() {
     }
 
-    public void setHostServices(HostService hostServices) {
-        this.hostServices = hostServices;
-    }
-
     public ServiceModel(int id, String name, int price) {
         this.id = id;
         this.name = name;
         this.price = price;
+    }
+
+    public void setHostServices(HostService hostServices) {
+        this.hostServices = hostServices;
     }
 
     public String getName() {

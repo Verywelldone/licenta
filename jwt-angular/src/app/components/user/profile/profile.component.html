@@ -1,58 +1,126 @@
+<div class="container hero-container">
+
+  <div class="row hero">
+    <div class="col-md-4 text-center" *ngIf="this.currentUser.userDetails.profileImage == null || changeimg">
+      <!--      <img *ngIf="this.currentUser.userDetails.profileImage == null" src="https://dummyimage.com/400x400/000/fff.png" alt="" class="img-circle">-->
+      <!--      <button mat-button color="accent" (click)="">Upload Image</button>-->
+      <input type="file" #fileDropRef id="fileDropRef" hidden accept="image/*" style="display: block"
+             (change)="onFileChanged($event); preview(fileDropRef.files)" class="img-circle"/>
+      <div class="text-center" *ngIf="!selectedFile">
+        <h4> Upload a profile picture!</h4>
+        <p> A profile picture will definitely increase the number of clients!</p>
+        <label for="fileDropRef" class="fileLabel"> Upload profile picture!</label>
+        <button mat-button (click)="changeImage()" *ngIf="retrievedImage !== null"> Cancel update</button>
+      </div>
+
+      <div *ngIf="selectedFile">
+        <div>
+          <img [src]="imgURL" class="img-circle">
+        </div>
+        <div>
+          <p class="lead p-3">You look amazing!</p>
+          <label for="fileDropRef" class="fileLabel">I want to upload a new picture!</label>
+          <button mat-button (click)="onUpload()"> Save update</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 text-center" *ngIf="this.currentUser.userDetails.profileImage !== null && !changeimg">
+      <img [src]="retrievedImage" alt="" class="img-circle" (click)="changeImage()"
+           matTooltip="Click to change profile image!">
+    </div>
 
 
-<div class="container" *ngIf="currentUser; else loggedOut">
+    <div class="col-md-8">
+      <h1>
+        <strong>
+          <span class="text-sitter-name">
+            {{currentUser.userDetails.firstName}} {{currentUser.userDetails.lastName}}
+          </span>
+        </strong>
+      </h1>
+      <h5>
+        <div class="m-4 lead">
+          {{currentUser.userDetails.country}}, {{currentUser.userDetails.city}}
+          <br>
+          <ng-template #t let-fill="fill">
+            <span class="star" [class.full]="fill === 100">
+              <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+            </span>
+          </ng-template>
+          <ngb-rating [(rate)]="currentRate" disabled="true" [starTemplate]="t" [readonly]="true"
+                      [max]="5"></ngb-rating>
+          <div>
+            <!--            Rating: <b>{{currentRate}}</b>-->
+            Rates: <b>{{userRatings.length}}</b>
+          </div>
+        </div>
+      </h5>
+    </div>
+  </div>
 
 
-  <img [src]="retrievedImage" alt="">
+  <div class="row">
 
-  <header class="jumbotron">
-    <h3>
-      <strong>{{ currentUser.username }}</strong> Profile
-    </h3>
-  </header>
-  <p>
-    <strong>Token:</strong>
-    {{ currentUser.accessToken.substring(0, 20) }} ...
-    {{ currentUser.accessToken.substr(currentUser.accessToken.length - 20) }}
-  </p>
-  <p>
-    <strong>Email:</strong>
-    {{ currentUser.email }}
-  </p>
-  <p>
-    <strong>ID:</strong>
-    {{ currentUser.id }}
-  </p>
-  <strong>Roles:</strong>
-  <ul>
-    <li *ngFor="let role of currentUser.roles">
-      {{ role }}
-    </li>
-  </ul>
-  <strong>User Data:</strong>
-  <ul>
-    <li> Username: {{currentUser.username}} </li>
-    <li>First name:  {{currentUser.userDetails.firstName}}</li>
-    <li> Last Name:  {{currentUser.userDetails.lastName}}</li>
-    <li> Phone Number: {{currentUser.userDetails.phone}}</li>
-    <li>Address: {{currentUser.userDetails.address}}</li>
-  </ul>
+    <mat-card class="col-md-4 service-box" *ngIf="isSitter">
+      <mat-card-title class="text-center"><strong>Services</strong></mat-card-title>
+      <mat-divider></mat-divider>
+      <div *ngFor="let service of sitterServices" class="service-item p-1">
+        <div>
+          <h4>
+            {{service.name}}
+          </h4>
+        </div>
+        <div>
 
-  <strong> Coordinates:</strong>
-  <ul>
-    <li> Latitude: {{currentUser.userDetails.userCoordinates.latitude}}</li>
-    <li>Longitude: {{currentUser.userDetails.userCoordinates.longitude}}</li>
-  </ul>
+          <h5>
+            <p>{{service.price}} RON <sub>/day</sub></p>
+          </h5>
+        </div>
+      </div>
+    </mat-card>
 
-  <strong>User Account status:</strong>
-  <ul>
-    <li>Is active: {{currentUser.userAccountStatus.isActive}}</li>
-    <li>Is Banned: {{currentUser.userAccountStatus.isBanned}}</li>
-    <li>Is Client: {{currentUser.userAccountStatus.isClient}}</li>
-    <li>Is Host: {{currentUser.userAccountStatus.isHost}}</li>
-  </ul>
+    <div class="col-md-4 sitter-not-found" *ngIf="!isSitter" style="margin-left:35px; height: 500px">
+
+      <!--      <h3 class="text-center"> User does not have any reviews yet! </h3>-->
+    </div>
+
+    <div class="col-md-8" *ngIf="areAnyReviews">
+      <div class="card mb-2" *ngFor="let rating of userRatings">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-2">
+              <img [src]="getReviewUserImg(rating.fromUserProfileImage)" class="img img-rounded img-fluid"/>
+              <p class="text-secondary text-center" style="font-size: smaller">{{rating.rateDate}}</p>
+            </div>
+            <div class="col-md-10">
+              <a class="float-right">
+                <strong>{{rating.fromUser.firstName}} {{rating.fromUser.lastName}}</strong>
+              </a>
+              <!--              STAR RATING-->
+              <ng-template #t let-fill="fill">
+                <span class="star" [class.full]="fill === 100">
+                  <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                </span>
+              </ng-template>
+              <ngb-rating
+                [(rate)]="rating.stars"
+                disabled="true"
+                [starTemplate]="t"
+                [readonly]="true"
+                [max]="5"></ngb-rating>
+              <!--              END STAR RATING-->
+              <div class="clearfix"></div>
+              <p class="lead mt-4">{{rating.message}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-7 notfound" *ngIf="noReviews" style="margin-left:35px; height: 500px ">
+
+    </div>
+  </div>
+
 </div>
 
-<ng-template #loggedOut>
-  Please login.
-</ng-template>

@@ -15,4 +15,13 @@ export class AdminService {
   getUserList(): Observable<any> {
     return this.http.get(this.API_URL + 'user-list');
   }
+
+  disableAccount(userId: any): Observable<any> {
+    return this.http.post(this.API_URL + 'disable-account', userId);
+  }
+
+  enableAccount(userId: any): Observable<any> {
+    return this.http.post(this.API_URL + 'enable-account', userId);
+
+  }
 }

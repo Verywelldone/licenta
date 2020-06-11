@@ -1,14 +1,14 @@
 package jwtspring.service.client;
 
-import java.util.List;
-
 import jwtspring.models.DTO.clientOrderDTO.SitterOrdersModelDTO;
 import jwtspring.models.user.User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface ClientService {
-    public List<User> getSitterList();
+    List<User> getSitterList();
 
     List<SitterOrdersModelDTO> getPendingClientOrders(int userId);
 

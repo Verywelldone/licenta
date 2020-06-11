@@ -17,8 +17,9 @@
             Sitter</a>
         </li>
         <li class="nav-item">
-          <a href="/sitter-profile" class="nav-link" *ngIf="isLoggedIn && isSitter" routerLink="sitter-profile">My
-            Sitter Profile</a>
+          <a href="/sitter-profile" class="nav-link" *ngIf="isLoggedIn && isSitter" routerLink="sitter-profile">
+            <i class="fas fa-bone"></i>Sitter Dashboard
+          </a>
         </li>
         <li class="nav-item">
           <a href="/become-client" class="nav-link" *ngIf="isLoggedIn" routerLink="become-client">Become Client</a>
@@ -35,10 +36,10 @@
 
       <ul class="navbar-nav" *ngIf="isLoggedIn">
         <li class="nav-item">
-          <a href="/profile" class="nav-link" routerLink="profile">MyProfile</a>
+          <a href="/profile" class="nav-link" routerLink="profile">  <i class="fas fa-user"></i> Profile</a>
         </li>
         <li class="nav-item">
-          <a href class="nav-link" (click)="logout()">Logout</a>
+          <a href class="nav-link" (click)="logout()"> <i class="fas fa-sign-out-alt"></i> Logout</a>
         </li>
       </ul>
     </div>

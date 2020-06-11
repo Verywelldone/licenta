@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TokenStorageService} from '../../../services/token-storage.service';
 import {SitterProfileService} from '../../../services/sitter-service/sitter-profile.service';
+import {CometChat} from '@cometchat-pro/chat/CometChat';
 
 @Component({
   selector: 'app-navbar',
@@ -33,7 +34,6 @@ export class NavbarComponent implements OnInit {
 
     this.sitterProfileService.getSitterData(this.tokenStorageService.getUser().id).subscribe(data => {
       if (data) {
-        console.log(data);
         this.isSitter = data.active;
       }
     });
@@ -41,6 +41,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.tokenStorageService.signOut();
+    CometChat.logout().then(r => CometChat.logout());
     window.location.reload();
   }
 

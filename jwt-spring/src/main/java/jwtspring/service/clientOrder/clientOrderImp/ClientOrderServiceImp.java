@@ -1,7 +1,7 @@
 package jwtspring.service.clientOrder.clientOrderImp;
 
 
-import jwtspring.models.DTO.ServiceArray;
+import jwtspring.models.DTO.sitter.ServiceArray;
 import jwtspring.models.DTO.clientOrderDTO.ClientOrderDTO;
 import jwtspring.models.order.ClientOrder;
 import jwtspring.models.order.OrderDetails;
@@ -39,7 +39,6 @@ public class ClientOrderServiceImp implements ClientOrderService {
 
         if (clientOrderRepository
                 .getClientOrderByFromClientAndToSitter(clientOrderDTO.getFromClient(), clientOrderDTO.getToSitter()) != null) {
-            System.out.println(" Intra in primul IF");
             return ResponseEntity.unprocessableEntity().body("You already have an order placed for this sitter!");
 
         } else {
@@ -47,7 +46,6 @@ public class ClientOrderServiceImp implements ClientOrderService {
             List<ServiceModel> serviceModels = serviceRepository.findAllByHostServices(userRepository.findUserById(clientOrderDTO.getToSitter()).getHostService());
 
             if (!Collections.disjoint(serviceModels, clientOrderDTO.getServices())) {
-                System.out.println(" Intra in al 2-lea IF");
                 return ResponseEntity.unprocessableEntity().body("Siiter no longer have these services displayed. Please refresh the page!");
             }
 //        Client Order Block

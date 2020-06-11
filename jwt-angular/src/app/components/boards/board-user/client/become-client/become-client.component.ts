@@ -203,4 +203,8 @@ export class BecomeClientComponent implements OnInit {
 
     console.log(this.clientSelectedServices);
   }
+
+  viewSitterProfile() {
+    this.router.navigate(['user-profile/'+this.selectedUser.username])
+  }
 }

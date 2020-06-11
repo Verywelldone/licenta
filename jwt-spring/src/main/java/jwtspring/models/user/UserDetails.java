@@ -1,5 +1,7 @@
 package jwtspring.models.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -19,6 +21,12 @@ public class UserDetails {
     @Column(name = "phone")
     private String phone;
 
+    @Column(name = "country")
+    private String country;
+
+    @Column(name = "city")
+    private String city;
+
     @Column(name = "address")
     private String address;
 
@@ -34,8 +42,35 @@ public class UserDetails {
     @JoinColumn(name = "user_profileImage")
     private UserProfileImage profileImage;
 
+    @Column(name = "security_question")
+    private String securityQuestion;
+
+    public String getSecurityQuestion() {
+        return securityQuestion;
+    }
+
+    public void setSecurityQuestion(String securityQuestion) {
+        this.securityQuestion = securityQuestion;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public int getId() {
@@ -101,9 +136,12 @@ public class UserDetails {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", phone='" + phone + '\'' +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
                 ", address='" + address + '\'' +
                 ", userCoordinates=" + userCoordinates +
                 ", profileImage=" + profileImage +
+                ", securityQuestion='" + securityQuestion + '\'' +
                 '}';
     }
 }

@@ -27,34 +27,6 @@ public class UserImgServiceImpl implements UserImgService {
     @Autowired
     UserRepository userRepository;
 
-
-    public ResponseEntity uplaodImage(@RequestParam("imageFile") MultipartFile file, @RequestParam("userId") int userid) throws IOException {
-
-        System.out.println("USER ID IS " + userid);
-        User currentUser = userRepository.findUserById(userid);
-
-        System.out.println("Original Image Byte Size - " + file.getBytes().length);
-        UserProfileImage img = new UserProfileImage(file.getOriginalFilename(), file.getContentType(),
-                compressBytes(file.getBytes()));
-
-        currentUser.getUserDetails().setProfileImage(img);
-        imageRepository.save(img);
-
-        return ResponseEntity.ok(new MessageResponse(" UPLOADED "));
-    }
-
-
-    public UserProfileImage getImage(int userImgId) {
-        final UserProfileImage retrievedImage = userRepository.findUserById(userImgId).getUserDetails().getProfileImage();
-
-        UserProfileImage img = new UserProfileImage(
-                retrievedImage.getName(),
-                retrievedImage.getType(),
-                decompressBytes(retrievedImage.getPicByte()));
-        return img;
-    }
-
-
     // compress the image bytes before storing it in the database
     public static byte[] compressBytes(byte[] data) {
         Deflater deflater = new Deflater();
@@ -74,7 +46,6 @@ public class UserImgServiceImpl implements UserImgService {
         return outputStream.toByteArray();
     }
 
-
     // uncompress the image bytes before returning it to the angular application
     public static byte[] decompressBytes(byte[] data) {
         Inflater inflater = new Inflater();
@@ -91,5 +62,32 @@ public class UserImgServiceImpl implements UserImgService {
         } catch (DataFormatException e) {
         }
         return outputStream.toByteArray();
+    }
+
+    public ResponseEntity uplaodImage(@RequestParam("imageFile") MultipartFile file, @RequestParam("userId") int userid) throws IOException {
+
+        System.out.println("USER ID IS " + userid);
+        User currentUser = userRepository.findUserById(userid);
+
+        System.out.println("Original Image Byte Size - " + file.getBytes().length);
+        UserProfileImage img = new UserProfileImage(file.getOriginalFilename(), file.getContentType(),
+                compressBytes(file.getBytes()));
+
+
+        currentUser.getUserDetails().setProfileImage(img);
+        userRepository.save(currentUser);
+//        imageRepository.save(img);
+
+        return ResponseEntity.ok(new MessageResponse(" UPLOADED "));
+    }
+
+    public UserProfileImage getImage(int userImgId) {
+        final UserProfileImage retrievedImage = userRepository.findUserById(userImgId).getUserDetails().getProfileImage();
+
+        UserProfileImage img = new UserProfileImage(
+                retrievedImage.getName(),
+                retrievedImage.getType(),
+                decompressBytes(retrievedImage.getPicByte()));
+        return img;
     }
 }
