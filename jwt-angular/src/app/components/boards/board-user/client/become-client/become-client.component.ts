@@ -133,8 +133,10 @@ export class BecomeClientComponent implements OnInit {
   addEvent(change: string, event: MatDatepickerInputEvent<unknown>) {
 
     if (change === 'startDate') {
+      // @ts-ignore
       this.startAtDate = new Date(event.value);
     } else {
+      // @ts-ignore
       this.endAtDate = new Date(event.value);
     }
 
@@ -151,7 +153,7 @@ export class BecomeClientComponent implements OnInit {
 
   submitRequest() {
 
-    if (this.endAtDate.getDate() == null || this.endAtDate.getDate() == null) {
+    if (this.endAtDate === undefined || this.endAtDate === undefined) {
       this.hasErrors = true;
       this.requestMessage = 'Please, select a Starting date and an Ending date!';
     } else if (this.clientSelectedServices.length === 0) {

@@ -19,11 +19,13 @@ export class UserRatingService {
   }
 
   getAllUserRatings(userId: number): Observable<any> {
-    console.log(userId)
+    return this.http.get(BASE_URL + 'get-ratings/' + userId);
+  }
+  getAsyncRating(userId: number) {
     return this.http.get(BASE_URL + 'get-ratings/' + userId);
   }
 
-  postUserRating(userRating: UserRatingModel) {
-    this.http.post(BASE_URL + '/save-rating', userRating, httpOptions);
+  postUserRating(userRating: UserRatingModel): Observable<any> {
+    return this.http.post(BASE_URL + 'save-rating', userRating, httpOptions);
   }
 }

@@ -18,17 +18,6 @@ import {MatPaginator, MatSnackBar, MatSort, MatTableDataSource} from '@angular/m
   ],
 })
 export class BoardAdminComponent implements OnInit {
-  content = '';
-  isAllowed = true;
-  dataSource;
-  displayedColumns = ['id', 'username', 'fname', 'lname', 'email'];
-  // displayedColumns = ['position', 'name', 'weight'];
-  isExpansionDetailRow = (index, row) => row.hasOwnProperty('detailRow');
-  expandedElement: any;
-
-
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
 
   constructor(
@@ -39,13 +28,22 @@ export class BoardAdminComponent implements OnInit {
     private router: Router) {
   }
 
+  content = '';
+  isAllowed = true;
+  dataSource;
+  displayedColumns = ['id', 'username', 'fname', 'lname', 'email'];
+  expandedElement: any;
+
+
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  // displayedColumns = ['position', 'name', 'weight'];
+  isExpansionDetailRow = (index, row) => row.hasOwnProperty('detailRow');
+
   ngOnInit() {
     this.userService.getAdminBoard().subscribe(
       data => {
         this.content = data;
-        // if (data === 'Forbidden') {
-        //   this.isAllowed = false;
-        // }
       },
       err => {
         this.content = JSON.parse(err.error).message;
@@ -57,6 +55,16 @@ export class BoardAdminComponent implements OnInit {
 
   loadUserList() {
     this.adminService.getUserList().subscribe(list => {
+
+      // tslint:disable-next-line:only-arrow-functions
+      list = list.filter(function (obj) {
+        // tslint:disable-next-line:only-arrow-functions
+        return obj.roles.filter(function (role) {
+          return role.name !== 'ROLE_USER';
+        });
+      });
+
+      console.log(list);
       this.dataSource = new MatTableDataSource(list);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

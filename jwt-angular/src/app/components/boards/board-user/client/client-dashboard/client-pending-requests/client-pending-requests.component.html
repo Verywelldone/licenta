@@ -9,7 +9,14 @@
         Start date and End date
       </mat-card-title>
       <mat-card-content>
-        From {{sitterResponse.startDate}} to {{sitterResponse.endDate}}
+        <mat-form-field>
+          <mat-label>Start Date</mat-label>
+          <input matInput readonly [value]="changeValue(sitterResponse.startDate)">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>End Date</mat-label>
+          <input matInput readonly [value]="changeValue(sitterResponse.endDate)">
+        </mat-form-field>
       </mat-card-content>
     </mat-card>
 
@@ -24,6 +31,7 @@
       </mat-card-content>
     </mat-card>
     <mat-action-row>
+      <button color="warn" class="border border-dark" mat-button>Cancel</button>
     </mat-action-row>
   </mat-expansion-panel>
 </div>

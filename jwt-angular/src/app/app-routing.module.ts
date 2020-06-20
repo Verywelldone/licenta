@@ -38,7 +38,7 @@ const routes: Routes = [
   {path: 'mod', component: BoardModeratorComponent},
   {path: 'admin', component: BoardAdminComponent},
   {path: 'tcs', component: UserTcsComponent},
-  {path: 'chat', component: CometchatEmbeddedComponent},
+  {path: 'chat', component: ChatComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 

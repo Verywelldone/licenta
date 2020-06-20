@@ -61,7 +61,6 @@ export class SitterPendingRequestsComponent implements OnInit {
     const day = ('0' + date.getDate()).slice(-2);
 
     return [day, mnth, date.getFullYear()].join('/');
-
   }
 
   getTimeLeftUntilServiceStarts(startDate: any) {

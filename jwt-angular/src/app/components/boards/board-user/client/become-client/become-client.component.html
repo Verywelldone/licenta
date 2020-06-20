@@ -35,19 +35,21 @@
       </agm-map>
     </div>
 
-    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-6 border" *ngIf="isSitterChosen">
+    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-6 border pick-sitter" *ngIf="isSitterChosen">
 
       <form (ngSubmit)="submitRequest()" class="text-center">
         <div>
           <span
-            class="font-weight-bold">{{this.selectedUser.userDetails.firstName}} {{this.selectedUser.userDetails.lastName}}</span>
-          offers:
+            class="font-weight-bold">
+            {{this.selectedUser.userDetails.firstName}} {{this.selectedUser.userDetails.lastName}} offers:
+          </span>
+
         </div>
 
 
         <div *ngFor="let service of selectedSitterData.serviceModelSet">
           <mat-checkbox (change)="handleSitterService($event, service)">
-            {{service.name}} - {{service.price}} RON
+                {{service.name}} - {{service.price}} RON
             <br>
           </mat-checkbox>
         </div>

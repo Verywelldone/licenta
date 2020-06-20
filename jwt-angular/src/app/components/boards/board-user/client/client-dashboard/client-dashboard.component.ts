@@ -19,6 +19,9 @@ export class ClientDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getPendingRequests();
+    this.getDeclinedRequests();
+    this.getAcceptedRequests();
   }
 
   getPendingRequests() {

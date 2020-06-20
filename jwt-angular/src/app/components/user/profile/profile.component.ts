@@ -29,7 +29,7 @@ export class ProfileComponent implements OnInit {
   base64Data: any;
   retrieveResonse: any;
 
-  //SITTER DATA
+  // SITTER DATA
   sitterServices;
 
   areAnyReviews = false;
@@ -37,6 +37,7 @@ export class ProfileComponent implements OnInit {
 
   isSitter = false;
   isNotSitter = true;
+  changeimg = false;
 
   constructor(
     private token: TokenStorageService,
@@ -56,10 +57,11 @@ export class ProfileComponent implements OnInit {
 
 
   getImage() {
-    console.log(this.token.getUser().id);
+    console.log(this.token.getUser().id + ' this id');
     this.http.get('http://localhost:8080/image/get/' + this.token.getUser().id)
       .subscribe(
         res => {
+          console.log(res);
           this.retrieveResonse = res;
           this.base64Data = this.retrieveResonse.picByte;
           this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
@@ -83,6 +85,8 @@ export class ProfileComponent implements OnInit {
     uploadImageData.append('userId', userID);
     this.http.post('http://localhost:8080/image/upload', uploadImageData, {observe: 'response'})
       .subscribe((response) => {
+          window.location.reload();
+
           if (response.status === 200) {
             this.message = 'Image uploaded successfully';
           } else {
@@ -90,7 +94,6 @@ export class ProfileComponent implements OnInit {
           }
         }
       );
-    window.location.reload();
   }
 
 
@@ -106,6 +109,7 @@ export class ProfileComponent implements OnInit {
     const reader = new FileReader();
     this.imagePath = files;
     reader.readAsDataURL(files[0]);
+    // tslint:disable-next-line:variable-name
     reader.onload = (_event) => {
       this.imgURL = reader.result;
     };
@@ -128,41 +132,38 @@ export class ProfileComponent implements OnInit {
 
   getUserRatings() {
     const userId = this.token.getUser().id;
-
     this.userRatingService.getAllUserRatings(userId).subscribe(response => {
+
+        console.log(response);
 
         if (response == null) {
           this.userRatings = null;
-          console.log(this.areAnyReviews + ' Are any reviews');
         } else {
           this.userRatings = response;
           let sum = 0;
           this.areAnyReviews = true;
           this.noReviews = false;
-          response.forEach(function(rating) {
-            console.log(rating.stars);
+          // tslint:disable-next-line:only-arrow-functions
+          response.forEach(function (rating) {
             sum += rating.stars;
           });
-          // console.log(sum / response.length);
           this.currentRate = sum / response.length;
         }
         console.log(this.userRatings);
       },
       error => {
-        console.log(' INTRA FUCKING AICI');
-        console.log(error.error);
       });
   }
 
   changeImage() {
-
+    this.changeimg = !this.changeImage;
   }
 
   getReviewUserImg(res) {
 
-    let retrieveResonse = res;
-    let base64Data = retrieveResonse.picByte;
-    let img = 'data:image/jpeg;base64,' + base64Data;
+    const retrieveResonse = res;
+    const base64Data = retrieveResonse.picByte;
+    const img = 'data:image/jpeg;base64,' + base64Data;
     return img;
   }
 }

@@ -1,14 +1,18 @@
 <div class="container hero-container">
 
   <div class="row hero">
-    <div class="col-md-4 text-center" *ngIf="this.currentUser.userDetails.profileImage == null || changeimg">
-      <!--      <img *ngIf="this.currentUser.userDetails.profileImage == null" src="https://dummyimage.com/400x400/000/fff.png" alt="" class="img-circle">-->
-      <!--      <button mat-button color="accent" (click)="">Upload Image</button>-->
+
+    <div class="col-md-4 text-center" *ngIf="!this.retrievedImage">
+      <h4> Upload a profile picture!</h4>
+      <p> A profile picture will definitely increase the number of clients!</p>
+      <img *ngIf="this.currentUser.userDetails.profileImage == null || selectedFile" [hidden]="selectedFile" src="https://dummyimage.com/400x400/000/fff.png"
+           alt="" class="img-circle">
+      <!--            <button mat-button color="accent" >Upload Image</button>-->
+
       <input type="file" #fileDropRef id="fileDropRef" hidden accept="image/*" style="display: block"
              (change)="onFileChanged($event); preview(fileDropRef.files)" class="img-circle"/>
       <div class="text-center" *ngIf="!selectedFile">
-        <h4> Upload a profile picture!</h4>
-        <p> A profile picture will definitely increase the number of clients!</p>
+
         <label for="fileDropRef" class="fileLabel"> Upload profile picture!</label>
         <button mat-button (click)="changeImage()" *ngIf="retrievedImage !== null"> Cancel update</button>
       </div>
@@ -24,11 +28,11 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4 text-center" *ngIf="this.currentUser.userDetails.profileImage !== null && !changeimg">
+
+    <div class="col-md-4 text-center" *ngIf="this.retrievedImage">
       <img [src]="retrievedImage" alt="" class="img-circle" (click)="changeImage()"
            matTooltip="Click to change profile image!">
     </div>
-
 
     <div class="col-md-8">
       <h1>
@@ -79,10 +83,10 @@
       </div>
     </mat-card>
 
-    <div class="col-md-4 sitter-not-found" *ngIf="!isSitter" style="margin-left:35px; height: 500px">
+    <!--    <div class="col-md-4 sitter-not-found" style="margin-left:35px; height: 500px">-->
 
-      <!--      <h3 class="text-center"> User does not have any reviews yet! </h3>-->
-    </div>
+    <!--      &lt;!&ndash;      <h3 class="text-center"> User does not have any reviews yet! </h3>&ndash;&gt;-->
+    <!--    </div>-->
 
     <div class="col-md-8" *ngIf="areAnyReviews">
       <div class="card mb-2" *ngFor="let rating of userRatings">
@@ -117,9 +121,9 @@
       </div>
     </div>
 
-    <div class="col-md-7 notfound" *ngIf="noReviews" style="margin-left:35px; height: 500px ">
+    <!--    <div class="col-md-7 notfound" *ngIf="noReviews" style="margin-left:35px; height: 500px ">-->
 
-    </div>
+    <!--    </div>-->
   </div>
 
 </div>

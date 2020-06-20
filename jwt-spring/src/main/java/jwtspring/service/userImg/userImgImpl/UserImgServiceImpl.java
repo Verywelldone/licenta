@@ -66,6 +66,8 @@ public class UserImgServiceImpl implements UserImgService {
 
     public ResponseEntity uplaodImage(@RequestParam("imageFile") MultipartFile file, @RequestParam("userId") int userid) throws IOException {
 
+        System.out.println(file.toString());
+
         System.out.println("USER ID IS " + userid);
         User currentUser = userRepository.findUserById(userid);
 
@@ -84,10 +86,15 @@ public class UserImgServiceImpl implements UserImgService {
     public UserProfileImage getImage(int userImgId) {
         final UserProfileImage retrievedImage = userRepository.findUserById(userImgId).getUserDetails().getProfileImage();
 
-        UserProfileImage img = new UserProfileImage(
-                retrievedImage.getName(),
-                retrievedImage.getType(),
-                decompressBytes(retrievedImage.getPicByte()));
-        return img;
+        if (retrievedImage != null) {
+            UserProfileImage img = new UserProfileImage(
+                    retrievedImage.getName(),
+                    retrievedImage.getType(),
+                    decompressBytes(retrievedImage.getPicByte()));
+            return img;
+        } else {
+            return null;
+        }
+
     }
 }

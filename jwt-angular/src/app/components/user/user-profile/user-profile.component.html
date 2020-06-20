@@ -60,7 +60,7 @@
           <button class="btn btn-sm btn-outline-primary mr-2" (click)="visitorRating = 4">4</button>
           <button class="btn btn-sm btn-outline-primary mr-2" (click)="visitorRating = 5">5</button>
           <hr>
-
+          <button mat-button color="primary" (click)="postUserRating()"> Send </button>
         </div>
       </mat-card-content>
     </mat-card>
@@ -95,8 +95,8 @@
               <p class="text-secondary text-center" style="font-size: smaller">{{rating.rateDate}}</p>
             </div>
             <div class="col-md-10">
-              <a class="float-right" href="https://maniruzzaman-akash.blogspot.com/p/contact.html">
-                <strong>Maniruzzaman Akash</strong>
+              <a class="float-right">
+                <strong>{{rating.fromUser.firstName}} {{rating.fromUser.lastName}}</strong>
               </a>
               <!--              STAR RATING-->
               <ng-template #t let-fill="fill">

@@ -15,4 +15,6 @@ import java.util.List;
 public interface UserRatingRepository extends JpaRepository<UserRating, Integer> {
 
     List<UserRating> getAllByToUser(int toUser);
+
+    Boolean existsByFromUserAndToUser(int fromUser, int toUser);
 }

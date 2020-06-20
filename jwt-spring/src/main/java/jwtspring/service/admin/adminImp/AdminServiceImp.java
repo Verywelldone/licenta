@@ -11,7 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Service
 public class AdminServiceImp implements AdminService {
@@ -24,7 +28,26 @@ public class AdminServiceImp implements AdminService {
 
     @Override
     public ResponseEntity<List<User>> getUserList() {
-        List<User> userList = userRepository.findAllByRoles(roleRepository.findByName(ERole.ROLE_USER));
+        List<User> userList = userRepository
+                .findAllByRoles(roleRepository.findByName(ERole.ROLE_USER))
+                .stream()
+                .filter(user ->
+                        user.getRoles()
+                                .stream()
+                                .allMatch(role -> !role.getName().equals(ERole.ROLE_ADMIN)))
+                .collect(Collectors.toList());
+
+//        List<User> test = new ArrayList<>();
+//        for (User user : userList) {
+//            AtomicBoolean admin = new AtomicBoolean(false);
+//            user.getRoles().forEach(role -> {
+//                if (role.getName().equals(ERole.ROLE_ADMIN))
+//                    admin.set(true);
+//            });
+//            if (admin.get() == false)
+//                test.add(user);
+//        }
+
         return ResponseEntity.ok(userList);
     }
 

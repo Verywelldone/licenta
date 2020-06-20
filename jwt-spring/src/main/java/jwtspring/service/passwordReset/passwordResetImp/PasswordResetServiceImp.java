@@ -65,7 +65,6 @@ public class PasswordResetServiceImp implements PasswordResetService {
     @Override
     public ResponseEntity resetPassword(NewPasswordDTO newPasswordDTO) {
 
-        System.out.println(newPasswordDTO.toString());
         User user = userRepository.findUserById(newPasswordDTO.getUserId());
         user.setPassword(encoder.encode(newPasswordDTO.getNewPassword()));
         userRepository.save(user);

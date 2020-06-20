@@ -64,6 +64,10 @@ agm-map{
   width: 35%;
 }
 
+.pick-sitter{
+  padding-top:15vh;
+}
+
 
 
 @media only screen and (max-width: 990px) {
@@ -71,5 +75,8 @@ agm-map{
     height: 250px;
     padding: .4rem;
     margin: .4rem;
+  }
+  .pick-sitter{
+    padding-top: 0;
   }
 }

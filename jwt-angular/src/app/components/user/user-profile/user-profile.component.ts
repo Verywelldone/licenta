@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {UserProfileService} from '../../../services/profile/user-profile.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {UserRatingModel} from '../../../model/user/user-rating.model';
@@ -7,6 +7,9 @@ import {error} from 'util';
 import {HttpClient} from '@angular/common/http';
 import {SitterProfileService} from '../../../services/sitter-service/sitter-profile.service';
 import {TokenStorageService} from '../../../services/token-storage.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Observable} from 'rxjs';
+
 
 @Component({
   selector: 'app-user-profile',
@@ -21,7 +24,7 @@ export class UserProfileComponent implements OnInit {
   //
 
   // USER RATING
-  userRatings: UserRatingModel[];
+  userRatings: Observable<UserRatingModel[]>;
   currentRate: number;
 
   // IMAGE VARIABLES
@@ -31,7 +34,7 @@ export class UserProfileComponent implements OnInit {
   base64Data: any;
   retrieveResonse: any;
 
-  //SITTER DATA
+  // SITTER DATA
   sitterServices;
   private: any;
 
@@ -46,6 +49,7 @@ export class UserProfileComponent implements OnInit {
     private http: HttpClient,
     private token: TokenStorageService,
     private userRatingService: UserRatingService,
+    private snackBar: MatSnackBar,
     private sitterProfileService: SitterProfileService) {
   }
 
@@ -61,7 +65,6 @@ export class UserProfileComponent implements OnInit {
       this.getUserRatings();
       this.getSitterServices();
     });
-
   }
 
 
@@ -83,8 +86,8 @@ export class UserProfileComponent implements OnInit {
       this.userRatings = response;
       let sum = 0;
 
+      // tslint:disable-next-line:only-arrow-functions
       response.forEach(function(rating) {
-        console.log(rating.stars);
         sum += rating.stars;
       });
       // console.log(sum / response.length);
@@ -97,6 +100,30 @@ export class UserProfileComponent implements OnInit {
     this.sitterProfileService.getSitterData(this.user.id).subscribe(response => {
       // console.log(response.serviceModelSet);
       this.sitterServices = response.serviceModelSet;
+    });
+  }
+
+  postUserRating() {
+    const userRating = new UserRatingModel();
+    userRating.fromUser = this.token.getUser().id;
+
+    const date: Date = new Date();
+    userRating.rateDate = date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getUTCMinutes();
+
+    userRating.message = this.visitorMessage;
+    userRating.stars = this.visitorRating;
+    userRating.toUser = this.user.id;
+
+    this.userRatingService.postUserRating(userRating).subscribe(response => {
+      this.snackBar.open(response.message, 'OK', {
+        duration: 4000,
+      });
+      // tslint:disable-next-line:no-shadowed-variable
+    }, error => {
+      console.log(error);
+      this.snackBar.open(error.error.message, 'OK', {
+        duration: 4000,
+      });
     });
   }
 
