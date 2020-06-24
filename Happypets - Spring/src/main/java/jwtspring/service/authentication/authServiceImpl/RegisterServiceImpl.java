@@ -10,8 +10,10 @@ import jwtspring.payload.response.MessageResponse;
 import jwtspring.repository.RoleRepository;
 import jwtspring.repository.UserRepository;
 import jwtspring.service.authentication.RegisterService;
+import jwtspring.service.emailsmtp.EmailSmtpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,9 @@ public class RegisterServiceImpl implements RegisterService {
 
     @Autowired
     PasswordEncoder encoder;
+
+    @Autowired
+    EmailSmtpService emailSmtpService;
 
 
     @Override
@@ -54,6 +59,14 @@ public class RegisterServiceImpl implements RegisterService {
                 signUpRequest.getUserDetails(),
                 signUpRequest.getUserAccountStatus()
         );
+
+        try {
+            emailSmtpService.sendRegisterEmail(signUpRequest);
+        }catch (MailException e){
+            e.printStackTrace();
+            e.getCause();
+        }
+
 //        user.getUserDetails().setSecurityQuestion(encoder.encode(signUpRequest.getSecurityQuestion()));
 
 //    Validare pentru @MapId @One-to-One
