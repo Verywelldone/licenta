@@ -28,6 +28,7 @@ public class AdminServiceImp implements AdminService {
 
     @Override
     public ResponseEntity<List<User>> getUserList() {
+
         List<User> userList = userRepository
                 .findAllByRoles(roleRepository.findByName(ERole.ROLE_USER))
                 .stream()
@@ -36,17 +37,6 @@ public class AdminServiceImp implements AdminService {
                                 .stream()
                                 .allMatch(role -> !role.getName().equals(ERole.ROLE_ADMIN)))
                 .collect(Collectors.toList());
-
-//        List<User> test = new ArrayList<>();
-//        for (User user : userList) {
-//            AtomicBoolean admin = new AtomicBoolean(false);
-//            user.getRoles().forEach(role -> {
-//                if (role.getName().equals(ERole.ROLE_ADMIN))
-//                    admin.set(true);
-//            });
-//            if (admin.get() == false)
-//                test.add(user);
-//        }
 
         return ResponseEntity.ok(userList);
     }

@@ -29,12 +29,11 @@ export class PasswordRecoveryService {
 
   resetPassword(id: number, newPassword: FormControl): Observable<any> {
 
-    let newPasswordDTO = {
+    const newPasswordDTO = {
       userId: id,
       newPassword: newPassword.value
     };
 
-    console.log(newPasswordDTO)
     return this.http.post(BASE_URL + '/pwd-reset', newPasswordDTO, httpOptions);
   }
 

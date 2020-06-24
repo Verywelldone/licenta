@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  appID: "19358c2fa100562",
-  region: "eu",
-  apiKey: "b7ad7d28b99c3a2a0a6874591485759860d0c8ff"
+  appID: '20519fc73d768dc',
+  region: 'eu',
+  apiKey: '5f4bf99ba447f20149bc7b9a5f839222a1e572d1'
 };
 
 /*
