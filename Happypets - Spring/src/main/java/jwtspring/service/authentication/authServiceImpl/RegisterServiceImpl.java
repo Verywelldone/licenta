@@ -52,6 +52,8 @@ public class RegisterServiceImpl implements RegisterService {
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
 
+//        UserAccountStatus userAccountStatus = signUpRequest.getUserAccountStatus();
+
         User user = new User(
                 signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
@@ -62,7 +64,7 @@ public class RegisterServiceImpl implements RegisterService {
 
         try {
             emailSmtpService.sendRegisterEmail(signUpRequest);
-        }catch (MailException e){
+        } catch (MailException e) {
             e.printStackTrace();
             e.getCause();
         }
@@ -82,6 +84,8 @@ public class RegisterServiceImpl implements RegisterService {
 //    Validare pentru @MapId @One-to-One
         UserAccountStatus userAccountStatus = signUpRequest.getUserAccountStatus();
         userAccountStatus.setUser(user);
+        userAccountStatus.setBanned(false);
+        userAccountStatus.setConfirmed(false);
         user.setUserAccountStatus(userAccountStatus);
 
         Set<String> strRoles = signUpRequest.getRole();

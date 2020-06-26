@@ -145,6 +145,11 @@
         <button type="submit" class=" btn btn-large btn-block btn-login">Register</button>
       </div>
 
+      <div class="form-group">
+        <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isSignUpFailed">
+          Login failed: {{ errorMessage }}
+        </div>
+      </div>
     </form>
 
     <p class="small-text text-center margin-v-x6">By signing in or signing up, I agree to Happypets.com's Terms of
@@ -181,7 +186,7 @@
         <p class="text-center">You will be redirected to login page!</p>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+        <button class="btn btn-success btn-block" data-dismiss="modal" (click)="redirectToLogin()">OK</button>
       </div>
     </div>
   </div>

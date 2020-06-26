@@ -69,11 +69,12 @@ export class RegisterComponent implements OnInit {
         // Start CometChat
 
         const name = this.userDetails.firstName + ' ' + this.userDetails.lastName;
-        const uid = this.form.email.substring(0, this.form.email.indexOf('@'));
+        const uid = this.form.username;
         const user = new CometChat.User(uid);
         user.setName(name);
 
         CometChat.createUser(user, COMETCHAT_CONSTANTS.apiKey).then(
+          // tslint:disable-next-line:no-shadowed-variable
           user => {
             console.log('CometChat user created', user);
           }, error => {
@@ -86,6 +87,7 @@ export class RegisterComponent implements OnInit {
 
       },
       err => {
+        console.log(err);
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
       }
@@ -132,6 +134,10 @@ export class RegisterComponent implements OnInit {
   }
 
   print() {
-    console.log(this.securityQuestion)
+    console.log(this.securityQuestion);
+  }
+
+  redirectToLogin() {
+    this.router.navigate(['login']).then(r => this.router.navigate(['login']));
   }
 }

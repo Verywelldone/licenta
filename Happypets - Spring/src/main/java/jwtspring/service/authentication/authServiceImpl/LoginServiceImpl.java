@@ -8,6 +8,7 @@ import jwtspring.security.jwt.JwtUtils;
 import jwtspring.service.authentication.LoginService;
 import jwtspring.service.userDetails.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -59,15 +60,20 @@ public class LoginServiceImpl implements LoginService {
         user.getUserAccountStatus().setLastLogin(lastLogin);
         userRepository.save(user);
 
-        return ResponseEntity.ok(
-                new JwtResponse(
-                        jwt,
-                        userDetails.getId(),
-                        userDetails.getUsername(),
-                        userDetails.getEmail(),
-                        roles,
-                        userDetails.getUserDetails(),
-                        userDetails.getUserAccountStatus()
-                ));
+        if (!user.getUserAccountStatus().getBanned()) {
+            return ResponseEntity.ok(
+                    new JwtResponse(
+                            jwt,
+                            userDetails.getId(),
+                            userDetails.getUsername(),
+                            userDetails.getEmail(),
+                            roles,
+                            userDetails.getUserDetails(),
+                            userDetails.getUserAccountStatus()
+                    ));
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Account is banned!");
+        }
+
     }
 }
