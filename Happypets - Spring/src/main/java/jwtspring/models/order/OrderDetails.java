@@ -25,6 +25,12 @@ public class OrderDetails {
     @Column
     private Boolean isDecline;
 
+    @Column
+    private Boolean isCanceled;
+
+    @Column
+    private Date createdAt;
+
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     private ClientOrder order;
@@ -34,6 +40,22 @@ public class OrderDetails {
 
     public Set<OrderServices> getOrderServices() {
         return orderServices;
+    }
+
+    public Boolean getCanceled() {
+        return isCanceled;
+    }
+
+    public void setCanceled(Boolean canceled) {
+        isCanceled = canceled;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public void setOrderServices(Set<OrderServices> orderServices) {

@@ -47,6 +47,7 @@ import { CdkDetailRowDirective } from './components/boards/board-admin/cdk-detai
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 import { ForgotPasswordComponent } from './components/user/forgot-password/forgot-password.component';
+import {NgxDateRangeModule} from "ngx-daterange";
 // @ts-ignore
 @NgModule({
     declarations: [
@@ -84,22 +85,23 @@ import { ForgotPasswordComponent } from './components/user/forgot-password/forgo
         UserProfileComponent,
         ForgotPasswordComponent
     ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBYeSZf4AVXQ3CNVDTcU3i_JCIv8001CLA'
-    }),
-    FileUploadModule,
-    BrowserAnimationsModule,
-    MaterialModule,
-    CometchatAngularUiKitModule,
-    NgbModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyBYeSZf4AVXQ3CNVDTcU3i_JCIv8001CLA'
+        }),
+        FileUploadModule,
+        BrowserAnimationsModule,
+        MaterialModule,
+        CometchatAngularUiKitModule,
+        NgbModule,
+        NgxDateRangeModule
 
-  ],
+    ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })

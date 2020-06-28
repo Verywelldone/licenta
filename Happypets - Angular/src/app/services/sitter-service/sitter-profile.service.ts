@@ -45,4 +45,7 @@ export class SitterProfileService {
     return this.http.put(`${this.baseUrl}sitter/update-sitter/${userId}`, newSitterData, httpOptions);
   }
 
+  cancelAccept(serviceId: any): Observable<any> {
+    return this.http.post(this.baseUrl + 'sitter/cancel-accept', serviceId, httpOptions);
+  }
 }

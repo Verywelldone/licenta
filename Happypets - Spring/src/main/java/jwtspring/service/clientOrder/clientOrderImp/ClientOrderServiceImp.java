@@ -17,10 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ClientOrderServiceImp implements ClientOrderService {
@@ -59,6 +56,8 @@ public class ClientOrderServiceImp implements ClientOrderService {
             orderDetails.setEndDate(clientOrderDTO.getEndDate());
             orderDetails.setAccepted(false);
             orderDetails.setDecline(false);
+            orderDetails.setCanceled(false);
+            orderDetails.setCreatedAt(new Date());
 
             Set<ServiceArray> ordersFromClient = clientOrderDTO.getServices();
             Set<OrderServices> orderServicesSet = new HashSet<>();

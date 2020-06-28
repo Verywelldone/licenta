@@ -42,9 +42,7 @@ public class ClientServiceImp implements ClientService {
                 .stream()
                 .filter(clientOrder -> !clientOrder.getOrderDetails().getAccepted() && !clientOrder.getOrderDetails().getDecline())
                 .forEach(clientOrder -> extractedMethod(pendingOrders, clientOrder));
-        System.out.println(
-                " Intra in pending"
-        );
+
         return pendingOrders;
     }
 
@@ -58,7 +56,6 @@ public class ClientServiceImp implements ClientService {
                 .filter(clientOrder -> clientOrder.getOrderDetails().getAccepted() && !clientOrder.getOrderDetails().getDecline())
                 .forEach(clientOrder ->
                         extractedMethod(acceptedRequests, clientOrder));
-        System.out.println(acceptedRequests);
         return acceptedRequests;
     }
 
@@ -71,7 +68,6 @@ public class ClientServiceImp implements ClientService {
                 .filter(clientOrder -> !clientOrder.getOrderDetails().getAccepted() && clientOrder.getOrderDetails().getDecline())
                 .forEach(clientOrder -> extractedMethod(declinedRequests, clientOrder));
 
-        System.out.println(declinedRequests);
         return declinedRequests;
     }
 
@@ -83,7 +79,7 @@ public class ClientServiceImp implements ClientService {
         sitterOrdersModelDTO.setStartDate(clientOrder.getOrderDetails().getStartDate());
         sitterOrdersModelDTO.setEndDate(clientOrder.getOrderDetails().getEndDate());
         sitterOrdersModelDTO.setOrderServicesSet(clientOrder.getOrderDetails().getOrderServices());
-
+        sitterOrdersModelDTO.setCreatedAt(clientOrder.getOrderDetails().getCreatedAt());
         pendingOrders.add(sitterOrdersModelDTO);
     }
 

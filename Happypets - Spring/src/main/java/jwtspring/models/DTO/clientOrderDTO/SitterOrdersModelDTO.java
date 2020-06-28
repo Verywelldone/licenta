@@ -13,6 +13,8 @@ public class SitterOrdersModelDTO {
     Date startDate;
     Date endDate;
     Set<OrderServices> orderServicesSet;
+    Date createdAt;
+
     private int id;
 
     public int getId() {
@@ -61,6 +63,14 @@ public class SitterOrdersModelDTO {
 
     public void setOrderServicesSet(Set<OrderServices> orderServicesSet) {
         this.orderServicesSet = orderServicesSet;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     @Override

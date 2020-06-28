@@ -1,5 +1,10 @@
 <mat-tab-group class="container" (selectedTabChange)="onTabClickEvent($event)">
-  <mat-tab label="Pending requests">
+
+  <mat-tab label="Become client">
+   <app-become-client></app-become-client>
+  </mat-tab>
+
+ <mat-tab label="Pending requests">
     <app-client-pending-requests [sitterPendingRequests]="pendingRequests"></app-client-pending-requests>
   </mat-tab>
 

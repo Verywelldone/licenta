@@ -29,7 +29,10 @@ public class SitterOrdersServiceImp implements SitterOrdersService {
         List<SitterOrdersModelDTO> sitterOrdersModelDTOS = new ArrayList<>();
 
         allClientOrders.forEach(clientOrder -> {
-            if (clientOrder.getToSitter() == userId && !clientOrder.getOrderDetails().getDecline() && !clientOrder.getOrderDetails().getAccepted()) {
+            if (clientOrder.getToSitter() == userId &&
+                    !clientOrder.getOrderDetails().getDecline() &&
+                    !clientOrder.getOrderDetails().getAccepted() &&
+                    !clientOrder.getOrderDetails().getCanceled()) {
                 extractedMethod(sitterOrdersModelDTOS, clientOrder);
             }
 
@@ -45,7 +48,10 @@ public class SitterOrdersServiceImp implements SitterOrdersService {
         List<SitterOrdersModelDTO> sitterOrdersModelDTOS = new ArrayList<>();
 
         allClientOrders.forEach(clientOrder -> {
-            if (clientOrder.getToSitter() == userId && !clientOrder.getOrderDetails().getDecline() && clientOrder.getOrderDetails().getAccepted()) {
+            if (clientOrder.getToSitter() == userId &&
+                    !clientOrder.getOrderDetails().getDecline() &&
+                    clientOrder.getOrderDetails().getAccepted() &&
+                    !clientOrder.getOrderDetails().getCanceled()) {
                 extractedMethod(sitterOrdersModelDTOS, clientOrder);
             }
 
@@ -61,7 +67,10 @@ public class SitterOrdersServiceImp implements SitterOrdersService {
         List<SitterOrdersModelDTO> sitterOrdersModelDTOS = new ArrayList<>();
 
         allClientOrders.forEach(clientOrder -> {
-            if (clientOrder.getToSitter() == userId && clientOrder.getOrderDetails().getDecline() && !clientOrder.getOrderDetails().getAccepted()) {
+            if (clientOrder.getToSitter() == userId &&
+                    clientOrder.getOrderDetails().getDecline() &&
+                    !clientOrder.getOrderDetails().getAccepted() &&
+                    !clientOrder.getOrderDetails().getCanceled()) {
                 extractedMethod(sitterOrdersModelDTOS, clientOrder);
             }
 
@@ -80,12 +89,12 @@ public class SitterOrdersServiceImp implements SitterOrdersService {
 
         sitterOrdersModelDTO.setStartDate(clientOrder.getOrderDetails().getStartDate());
         sitterOrdersModelDTO.setEndDate(clientOrder.getOrderDetails().getEndDate());
+        sitterOrdersModelDTO.setCreatedAt(clientOrder.getOrderDetails().getCreatedAt());
 
         sitterOrdersModelDTO.setOrderServicesSet(clientOrder.getOrderDetails().getOrderServices());
 
         sitterOrdersModelDTOS.add(sitterOrdersModelDTO);
     }
-
 
     @Override
     public ResponseEntity acceptClientRequest(int serviceId) {
@@ -97,6 +106,18 @@ public class SitterOrdersServiceImp implements SitterOrdersService {
         });
 
         return ResponseEntity.ok().body("Request Accepted");
+    }
+
+    @Override
+    public ResponseEntity cancelAccept(int serviceId) {
+
+        Optional<ClientOrder> clientOrder = this.clientOrderRepository.findById(serviceId);
+        clientOrder.ifPresent(order -> {
+            order.getOrderDetails().setAccepted(false);
+            clientOrderRepository.save(order);
+        });
+
+        return ResponseEntity.ok().body("Request returned to Pending");
     }
 
     @Override

@@ -14,6 +14,10 @@ export class SitterDashboardComponent implements OnInit {
   acceptedRequests: any;
   declinedRequests: any;
 
+  pendingRequestsSize: number;
+  acceptedRequestsSize: number;
+  declinedRequestsSize: number;
+
   constructor(private token: TokenStorageService, private sitterProfileService: SitterProfileService) {
   }
 
@@ -25,20 +29,36 @@ export class SitterDashboardComponent implements OnInit {
 
   getPendingRequests() {
     this.sitterProfileService.getSitterPendingRequests(this.token.getUser().id).subscribe(response => {
-      console.log(response);
-      this.pendingRequests = response;
+      // console.log(response);
+      if (response) {
+        this.pendingRequests = response;
+        this.pendingRequestsSize = response.length;
+      } else {
+        this.pendingRequestsSize = 0;
+      }
     });
   }
 
   getAcceptedRequests() {
     this.sitterProfileService.getSitterAcceptedRequests(this.token.getUser().id).subscribe(response => {
-      this.acceptedRequests = response;
+      // console.log(response);
+      if (response) {
+        this.acceptedRequests = response;
+        this.acceptedRequestsSize = response.length;
+      } else {
+        this.acceptedRequestsSize = 0;
+      }
     });
   }
 
   getDeclinedRequests() {
     this.sitterProfileService.getSitterDeclinedRequests(this.token.getUser().id).subscribe(response => {
-      this.declinedRequests = response;
+      if (response) {
+        this.declinedRequests = response;
+        this.declinedRequestsSize = this.declinedRequests.length;
+      } else {
+        this.declinedRequestsSize = 0;
+      }
     });
   }
 

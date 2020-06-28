@@ -1,3 +1,6 @@
 .mat-card{
   box-shadow: 0 8px 12px 0 #3F51B5;
 }
+table {
+  width: 100%;
+}

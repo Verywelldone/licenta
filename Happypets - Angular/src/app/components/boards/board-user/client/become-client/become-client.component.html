@@ -1,27 +1,8 @@
 <div class="container-fluid">
 
-  <div class="row">
-    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-3 border" *ngIf="users.length>0">
-      <h3 style="text-align: center"> Sitter list </h3>
-
-      <ul class="heroes">
-        <li class="p-3 border" *ngFor="let user of users let i = index" [attr.data-index]="i" (click)="onSelect(user)">
-          <span class="badge">{{i + 1}}</span>
-          {{user.username}}
-        </li>
-      </ul>
-    </div>
-
-    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-3 border" *ngIf="users.length==0">
-      <h3 style="text-align: center"> Sitter list ... is empty :( </h3>
-
-      <div class="text-center">
-        <p class="lead"> Oups... it looks like there is no sitters around!</p>
-      </div>
-
-    </div>
-
-    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-6 border" *ngIf="!isSitterChosen">
+  <div class="row m-4">
+    <!--    Harta / pick sitter-->
+    <div class="col-md-12" *ngIf="!isSitterChosen">
       <agm-map [latitude]="latitude" [longitude]="longitude">
         <agm-marker *ngIf="selectedUser"
                     [latitude]="selectedUser.userDetails.userCoordinates.latitude"
@@ -35,7 +16,7 @@
       </agm-map>
     </div>
 
-    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-lg-6 border pick-sitter" *ngIf="isSitterChosen">
+    <div class="col-md-12 pick-sitter" *ngIf="isSitterChosen">
 
       <form (ngSubmit)="submitRequest()" class="text-center">
         <div>
@@ -47,9 +28,9 @@
         </div>
 
 
-        <div *ngFor="let service of selectedSitterData.serviceModelSet">
+        <div *ngFor="let service of selectedUser.hostService.serviceModelSet">
           <mat-checkbox (change)="handleSitterService($event, service)">
-                {{service.name}} - {{service.price}} RON
+            {{service.name}} - {{service.price}} RON
             <br>
           </mat-checkbox>
         </div>
@@ -87,45 +68,70 @@
         </mat-error>
       </form>
     </div>
+  </div>
 
+  <div class="row" style="max-height: 55vh">
+    <!--    Lista utilizatori -->
+    <div class="col-md-6" style="overflow-y: scroll; max-height: 55vh" *ngIf="users.length>0">
+      <h3 style="text-align: center"> Sitter list </h3>
+      <ul class="heroes">
+        <li class="p-3 " *ngFor="let user of users let i = index" [attr.data-index]="i" (click)="onSelect(user)">
+          <span class="badge">{{i + 1}}</span>
+          {{user.userDetails.firstName}} {{user.userDetails.lastName}}
+        </li>
+      </ul>
+    </div>
 
-    <div class="user-info col-xs-12 col-sm-12 col-md-12 col-lg-3 border" *ngIf="selectedUser">
-      <h3 style="text-align: center"> Selected Sitter Details </h3>
-
-      <mat-card class="m-3">
-        <h3>General info</h3>
-        <ul>
-          <li style="overflow: paged-x"> Email: {{selectedUser.email}}</li>
-          <li> First Name: {{selectedUser.userDetails.firstName}}</li>
-          <li> Last Name: {{selectedUser.userDetails.lastName}}</li>
-          <li> Address: {{selectedUser.userDetails.address}}</li>
-        </ul>
-      </mat-card>
-
-      <mat-card class="m-3">
-        <h3>Services acceptance</h3>
-        <ul>
-          <li>Accepts: {{selectedSitterData.animalType}}</li>
-          <li>Dog sizes: {{selectedSitterData.dogSize}}</li>
-          <li>Lives in a: {{selectedSitterData.houseType}}</li>
-          <li>Has other pets: {{selectedSitterData.otherPets}}</li>
-        </ul>
-      </mat-card>
-
-      <mat-card class="m-3">
-        <h3>Services provided</h3>
-        <ul>
-          <li *ngFor="let service of selectedSitterData.serviceModelSet">
-            {{service.name}} - {{service.price}} RON
-          </li>
-        </ul>
-      </mat-card>
-
+    <div class="col-md-6" style="overflow-y: scroll" *ngIf="users.length==0">
+      <h3 style="text-align: center"> Sitter list ... is empty :( </h3>
       <div class="text-center">
-        <button class="btn btn-primary w-25" (click)="viewSitterProfile()"> View profile</button>
-        <button class="btn btn-primary w-25" (click)="pickSitter()"> Pick sitter</button>
-        <p class="lead"> DISTANCE: {{distanceBetween}} KM AWAY FROM YOU</p>
+        <p class="lead"> Oups... it looks like there is no sitters around!</p>
       </div>
     </div>
+
+    <!--    right sitter pannel-->
+    <div class="user-info col-md-6" style="max-height: 55vh; overflow-y: scroll" *ngIf="selectedUser">
+      <div class="row text-center">
+        <h4 class="col-md-4"> Sitter Details </h4>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <mat-card class="m-3 mt-0">
+            <h4>Services acceptance</h4>
+            <ul>
+              <li>Accepts: {{selectedUser.hostService.animalType}}</li>
+              <li>Dog sizes: {{selectedUser.hostService.dogSize}}</li>
+              <li>Lives in a: {{selectedUser.hostService.houseType}}</li>
+              <li>Has other pets: {{selectedUser.hostService.otherPets}}</li>
+            </ul>
+          </mat-card>
+        </div>
+
+        <div class="col-md-12">
+          <mat-card class="m-3 mt-0">
+            <h4>Services provided</h4>
+            <ul>
+              <li *ngFor="let service of selectedUser.hostService.serviceModelSet">
+                {{service.name}} - {{service.price}} RON
+              </li>
+            </ul>
+          </mat-card>
+        </div>
+
+        <div class="text-center col-12 m-2">
+          <!--          <button class="btn btn-primary col-md-4" (click)="viewSitterProfile()"> View profile</button>-->
+          <!--          <button class="btn btn-primary col-md-4" (click)="pickSitter()"> Pick sitter</button>-->
+          <button mat-flat-button color="primary" (click)="viewSitterProfile()">View profile</button>
+          <button mat-flat-button color="accent" (click)="pickSitter()">Pick sitter</button>
+
+        </div>
+        <div class="text-center col-12 " >
+          <p class="lead ml-auto mr-auto"> DISTANCE: {{distanceBetween}} KM AWAY FROM YOU</p>
+        </div>
+      </div>
+    </div>
+
   </div>
+
+
 </div>

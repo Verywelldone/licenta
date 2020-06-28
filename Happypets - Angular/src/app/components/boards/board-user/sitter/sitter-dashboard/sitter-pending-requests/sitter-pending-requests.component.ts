@@ -2,6 +2,9 @@ import {Component, OnInit, Input} from '@angular/core';
 import {TokenStorageService} from '../../../../../../services/token-storage.service';
 import {SitterProfileService} from '../../../../../../services/sitter-service/sitter-profile.service';
 import {MatSnackBar} from '@angular/material';
+// @ts-ignore
+import moment = require('moment');
+
 
 
 @Component({
@@ -12,9 +15,11 @@ import {MatSnackBar} from '@angular/material';
 export class SitterPendingRequestsComponent implements OnInit {
 
   @Input() clientPendingRequests: any;
-  dateDifference;
+  columnsToDisplay = ['Name', 'Price'];
 
-  constructor(private token: TokenStorageService, private sitterProfileService: SitterProfileService, private snackBar: MatSnackBar) {
+  constructor(private token: TokenStorageService,
+              private sitterProfileService: SitterProfileService,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -55,7 +60,10 @@ export class SitterPendingRequestsComponent implements OnInit {
     window.location.reload();
   }
 
+
+
   changeValue(startDate: any) {
+
     const date = new Date(startDate);
     const mnth = ('0' + (date.getMonth() + 1)).slice(-2);
     const day = ('0' + date.getDate()).slice(-2);

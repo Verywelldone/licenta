@@ -26,6 +26,7 @@ export class ClientDashboardComponent implements OnInit {
 
   getPendingRequests() {
     this.clientProfileService.getSitterPendingRequests(this.token.getUser().id).subscribe(response => {
+      console.log(response);
       this.pendingRequests = response;
     });
   }

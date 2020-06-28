@@ -26,7 +26,6 @@ public class ImageUploadController {
 
     @GetMapping(path = {"/get/{userImageId}"})
     public UserProfileImage getImage(@PathVariable("userImageId") int userImgId) throws IOException {
-        System.out.println("Intra aici");
         return userImgService.getImage(userImgId);
     }
 

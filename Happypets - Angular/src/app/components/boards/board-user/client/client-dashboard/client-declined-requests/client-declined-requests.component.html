@@ -1,33 +1,40 @@
 <div class="container">
 
-  <mat-expansion-panel *ngFor="let sitterResponse of sitterDeclinedRequests" class="m-3">
-    <mat-expansion-panel-header class="font-weight-bold">
-      From sitter:  {{sitterResponse.fromClient.firstName}} {{sitterResponse.fromClient.lastName}}
+  <mat-expansion-panel class="card text-center mt-3" *ngFor="let sitterResponse of sitterDeclinedRequests">
+    <mat-expansion-panel-header class="card-header">
+      To: &nbsp; <strong>{{sitterResponse.toSitter.firstName}} {{sitterResponse.toSitter.lastName}}</strong>
     </mat-expansion-panel-header>
+    <div class="card-body">
+      <mat-form-field>
+        <mat-label>Start Date</mat-label>
+        <input class="text-center" matInput readonly [value]="changeValue(sitterResponse.startDate)">
+      </mat-form-field>
+      &nbsp;&nbsp;
+      <mat-form-field>
+        <mat-label>End Date</mat-label>
+        <input class="text-center" matInput readonly [value]="changeValue(sitterResponse.endDate)">
+      </mat-form-field>
+      <h5 class="card-title">Services ordered:</h5>
+      <table mat-table [dataSource]="sitterResponse.orderServicesSet" class="mat-elevation-z8 text-left">
 
-    <mat-card class="m-2">
-      <mat-card-title>
-        Start date and End date
-      </mat-card-title>
-      <mat-card-content>
-        From {{sitterResponse.startDate}} to {{sitterResponse.endDate}}
-      </mat-card-content>
-    </mat-card>
+        <ng-container matColumnDef="Name">
+          <th mat-header-cell *matHeaderCellDef class="font-weight-bold"> Name</th>
+          <td mat-cell *matCellDef="let service" aria-setsize="20px"> {{service.name}} </td>
+        </ng-container>
 
-    <mat-card class="m-2">
-      <mat-card-title>Services requested</mat-card-title>
-      <mat-card-content>
-        <ul *ngFor="let service of sitterResponse.orderServicesSet">
-          <div>
-            {{service.name}} - {{service.price}} RON
-          </div>
-        </ul>
-      </mat-card-content>
-    </mat-card>
+        <ng-container matColumnDef="Price">
+          <th mat-header-cell *matHeaderCellDef class="font-weight-bold"> Price</th>
+          <td mat-cell *matCellDef="let service"> {{service.price}} RON</td>
+        </ng-container>
 
-    <mat-action-row>
-      <!--      <button color="primary" class="border border-dark" mat-button (click)="acceptRequest(sitterResponse.id)">Accept</button>-->
-      <!--      <button color="accent" class="border border-dark" mat-button (click)="declineRequest(sitterResponse.id)">Decline</button>-->
-    </mat-action-row>
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+      </table>
+    </div>
+    <div class="card-footer text-muted">
+      Created at {{changeValue(sitterResponse.createdAt)}}
+    </div>
   </mat-expansion-panel>
+
+
 </div>

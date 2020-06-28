@@ -35,7 +35,7 @@ export class SitterProfileComponent implements OnInit {
       this.otherPets = data.otherPets;
       this.userServices = data.serviceModelSet;
 
-      console.log(this.userServices)
+      // console.log(this.userServices)
 
     }, err => {
       console.log(err);
@@ -48,7 +48,6 @@ export class SitterProfileComponent implements OnInit {
     animalType = animalType.replace(' ', '');
     this.animalType = animalType.split(',');
 
-    console.log(this.animalType)
   }
 
   getDogSize(dogSize: string) {

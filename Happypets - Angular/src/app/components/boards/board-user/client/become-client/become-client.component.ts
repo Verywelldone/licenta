@@ -66,15 +66,11 @@ export class BecomeClientComponent implements OnInit {
 
   onSelect(user: any): void {
     this.selectedUser = user;
-
-    this.getSitterData(this.selectedUser.id);
     this.haversineDistance();
   }
 
   reloadData() {
     this.clientPageService.getSittersList().subscribe(data => {
-
-        // console.log(data);
         this.users = data;
 
         //remove current user
@@ -84,7 +80,6 @@ export class BecomeClientComponent implements OnInit {
         }).indexOf(this.curentUser.id);
 
         if (removeIndex !== -1) {
-          console.log(removeIndex + ' removeindex');
           this.users.splice(removeIndex, 1);
         }
         //
@@ -92,11 +87,11 @@ export class BecomeClientComponent implements OnInit {
     );
   }
 
-  getSitterData(userId: number) {
-    this.sitterProfileService.getSitterData(userId).subscribe(data => {
-      this.selectedSitterData = data;
-    });
-  }
+  // getSitterData(userId: number) {
+  //   this.sitterProfileService.getSitterData(userId).subscribe(data => {
+  //     this.selectedSitterData = data;
+  //   });
+  // }
 
 
   haversineDistance() {
@@ -203,10 +198,10 @@ export class BecomeClientComponent implements OnInit {
       this.clientSelectedServices.splice(index, 1);
     }
 
-    console.log(this.clientSelectedServices);
+    // console.log(this.clientSelectedServices);
   }
 
   viewSitterProfile() {
-    this.router.navigate(['user-profile/'+this.selectedUser.username])
+    this.router.navigate(['user-profile/' + this.selectedUser.username]);
   }
 }

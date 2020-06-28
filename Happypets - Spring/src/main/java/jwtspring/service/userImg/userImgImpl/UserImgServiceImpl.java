@@ -66,9 +66,6 @@ public class UserImgServiceImpl implements UserImgService {
 
     public ResponseEntity uplaodImage(@RequestParam("imageFile") MultipartFile file, @RequestParam("userId") int userid) throws IOException {
 
-        System.out.println(file.toString());
-
-        System.out.println("USER ID IS " + userid);
         User currentUser = userRepository.findUserById(userid);
 
         System.out.println("Original Image Byte Size - " + file.getBytes().length);

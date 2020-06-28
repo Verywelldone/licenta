@@ -75,7 +75,6 @@ public class RegisterServiceImpl implements RegisterService {
         UserDetails userDetails = signUpRequest.getUserDetails();
 
 //        System.out.println(signUpRequest.getSecurityQuestion());
-        System.out.println(signUpRequest.getUserDetails().toString());
 
         userDetails.setSecurityQuestion(encoder.encode(signUpRequest.getUserDetails().getSecurityQuestion()));
         userDetails.setUser(user);

@@ -18,4 +18,6 @@ public interface SitterOrdersService {
     List<SitterOrdersModelDTO> getAcceptedRequests(int userId);
 
     List<SitterOrdersModelDTO> getDeclinedRequests(int userId);
+
+    ResponseEntity cancelAccept(int serviceId);
 }

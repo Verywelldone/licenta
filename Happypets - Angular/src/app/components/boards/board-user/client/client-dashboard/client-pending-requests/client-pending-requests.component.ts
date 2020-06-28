@@ -8,10 +8,12 @@ import {Component, Input, OnInit} from '@angular/core';
 export class ClientPendingRequestsComponent implements OnInit {
 
   @Input() sitterPendingRequests: any;
+  columnsToDisplay = ['Name', 'Price'];
 
   constructor() { }
 
   ngOnInit() {
+    console.log(this.sitterPendingRequests);
   }
 
   changeValue(startDate: any) {

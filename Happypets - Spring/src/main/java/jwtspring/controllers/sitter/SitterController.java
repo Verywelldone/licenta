@@ -61,4 +61,9 @@ public class SitterController {
         return this.sitterRequestService.updateSitterRequest(userId, sitterRequest);
     }
 
+    @PostMapping("/cancel-accept")
+    ResponseEntity cancelAccept(@RequestBody int serviceId){
+        return this.sitterOrdersService.cancelAccept(serviceId);
+    }
+
 }
