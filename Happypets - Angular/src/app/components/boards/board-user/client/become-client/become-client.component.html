@@ -70,9 +70,9 @@
     </div>
   </div>
 
-  <div class="row" style="max-height: 55vh">
+  <div class="row" style="max-height: 50vh">
     <!--    Lista utilizatori -->
-    <div class="col-md-6" style="overflow-y: scroll; max-height: 55vh" *ngIf="users.length>0">
+    <div class="col-md-6" style="overflow-y: scroll; max-height: 50vh" *ngIf="users.length>0">
       <h3 style="text-align: center"> Sitter list </h3>
       <ul class="heroes">
         <li class="p-3 " *ngFor="let user of users let i = index" [attr.data-index]="i" (click)="onSelect(user)">
